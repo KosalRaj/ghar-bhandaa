@@ -1,0 +1,27 @@
+{
+  "projectName": "ghar-bhandaa",
+  "mode": "file-router",
+  "typescript": true,
+  "tailwind": true,
+  "packageManager": "pnpm",
+  "git": true,
+  "install": true,
+  "intent": true,
+  "addOnOptions": {
+    "drizzle": {
+      "database": "postgresql"
+    }
+  },
+  "includeExamples": true,
+  "envVarValues": {},
+  "routerOnly": false,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "drizzle",
+    "shadcn",
+    "better-auth",
+    "eslint",
+    "cloudflare"
+  ]
+}
