@@ -17,7 +17,7 @@ export const getTenants = createServerFn({ method: 'GET' })
 
 export const createTenant = createServerFn({ method: 'POST' })
   .middleware([landlordAuthMiddleware])
-  .validator(createTenantSchema)
+  .inputValidator(createTenantSchema)
   .handler(async ({ data, context }) => {
     const { db, landlordId } = context
     const id = crypto.randomUUID()
@@ -35,7 +35,7 @@ export const createTenant = createServerFn({ method: 'POST' })
 
 export const updateTenant = createServerFn({ method: 'POST' })
   .middleware([landlordAuthMiddleware])
-  .validator(
+  .inputValidator(
     z.object({
       id: z.string(),
       data: updateTenantSchema,

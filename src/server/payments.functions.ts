@@ -5,7 +5,7 @@ import { recordCashPayment } from '#/lib/payments.server'
 
 export const recordCashPaymentFn = createServerFn({ method: 'POST' })
   .middleware([landlordAuthMiddleware])
-  .validator(recordCashPaymentSchema)
+  .inputValidator(recordCashPaymentSchema)
   .handler(async ({ data, context }) => {
     const { db, landlordId } = context
     return await recordCashPayment(db, landlordId, data)

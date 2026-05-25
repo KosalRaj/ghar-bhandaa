@@ -111,7 +111,7 @@ function PropertiesPage() {
                   className="rounded-full border border-[var(--chip-line)] bg-white/50 px-4 py-1.5 text-xs font-semibold text-[var(--sea-ink)] hover:bg-white transition-colors"
                 >
                   Edit Property
-                </option>
+                </button>
               </div>
             </div>
           ))

@@ -1,4 +1,4 @@
-import { Database } from '#/db/index'
+import type { Database } from '#/db/index'
 import { invoices, invoiceLineItems, payments, leases } from '#/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { nprToPaisa } from './money'

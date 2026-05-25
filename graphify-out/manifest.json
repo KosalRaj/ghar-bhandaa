@@ -1,0 +1,242 @@
+{
+  "/Users/koshal/Desktop/ghar-bhandaa/prettier.config.js": {
+    "mtime": 1779606893.236071,
+    "hash": "3de0f887cfc4b38e9216a42ef669b6ec"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/eslint.config.js": {
+    "mtime": 1779606893.235963,
+    "hash": "de796882dd170a2bba0bd3ecc239942b"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/drizzle.config.ts": {
+    "mtime": 1779607084.757935,
+    "hash": "7f7ce5381023e25afe9e0ff1df81b90b"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/vite.config.ts": {
+    "mtime": 1779606893.2035139,
+    "hash": "b55b1c69bb532bca68f7872b3986f925"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/router.tsx": {
+    "mtime": 1779606893.1819692,
+    "hash": "1f7c8d16bd6072ead126357a2047e9dc"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routeTree.gen.ts": {
+    "mtime": 1779615875.3988657,
+    "hash": "3b47ecd2c14c2e1676220980341780ae"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/middleware/auth.ts": {
+    "mtime": 1779615174.5892565,
+    "hash": "4578df6ea7ff82fefd09cd24b1bc058d"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/types/cloudflare.d.ts": {
+    "mtime": 1779607238.695618,
+    "hash": "4077fd43cde575c9091ce3a8a57758c6"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/server/invoices.functions.ts": {
+    "mtime": 1779615277.7369914,
+    "hash": "5ab6808162ee445d9dbbfacc246a2e6b"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/server/rooms.functions.ts": {
+    "mtime": 1779615207.5717103,
+    "hash": "8b135d61f9749ff44e4b7b5554a6e9ea"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/server/payments.functions.ts": {
+    "mtime": 1779615225.5064793,
+    "hash": "cca920e1b6e4f2665658205775354530"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/server/tenants.functions.ts": {
+    "mtime": 1779615210.6613185,
+    "hash": "23c836527d88a8b8d4f9257502654466"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/server/auth.functions.ts": {
+    "mtime": 1779615265.2649357,
+    "hash": "7d9b49d6833ed168abaeed26cb434d08"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/server/leases.functions.ts": {
+    "mtime": 1779615215.9784021,
+    "hash": "9a7aab3520348d2f204f4b797d0f2052"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/server/properties.functions.ts": {
+    "mtime": 1779615202.802443,
+    "hash": "176f74d75f8623854e796b2550eda888"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/schemas/tenants.ts": {
+    "mtime": 1779615158.8359706,
+    "hash": "cef7dd6f2debe9163c0e1191fbe80dda"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/schemas/invoices.ts": {
+    "mtime": 1779615164.852225,
+    "hash": "52cf96a6569938806907e6d1ab3bd1f2"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/schemas/properties.ts": {
+    "mtime": 1779615152.4230988,
+    "hash": "ed383b6cd75f2e0feb37a041a2970546"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/schemas/payments.ts": {
+    "mtime": 1779615168.2059126,
+    "hash": "6e5d0e89b203b0edea292f60163eebec"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/schemas/leases.ts": {
+    "mtime": 1779615161.7112389,
+    "hash": "889351a81a17778fdf54c124edf33bf5"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/schemas/rooms.ts": {
+    "mtime": 1779615155.4047444,
+    "hash": "337a46167fdcefc03e66e3048974dcf5"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/integrations/better-auth/header-user.tsx": {
+    "mtime": 1779606893.2229266,
+    "hash": "585199e9435b6f3a89514b4d3e458c69"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/components/LandlordHeader.tsx": {
+    "mtime": 1779615346.95514,
+    "hash": "675c9a5b5c373bb69ee327bfd09d1e84"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/components/Footer.tsx": {
+    "mtime": 1779606893.1639984,
+    "hash": "78b42f434bbd71682bb7f187b40e3ee1"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/components/ThemeToggle.tsx": {
+    "mtime": 1779606893.1791232,
+    "hash": "441a6325341b0934782b64448e8b7dbc"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/components/Header.tsx": {
+    "mtime": 1779606893.1702876,
+    "hash": "347cbf9e4584d55f29500c65c7e20171"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/lib/dates.ts": {
+    "mtime": 1779615182.4262705,
+    "hash": "f231536c82c4094d620b600a3ab4fa58"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/lib/payments.server.ts": {
+    "mtime": 1779615194.1050324,
+    "hash": "414cda941dbde91666c05e83ccc4e7b9"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/lib/utils.ts": {
+    "mtime": 1779606893.219259,
+    "hash": "68f56e6d4a66d8a94bd154acf246512a"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/lib/money.ts": {
+    "mtime": 1779615186.0329554,
+    "hash": "38879166e2d00d9a5827005e49dc08e3"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/lib/invoices.server.ts": {
+    "mtime": 1779615190.392598,
+    "hash": "f284d6fa28a56733f79aeeff07083784"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/lib/auth.ts": {
+    "mtime": 1779615081.42627,
+    "hash": "b13c87d98a250f239dd53731a2a3c27e"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/lib/auth-client.ts": {
+    "mtime": 1779606893.2235174,
+    "hash": "85f06bcb101d435360476ba7f8c93ae0"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/db/schema.ts": {
+    "mtime": 1779607077.5007772,
+    "hash": "d62188329c1a9cc5061c4e48e885969e"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/db/index.ts": {
+    "mtime": 1779607082.0025358,
+    "hash": "b86e870ec6afadc22057299e24982e20"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/index.tsx": {
+    "mtime": 1779615350.4301856,
+    "hash": "c40dd026b204581b12d3fa6171ddd372"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/__root.tsx": {
+    "mtime": 1779606893.1864018,
+    "hash": "51a3f1b9c1fed52f6330286c7fe864ab"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/login.tsx": {
+    "mtime": 1779615242.172888,
+    "hash": "5c07319b401c2f625c7e9f94c74be889"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/signup.tsx": {
+    "mtime": 1779615237.8369677,
+    "hash": "6cbd4d3c328c9b803be9913d6497e7a6"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/_authed.tsx": {
+    "mtime": 1779615270.7736893,
+    "hash": "6f0f3308884daa0e4a254d3f43f4c460"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/about.tsx": {
+    "mtime": 1779606893.188198,
+    "hash": "7a73136fb01eb90f092d0b125b61704d"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/demo/better-auth.tsx": {
+    "mtime": 1779606893.2355993,
+    "hash": "9c857b4b0c30d097395cbb8481c6c491"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/demo/drizzle.tsx": {
+    "mtime": 1779606893.2176297,
+    "hash": "01b2f03e20df72c94b12953f7529b0c0"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/_authed/tenants.tsx": {
+    "mtime": 1779615379.6437244,
+    "hash": "ea1b631bfa888a3b28178050227a256e"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/_authed/dashboard.tsx": {
+    "mtime": 1779615360.8669252,
+    "hash": "1b01ab73d30a751dc1b96059038249c4"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/_authed/properties.tsx": {
+    "mtime": 1779615875.1362593,
+    "hash": "f12f5b6288d1cefe215582d89feee813"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/_authed/leases.tsx": {
+    "mtime": 1779615385.8642824,
+    "hash": "6452b371395f63851627794f0f0f5784"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/_authed/rooms.tsx": {
+    "mtime": 1779615374.8129518,
+    "hash": "6f24164eebb24f5ab047a51e37218b7d"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/_authed/invoices.$invoiceId.tsx": {
+    "mtime": 1779615397.9470756,
+    "hash": "75c70bf3f2818dafb72e3bcca7adbbc7"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/src/routes/api/auth/$.ts": {
+    "mtime": 1779615084.7040734,
+    "hash": "afa2b42ed13e62b7600ee9d10fcf1fe1"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/drizzle/0000_clear_punisher.sql": {
+    "mtime": 1779615004.4994187,
+    "hash": "950738c917512b472a46f1d0551d496f"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/REQUIREMENTS.md": {
+    "mtime": 1779604825.6575322,
+    "hash": "26f91beb3f6b660e46c4c258d0ac1b70"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/README.md": {
+    "mtime": 1779606893.1311426,
+    "hash": "61d109188fb0ef6a81b78a286a4f7804"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/PLAN.md": {
+    "mtime": 1779604981.7165549,
+    "hash": "086e7bc8fec917817dcd09076ac6b0fd"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/GEMINI.md": {
+    "mtime": 1779615370.45005,
+    "hash": "da79aa9343cd2b362206f03762160abc"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/AGENTS.md": {
+    "mtime": 1779606916.0091388,
+    "hash": "9a25c2df48f9f91e7ac1c20843aeb55a"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/public/robots.txt": {
+    "mtime": 1779606893.13307,
+    "hash": "fa1ded1ed7c11438a9b0385b1e112850"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/public/logo512.png": {
+    "mtime": 1779606893.1327941,
+    "hash": "917515db74ea8d1aee6a246cfbcc0b45"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/public/drizzle.svg": {
+    "mtime": 1779606893.2062693,
+    "hash": "1a67952e8e4e4afe70f6043b924ba090"
+  },
+  "/Users/koshal/Desktop/ghar-bhandaa/public/logo192.png": {
+    "mtime": 1779606893.132624,
+    "hash": "33dbdd0177549353eeeb785d02c294af"
+  }
+}

@@ -14,10 +14,13 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DemoDrizzleRouteImport } from './routes/demo/drizzle'
-import { Route as DemoBetterAuthRouteImport } from './routes/demo/better-auth'
+import { Route as AuthedTenantsRouteImport } from './routes/_authed/tenants'
+import { Route as AuthedRoomsRouteImport } from './routes/_authed/rooms'
+import { Route as AuthedPropertiesRouteImport } from './routes/_authed/properties'
+import { Route as AuthedLeasesRouteImport } from './routes/_authed/leases'
 import { Route as AuthedDashboardRouteImport } from './routes/_authed/dashboard'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as AuthedInvoicesInvoiceIdRouteImport } from './routes/_authed/invoices.$invoiceId'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -43,15 +46,25 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoDrizzleRoute = DemoDrizzleRouteImport.update({
-  id: '/demo/drizzle',
-  path: '/demo/drizzle',
-  getParentRoute: () => rootRouteImport,
+const AuthedTenantsRoute = AuthedTenantsRouteImport.update({
+  id: '/tenants',
+  path: '/tenants',
+  getParentRoute: () => AuthedRoute,
 } as any)
-const DemoBetterAuthRoute = DemoBetterAuthRouteImport.update({
-  id: '/demo/better-auth',
-  path: '/demo/better-auth',
-  getParentRoute: () => rootRouteImport,
+const AuthedRoomsRoute = AuthedRoomsRouteImport.update({
+  id: '/rooms',
+  path: '/rooms',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedPropertiesRoute = AuthedPropertiesRouteImport.update({
+  id: '/properties',
+  path: '/properties',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedLeasesRoute = AuthedLeasesRouteImport.update({
+  id: '/leases',
+  path: '/leases',
+  getParentRoute: () => AuthedRoute,
 } as any)
 const AuthedDashboardRoute = AuthedDashboardRouteImport.update({
   id: '/dashboard',
@@ -63,6 +76,11 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthedInvoicesInvoiceIdRoute = AuthedInvoicesInvoiceIdRouteImport.update({
+  id: '/invoices/$invoiceId',
+  path: '/invoices/$invoiceId',
+  getParentRoute: () => AuthedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -70,8 +88,11 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/dashboard': typeof AuthedDashboardRoute
-  '/demo/better-auth': typeof DemoBetterAuthRoute
-  '/demo/drizzle': typeof DemoDrizzleRoute
+  '/leases': typeof AuthedLeasesRoute
+  '/properties': typeof AuthedPropertiesRoute
+  '/rooms': typeof AuthedRoomsRoute
+  '/tenants': typeof AuthedTenantsRoute
+  '/invoices/$invoiceId': typeof AuthedInvoicesInvoiceIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
@@ -80,8 +101,11 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/dashboard': typeof AuthedDashboardRoute
-  '/demo/better-auth': typeof DemoBetterAuthRoute
-  '/demo/drizzle': typeof DemoDrizzleRoute
+  '/leases': typeof AuthedLeasesRoute
+  '/properties': typeof AuthedPropertiesRoute
+  '/rooms': typeof AuthedRoomsRoute
+  '/tenants': typeof AuthedTenantsRoute
+  '/invoices/$invoiceId': typeof AuthedInvoicesInvoiceIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
@@ -92,8 +116,11 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/_authed/dashboard': typeof AuthedDashboardRoute
-  '/demo/better-auth': typeof DemoBetterAuthRoute
-  '/demo/drizzle': typeof DemoDrizzleRoute
+  '/_authed/leases': typeof AuthedLeasesRoute
+  '/_authed/properties': typeof AuthedPropertiesRoute
+  '/_authed/rooms': typeof AuthedRoomsRoute
+  '/_authed/tenants': typeof AuthedTenantsRoute
+  '/_authed/invoices/$invoiceId': typeof AuthedInvoicesInvoiceIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
@@ -104,8 +131,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/dashboard'
-    | '/demo/better-auth'
-    | '/demo/drizzle'
+    | '/leases'
+    | '/properties'
+    | '/rooms'
+    | '/tenants'
+    | '/invoices/$invoiceId'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -114,8 +144,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/dashboard'
-    | '/demo/better-auth'
-    | '/demo/drizzle'
+    | '/leases'
+    | '/properties'
+    | '/rooms'
+    | '/tenants'
+    | '/invoices/$invoiceId'
     | '/api/auth/$'
   id:
     | '__root__'
@@ -125,8 +158,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/_authed/dashboard'
-    | '/demo/better-auth'
-    | '/demo/drizzle'
+    | '/_authed/leases'
+    | '/_authed/properties'
+    | '/_authed/rooms'
+    | '/_authed/tenants'
+    | '/_authed/invoices/$invoiceId'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
@@ -136,8 +172,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
-  DemoBetterAuthRoute: typeof DemoBetterAuthRoute
-  DemoDrizzleRoute: typeof DemoDrizzleRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
@@ -178,19 +212,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/drizzle': {
-      id: '/demo/drizzle'
-      path: '/demo/drizzle'
-      fullPath: '/demo/drizzle'
-      preLoaderRoute: typeof DemoDrizzleRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_authed/tenants': {
+      id: '/_authed/tenants'
+      path: '/tenants'
+      fullPath: '/tenants'
+      preLoaderRoute: typeof AuthedTenantsRouteImport
+      parentRoute: typeof AuthedRoute
     }
-    '/demo/better-auth': {
-      id: '/demo/better-auth'
-      path: '/demo/better-auth'
-      fullPath: '/demo/better-auth'
-      preLoaderRoute: typeof DemoBetterAuthRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_authed/rooms': {
+      id: '/_authed/rooms'
+      path: '/rooms'
+      fullPath: '/rooms'
+      preLoaderRoute: typeof AuthedRoomsRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/properties': {
+      id: '/_authed/properties'
+      path: '/properties'
+      fullPath: '/properties'
+      preLoaderRoute: typeof AuthedPropertiesRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/leases': {
+      id: '/_authed/leases'
+      path: '/leases'
+      fullPath: '/leases'
+      preLoaderRoute: typeof AuthedLeasesRouteImport
+      parentRoute: typeof AuthedRoute
     }
     '/_authed/dashboard': {
       id: '/_authed/dashboard'
@@ -206,15 +254,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authed/invoices/$invoiceId': {
+      id: '/_authed/invoices/$invoiceId'
+      path: '/invoices/$invoiceId'
+      fullPath: '/invoices/$invoiceId'
+      preLoaderRoute: typeof AuthedInvoicesInvoiceIdRouteImport
+      parentRoute: typeof AuthedRoute
+    }
   }
 }
 
 interface AuthedRouteChildren {
   AuthedDashboardRoute: typeof AuthedDashboardRoute
+  AuthedLeasesRoute: typeof AuthedLeasesRoute
+  AuthedPropertiesRoute: typeof AuthedPropertiesRoute
+  AuthedRoomsRoute: typeof AuthedRoomsRoute
+  AuthedTenantsRoute: typeof AuthedTenantsRoute
+  AuthedInvoicesInvoiceIdRoute: typeof AuthedInvoicesInvoiceIdRoute
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedDashboardRoute: AuthedDashboardRoute,
+  AuthedLeasesRoute: AuthedLeasesRoute,
+  AuthedPropertiesRoute: AuthedPropertiesRoute,
+  AuthedRoomsRoute: AuthedRoomsRoute,
+  AuthedTenantsRoute: AuthedTenantsRoute,
+  AuthedInvoicesInvoiceIdRoute: AuthedInvoicesInvoiceIdRoute,
 }
 
 const AuthedRouteWithChildren =
@@ -226,8 +291,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
-  DemoBetterAuthRoute: DemoBetterAuthRoute,
-  DemoDrizzleRoute: DemoDrizzleRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

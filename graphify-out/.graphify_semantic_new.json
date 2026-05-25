@@ -1,0 +1,3189 @@
+{
+  "nodes": [
+    {
+      "id": "prettier_config",
+      "label": "Prettier Config",
+      "file_type": "code",
+      "source_file": "prettier.config.js",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "eslint_config",
+      "label": "ESLint Config (TanStack)",
+      "file_type": "code",
+      "source_file": "eslint.config.js",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "drizzle_config",
+      "label": "Drizzle ORM Config",
+      "file_type": "code",
+      "source_file": "drizzle.config.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "vite_config",
+      "label": "Vite Build Config",
+      "file_type": "code",
+      "source_file": "vite.config.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "router_getRouter",
+      "label": "getRouter Factory",
+      "file_type": "code",
+      "source_file": "src/router.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "routeTree",
+      "label": "Generated Route Tree",
+      "file_type": "code",
+      "source_file": "src/routeTree.gen.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "middleware_landlordAuth",
+      "label": "Landlord Auth Middleware",
+      "file_type": "code",
+      "source_file": "src/middleware/auth.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "types_cloudflareBindings",
+      "label": "CloudflareBindings",
+      "file_type": "code",
+      "source_file": "src/types/cloudflare.d.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_user",
+      "label": "user table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_session",
+      "label": "session table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_account",
+      "label": "account table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_landlords",
+      "label": "landlords table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_properties",
+      "label": "properties table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_rooms",
+      "label": "rooms table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_tenants",
+      "label": "tenants table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_leases",
+      "label": "leases table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_invoices",
+      "label": "invoices table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_invoiceLineItems",
+      "label": "invoice_line_items table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_payments",
+      "label": "payments table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_notificationsLog",
+      "label": "notifications_log table",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "db_getDB",
+      "label": "getDB Factory",
+      "file_type": "code",
+      "source_file": "src/db/index.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "header_BetterAuthHeader",
+      "label": "BetterAuthHeader Component",
+      "file_type": "code",
+      "source_file": "src/integrations/better-auth/header-user.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "invoices_functions_getInvoices",
+      "label": "getInvoices Server Function",
+      "file_type": "code",
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "id": "invoices_functions_getInvoiceDetails",
+      "label": "getInvoiceDetails Server Function",
+      "file_type": "code",
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "id": "invoices_functions_createManualInvoiceFn",
+      "label": "createManualInvoiceFn Server Function",
+      "file_type": "code",
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "id": "invoices_functions_getDashboardData",
+      "label": "getDashboardData Server Function",
+      "file_type": "code",
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "id": "rooms_functions_getRooms",
+      "label": "getRooms Server Function",
+      "file_type": "code",
+      "source_file": "src/server/rooms.functions.ts"
+    },
+    {
+      "id": "rooms_functions_createRoom",
+      "label": "createRoom Server Function",
+      "file_type": "code",
+      "source_file": "src/server/rooms.functions.ts"
+    },
+    {
+      "id": "rooms_functions_updateRoom",
+      "label": "updateRoom Server Function",
+      "file_type": "code",
+      "source_file": "src/server/rooms.functions.ts"
+    },
+    {
+      "id": "payments_functions_recordCashPaymentFn",
+      "label": "recordCashPaymentFn Server Function",
+      "file_type": "code",
+      "source_file": "src/server/payments.functions.ts"
+    },
+    {
+      "id": "tenants_functions_getTenants",
+      "label": "getTenants Server Function",
+      "file_type": "code",
+      "source_file": "src/server/tenants.functions.ts"
+    },
+    {
+      "id": "tenants_functions_createTenant",
+      "label": "createTenant Server Function",
+      "file_type": "code",
+      "source_file": "src/server/tenants.functions.ts"
+    },
+    {
+      "id": "tenants_functions_updateTenant",
+      "label": "updateTenant Server Function",
+      "file_type": "code",
+      "source_file": "src/server/tenants.functions.ts"
+    },
+    {
+      "id": "auth_functions_registerLandlord",
+      "label": "registerLandlord Server Function",
+      "file_type": "code",
+      "source_file": "src/server/auth.functions.ts"
+    },
+    {
+      "id": "auth_functions_checkLandlordAuth",
+      "label": "checkLandlordAuth Server Function",
+      "file_type": "code",
+      "source_file": "src/server/auth.functions.ts"
+    },
+    {
+      "id": "leases_functions_getLeases",
+      "label": "getLeases Server Function",
+      "file_type": "code",
+      "source_file": "src/server/leases.functions.ts"
+    },
+    {
+      "id": "leases_functions_createLease",
+      "label": "createLease Server Function",
+      "file_type": "code",
+      "source_file": "src/server/leases.functions.ts"
+    },
+    {
+      "id": "leases_functions_endLease",
+      "label": "endLease Server Function",
+      "file_type": "code",
+      "source_file": "src/server/leases.functions.ts"
+    },
+    {
+      "id": "properties_functions_getProperties",
+      "label": "getProperties Server Function",
+      "file_type": "code",
+      "source_file": "src/server/properties.functions.ts"
+    },
+    {
+      "id": "properties_functions_createProperty",
+      "label": "createProperty Server Function",
+      "file_type": "code",
+      "source_file": "src/server/properties.functions.ts"
+    },
+    {
+      "id": "properties_functions_updateProperty",
+      "label": "updateProperty Server Function",
+      "file_type": "code",
+      "source_file": "src/server/properties.functions.ts"
+    },
+    {
+      "id": "schemas_tenants_createTenantSchema",
+      "label": "createTenantSchema",
+      "file_type": "code",
+      "source_file": "src/schemas/tenants.ts"
+    },
+    {
+      "id": "schemas_tenants_updateTenantSchema",
+      "label": "updateTenantSchema",
+      "file_type": "code",
+      "source_file": "src/schemas/tenants.ts"
+    },
+    {
+      "id": "schemas_invoices_invoiceLineItemInputSchema",
+      "label": "invoiceLineItemInputSchema",
+      "file_type": "code",
+      "source_file": "src/schemas/invoices.ts"
+    },
+    {
+      "id": "schemas_invoices_createManualInvoiceSchema",
+      "label": "createManualInvoiceSchema",
+      "file_type": "code",
+      "source_file": "src/schemas/invoices.ts"
+    },
+    {
+      "id": "schemas_properties_createPropertySchema",
+      "label": "createPropertySchema",
+      "file_type": "code",
+      "source_file": "src/schemas/properties.ts"
+    },
+    {
+      "id": "schemas_properties_updatePropertySchema",
+      "label": "updatePropertySchema",
+      "file_type": "code",
+      "source_file": "src/schemas/properties.ts"
+    },
+    {
+      "id": "schemas_payments_recordCashPaymentSchema",
+      "label": "recordCashPaymentSchema",
+      "file_type": "code",
+      "source_file": "src/schemas/payments.ts"
+    },
+    {
+      "id": "schemas_leases_createLeaseSchema",
+      "label": "createLeaseSchema",
+      "file_type": "code",
+      "source_file": "src/schemas/leases.ts"
+    },
+    {
+      "id": "schemas_leases_updateLeaseSchema",
+      "label": "updateLeaseSchema",
+      "file_type": "code",
+      "source_file": "src/schemas/leases.ts"
+    },
+    {
+      "id": "schemas_rooms_createRoomSchema",
+      "label": "createRoomSchema",
+      "file_type": "code",
+      "source_file": "src/schemas/rooms.ts"
+    },
+    {
+      "id": "schemas_rooms_updateRoomSchema",
+      "label": "updateRoomSchema",
+      "file_type": "code",
+      "source_file": "src/schemas/rooms.ts"
+    },
+    {
+      "id": "middleware_landlordAuthMiddleware",
+      "label": "landlordAuthMiddleware",
+      "file_type": "code",
+      "source_file": "src/middleware/auth.ts"
+    },
+    {
+      "id": "lib_invoices_createManualInvoice",
+      "label": "createManualInvoice",
+      "file_type": "code",
+      "source_file": "src/lib/invoices.server.ts"
+    },
+    {
+      "id": "lib_payments_recordCashPayment",
+      "label": "recordCashPayment",
+      "file_type": "code",
+      "source_file": "src/lib/payments.server.ts"
+    },
+    {
+      "id": "lib_money_nprToPaisa",
+      "label": "nprToPaisa",
+      "file_type": "code",
+      "source_file": "src/lib/money.ts"
+    },
+    {
+      "id": "lib_auth_getAuth",
+      "label": "getAuth",
+      "file_type": "code",
+      "source_file": "src/lib/auth.ts"
+    },
+    {
+      "id": "lib_db_getDB",
+      "label": "getDB",
+      "file_type": "code",
+      "source_file": "src/db/index.ts"
+    },
+    {
+      "id": "routes_root",
+      "label": "Root Layout",
+      "file_type": "code",
+      "source_file": "src/routes/__root.tsx"
+    },
+    {
+      "id": "routes_index",
+      "label": "Index Route",
+      "file_type": "code",
+      "source_file": "src/routes/index.tsx"
+    },
+    {
+      "id": "routes_login",
+      "label": "Login Route",
+      "file_type": "code",
+      "source_file": "src/routes/login.tsx"
+    },
+    {
+      "id": "routes_signup",
+      "label": "Signup Route",
+      "file_type": "code",
+      "source_file": "src/routes/signup.tsx"
+    },
+    {
+      "id": "routes_authed",
+      "label": "Authenticated Layout Guard",
+      "file_type": "code",
+      "source_file": "src/routes/_authed.tsx"
+    },
+    {
+      "id": "routes_about",
+      "label": "About Route",
+      "file_type": "code",
+      "source_file": "src/routes/about.tsx"
+    },
+    {
+      "id": "routes_demo_better_auth",
+      "label": "Better Auth Demo Route",
+      "file_type": "code",
+      "source_file": "src/routes/demo/better-auth.tsx"
+    },
+    {
+      "id": "routes_demo_drizzle",
+      "label": "Drizzle Demo Route",
+      "file_type": "code",
+      "source_file": "src/routes/demo/drizzle.tsx"
+    },
+    {
+      "id": "routes_authed_dashboard",
+      "label": "Dashboard Route",
+      "file_type": "code",
+      "source_file": "src/routes/_authed/dashboard.tsx"
+    },
+    {
+      "id": "routes_authed_tenants",
+      "label": "Tenants CRUD Route",
+      "file_type": "code",
+      "source_file": "src/routes/_authed/tenants.tsx"
+    },
+    {
+      "id": "routes_authed_properties",
+      "label": "Properties CRUD Route",
+      "file_type": "code",
+      "source_file": "src/routes/_authed/properties.tsx"
+    },
+    {
+      "id": "routes_authed_leases",
+      "label": "Leases CRUD Route",
+      "file_type": "code",
+      "source_file": "src/routes/_authed/leases.tsx"
+    },
+    {
+      "id": "routes_authed_rooms",
+      "label": "Rooms CRUD Route",
+      "file_type": "code",
+      "source_file": "src/routes/_authed/rooms.tsx"
+    },
+    {
+      "id": "routes_authed_invoices_invoiceId",
+      "label": "Invoice Details Route",
+      "file_type": "code",
+      "source_file": "src/routes/_authed/invoices.$invoiceId.tsx"
+    },
+    {
+      "id": "routes_api_auth",
+      "label": "Auth API Handler Route",
+      "file_type": "code",
+      "source_file": "src/routes/api/auth/$.ts"
+    },
+    {
+      "id": "server_auth_functions",
+      "label": "Auth Server Functions",
+      "file_type": "code",
+      "source_file": "src/server/auth.functions.ts"
+    },
+    {
+      "id": "server_tenants_functions",
+      "label": "Tenants Server Functions",
+      "file_type": "code",
+      "source_file": "src/server/tenants.functions.ts"
+    },
+    {
+      "id": "server_invoices_functions",
+      "label": "Invoices Server Functions",
+      "file_type": "code",
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "id": "server_leases_functions",
+      "label": "Leases Server Functions",
+      "file_type": "code",
+      "source_file": "src/server/leases.functions.ts"
+    },
+    {
+      "id": "server_rooms_functions",
+      "label": "Rooms Server Functions",
+      "file_type": "code",
+      "source_file": "src/server/rooms.functions.ts"
+    },
+    {
+      "id": "server_properties_functions",
+      "label": "Properties Server Functions",
+      "file_type": "code",
+      "source_file": "src/server/properties.functions.ts"
+    },
+    {
+      "id": "server_payments_functions",
+      "label": "Payments Server Functions",
+      "file_type": "code",
+      "source_file": "src/server/payments.functions.ts"
+    },
+    {
+      "id": "lib_auth_client",
+      "label": "Better Auth Client",
+      "file_type": "code",
+      "source_file": "src/lib/auth-client.ts"
+    },
+    {
+      "id": "lib_auth",
+      "label": "Auth Library (getAuth)",
+      "file_type": "code",
+      "source_file": "src/lib/auth.ts"
+    },
+    {
+      "id": "lib_money",
+      "label": "Money Format Utilities",
+      "file_type": "code",
+      "source_file": "src/lib/money.ts"
+    },
+    {
+      "id": "lib_dates",
+      "label": "Date Utilities (Kathmandu)",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts"
+    },
+    {
+      "id": "db_instance",
+      "label": "Database Instance",
+      "file_type": "code",
+      "source_file": "src/db/index.ts"
+    },
+    {
+      "id": "db_schema_todos",
+      "label": "Todos DB Schema",
+      "file_type": "code",
+      "source_file": "src/db/schema.ts"
+    },
+    {
+      "id": "dates_getTodayInKathmandu",
+      "label": "getTodayInKathmandu",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "6"
+    },
+    {
+      "id": "dates_getCurrentDateTimeInKathmandu",
+      "label": "getCurrentDateTimeInKathmandu",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "20"
+    },
+    {
+      "id": "dates_isPastDateInKathmandu",
+      "label": "isPastDateInKathmandu",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "25"
+    },
+    {
+      "id": "payments_recordCashPayment",
+      "label": "recordCashPayment",
+      "file_type": "code",
+      "source_file": "src/lib/payments.server.ts",
+      "source_location": "14"
+    },
+    {
+      "id": "payments_RecordCashPaymentInput",
+      "label": "RecordCashPaymentInput",
+      "file_type": "code",
+      "source_file": "src/lib/payments.server.ts",
+      "source_location": "8"
+    },
+    {
+      "id": "utils_cn",
+      "label": "cn",
+      "file_type": "code",
+      "source_file": "src/lib/utils.ts",
+      "source_location": "5"
+    },
+    {
+      "id": "money_nprToPaisa",
+      "label": "nprToPaisa",
+      "file_type": "code",
+      "source_file": "src/lib/money.ts",
+      "source_location": "6"
+    },
+    {
+      "id": "money_paisaToNpr",
+      "label": "paisaToNpr",
+      "file_type": "code",
+      "source_file": "src/lib/money.ts",
+      "source_location": "10"
+    },
+    {
+      "id": "money_formatNpr",
+      "label": "formatNpr",
+      "file_type": "code",
+      "source_file": "src/lib/money.ts",
+      "source_location": "14"
+    },
+    {
+      "id": "invoices_recalculateInvoiceStatus",
+      "label": "recalculateInvoiceStatus",
+      "file_type": "code",
+      "source_file": "src/lib/invoices.server.ts",
+      "source_location": "7"
+    },
+    {
+      "id": "invoices_createManualInvoice",
+      "label": "createManualInvoice",
+      "file_type": "code",
+      "source_file": "src/lib/invoices.server.ts",
+      "source_location": "65"
+    },
+    {
+      "id": "invoices_CreateManualInvoiceInput",
+      "label": "CreateManualInvoiceInput",
+      "file_type": "code",
+      "source_file": "src/lib/invoices.server.ts",
+      "source_location": "54"
+    },
+    {
+      "id": "auth_getAuth",
+      "label": "getAuth",
+      "file_type": "code",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "8"
+    },
+    {
+      "id": "auth_client_authClient",
+      "label": "authClient",
+      "file_type": "code",
+      "source_file": "src/lib/auth-client.ts",
+      "source_location": "3"
+    },
+    {
+      "id": "components_LandlordHeader",
+      "label": "LandlordHeader",
+      "file_type": "code",
+      "source_file": "src/components/LandlordHeader.tsx",
+      "source_location": "5"
+    },
+    {
+      "id": "components_Footer",
+      "label": "Footer",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "1"
+    },
+    {
+      "id": "components_ThemeToggle",
+      "label": "ThemeToggle",
+      "file_type": "code",
+      "source_file": "src/components/ThemeToggle.tsx",
+      "source_location": "34"
+    },
+    {
+      "id": "components_Header",
+      "label": "Header",
+      "file_type": "code",
+      "source_file": "src/components/Header.tsx",
+      "source_location": "5"
+    },
+    {
+      "id": "integrations_BetterAuthHeader",
+      "label": "BetterAuthHeader",
+      "file_type": "code",
+      "source_file": "src/integrations/better-auth/header-user.tsx"
+    },
+    {
+      "id": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "label": "Automated Room Rent Collection System",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a71"
+    },
+    {
+      "id": "REQUIREMENTS_Landlord",
+      "label": "Landlord",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a72"
+    },
+    {
+      "id": "REQUIREMENTS_Tenant",
+      "label": "Tenant",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a72"
+    },
+    {
+      "id": "REQUIREMENTS_PaymentGateway",
+      "label": "Payment Gateway",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a72"
+    },
+    {
+      "id": "REQUIREMENTS_Khalti",
+      "label": "Khalti",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a73.4"
+    },
+    {
+      "id": "REQUIREMENTS_eSewa",
+      "label": "eSewa",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a73.4"
+    },
+    {
+      "id": "REQUIREMENTS_Invoice",
+      "label": "Invoice",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a78"
+    },
+    {
+      "id": "REQUIREMENTS_Lease",
+      "label": "Lease",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a78"
+    },
+    {
+      "id": "REQUIREMENTS_Payment",
+      "label": "Payment",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a78"
+    },
+    {
+      "id": "REQUIREMENTS_DerivedStatus",
+      "label": "Derived Invoice Status",
+      "file_type": "rationale",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a73.3"
+    },
+    {
+      "id": "REQUIREMENTS_VerificationQueue",
+      "label": "Verification Queue",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a73.5"
+    },
+    {
+      "id": "REQUIREMENTS_Paisa",
+      "label": "Paisa",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a74.5"
+    },
+    {
+      "id": "REQUIREMENTS_NepalTime",
+      "label": "Nepal Time (NPT)",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a74.5"
+    },
+    {
+      "id": "REQUIREMENTS_PWA",
+      "label": "Progressive Web App",
+      "file_type": "document",
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a74.7"
+    },
+    {
+      "id": "PLAN_TanStackStart",
+      "label": "TanStack Start v1 (React)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_CloudflareWorkers",
+      "label": "Cloudflare Workers",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_CloudflareD1",
+      "label": "Cloudflare D1 (SQLite)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_DrizzleORM",
+      "label": "Drizzle ORM",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_BetterAuth",
+      "label": "Better Auth",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_CloudflareR2",
+      "label": "Cloudflare R2",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_CronTriggers",
+      "label": "Cloudflare Cron Triggers",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_Resend",
+      "label": "Resend",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_SparrowSMS",
+      "label": "Sparrow SMS",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_Zod",
+      "label": "Zod",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_TailwindCSS",
+      "label": "Tailwind CSS",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73"
+    },
+    {
+      "id": "PLAN_MultiTenancyArchitecture",
+      "label": "Multi-Tenancy via landlordId",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a72, \u00a75, \u00a76"
+    },
+    {
+      "id": "PLAN_DomainLogicLayer",
+      "label": "Domain Logic Layer (src/lib)",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74, \u00a78"
+    },
+    {
+      "id": "PLAN_ThreeEntryPoints",
+      "label": "Three Independent Entry Points",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74"
+    },
+    {
+      "id": "PLAN_ServerFunctions",
+      "label": "Server Functions Entry Point",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74"
+    },
+    {
+      "id": "PLAN_ScheduledHandler",
+      "label": "Scheduled Handler Entry Point",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74"
+    },
+    {
+      "id": "PLAN_PublicWebhookRoutes",
+      "label": "Public Webhook Routes Entry Point",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74"
+    },
+    {
+      "id": "PLAN_IntegerPaisaInvariant",
+      "label": "Integer Paisa Money Rule",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a76"
+    },
+    {
+      "id": "PLAN_DerivedStatusInvariant",
+      "label": "Derived Invoice Status Rule",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a76"
+    },
+    {
+      "id": "PLAN_IdempotentGenerationInvariant",
+      "label": "Idempotent Invoice Generation",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a76"
+    },
+    {
+      "id": "PLAN_AppendOnlyLedgerInvariant",
+      "label": "Append-Only Payment Ledger",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a76"
+    },
+    {
+      "id": "PLAN_WebhookVerificationInvariant",
+      "label": "Webhook Signature Verification",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a76"
+    },
+    {
+      "id": "PLAN_InvoiceGenerationFlow",
+      "label": "Monthly Invoice Generation Flow",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.1"
+    },
+    {
+      "id": "PLAN_ReminderFlow",
+      "label": "Payment Reminder Flow",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.2"
+    },
+    {
+      "id": "PLAN_WalletPaymentFlow",
+      "label": "Wallet Payment Flow",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.3"
+    },
+    {
+      "id": "PLAN_BankTransferFlow",
+      "label": "Bank Transfer Verification Flow",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.4"
+    },
+    {
+      "id": "PLAN_Phase0",
+      "label": "Phase 0: Project Setup",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710"
+    },
+    {
+      "id": "PLAN_Phase1",
+      "label": "Phase 1: Core Records + Manual Billing",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710"
+    },
+    {
+      "id": "PLAN_Phase2",
+      "label": "Phase 2: Automation",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710"
+    },
+    {
+      "id": "PLAN_Phase3",
+      "label": "Phase 3: Bank Transfer + Verification",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710"
+    },
+    {
+      "id": "PLAN_Phase4",
+      "label": "Phase 4: Online Wallet Payments",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710"
+    },
+    {
+      "id": "PLAN_Phase5",
+      "label": "Phase 5: Hardening + Extras",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710"
+    },
+    {
+      "id": "PLAN_Phase6",
+      "label": "Phase 6: Multi-Landlord Readiness",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710"
+    },
+    {
+      "id": "PLAN_FileSuffixConvention",
+      "label": "File Suffix Convention",
+      "file_type": "rationale",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a78"
+    },
+    {
+      "id": "PLAN_TestingStrategy",
+      "label": "Testing Strategy",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": "\u00a713"
+    },
+    {
+      "id": "drizzle_svg",
+      "label": "Drizzle ORM Logo SVG",
+      "file_type": "image",
+      "source_file": "public/drizzle.svg"
+    },
+    {
+      "id": "logo192_png",
+      "label": "React Logo PWA Icon 192px",
+      "file_type": "image",
+      "source_file": "public/logo192.png"
+    }
+  ],
+  "edges": [
+    {
+      "source": "drizzle_config",
+      "target": "schema_landlords",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle.config.ts",
+      "source_location": 5,
+      "weight": 1.0
+    },
+    {
+      "source": "drizzle_config",
+      "target": "schema_user",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle.config.ts",
+      "source_location": 5,
+      "weight": 1.0
+    },
+    {
+      "source": "router_getRouter",
+      "target": "routeTree",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/router.tsx",
+      "source_location": 6,
+      "weight": 1.0
+    },
+    {
+      "source": "routeTree",
+      "target": "router_getRouter",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routeTree.gen.ts",
+      "source_location": 237,
+      "weight": 1.0
+    },
+    {
+      "source": "middleware_landlordAuth",
+      "target": "db_getDB",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/middleware/auth.ts",
+      "source_location": 24,
+      "weight": 1.0
+    },
+    {
+      "source": "middleware_landlordAuth",
+      "target": "schema_landlords",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/middleware/auth.ts",
+      "source_location": 27,
+      "weight": 1.0
+    },
+    {
+      "source": "middleware_landlordAuth",
+      "target": "types_cloudflareBindings",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/middleware/auth.ts",
+      "source_location": 9,
+      "weight": 1.0
+    },
+    {
+      "source": "db_getDB",
+      "target": "schema_user",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/index.ts",
+      "source_location": 4,
+      "weight": 1.0
+    },
+    {
+      "source": "vite_config",
+      "target": "types_cloudflareBindings",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "vite.config.ts",
+      "source_location": 14,
+      "weight": 1.0
+    },
+    {
+      "source": "types_cloudflareBindings",
+      "target": "db_getDB",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "src/types/cloudflare.d.ts",
+      "source_location": 2,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_user",
+      "target": "schema_session",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 23,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_user",
+      "target": "schema_account",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 30,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_landlords",
+      "target": "schema_properties",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 63,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_landlords",
+      "target": "schema_rooms",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 73,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_landlords",
+      "target": "schema_tenants",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 88,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_landlords",
+      "target": "schema_leases",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 101,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_landlords",
+      "target": "schema_invoices",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 119,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_landlords",
+      "target": "schema_payments",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 147,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_properties",
+      "target": "schema_rooms",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 74,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_rooms",
+      "target": "schema_leases",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 102,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_tenants",
+      "target": "schema_leases",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 103,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_leases",
+      "target": "schema_invoices",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 120,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_tenants",
+      "target": "schema_invoices",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 121,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_invoices",
+      "target": "schema_invoiceLineItems",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 137,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_invoices",
+      "target": "schema_payments",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 148,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_tenants",
+      "target": "schema_payments",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 149,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_invoices",
+      "target": "schema_notificationsLog",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 168,
+      "weight": 1.0
+    },
+    {
+      "source": "schema_tenants",
+      "target": "schema_notificationsLog",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts",
+      "source_location": 169,
+      "weight": 1.0
+    },
+    {
+      "source": "header_BetterAuthHeader",
+      "target": "middleware_landlordAuth",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "src/integrations/better-auth/header-user.tsx",
+      "source_location": 5,
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config",
+      "target": "prettier_config",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eslint.config.js",
+      "source_location": 18,
+      "weight": 1.0
+    },
+    {
+      "source": "invoices_functions_getInvoices",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "source": "invoices_functions_getInvoiceDetails",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "source": "invoices_functions_createManualInvoiceFn",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "source": "invoices_functions_getDashboardData",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "source": "rooms_functions_getRooms",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/rooms.functions.ts"
+    },
+    {
+      "source": "rooms_functions_createRoom",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/rooms.functions.ts"
+    },
+    {
+      "source": "rooms_functions_updateRoom",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/rooms.functions.ts"
+    },
+    {
+      "source": "payments_functions_recordCashPaymentFn",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/payments.functions.ts"
+    },
+    {
+      "source": "tenants_functions_getTenants",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/tenants.functions.ts"
+    },
+    {
+      "source": "tenants_functions_createTenant",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/tenants.functions.ts"
+    },
+    {
+      "source": "tenants_functions_updateTenant",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/tenants.functions.ts"
+    },
+    {
+      "source": "leases_functions_getLeases",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/leases.functions.ts"
+    },
+    {
+      "source": "leases_functions_createLease",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/leases.functions.ts"
+    },
+    {
+      "source": "leases_functions_endLease",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/leases.functions.ts"
+    },
+    {
+      "source": "properties_functions_getProperties",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/properties.functions.ts"
+    },
+    {
+      "source": "properties_functions_createProperty",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/properties.functions.ts"
+    },
+    {
+      "source": "properties_functions_updateProperty",
+      "target": "middleware_landlordAuthMiddleware",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/properties.functions.ts"
+    },
+    {
+      "source": "invoices_functions_createManualInvoiceFn",
+      "target": "lib_invoices_createManualInvoice",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "source": "payments_functions_recordCashPaymentFn",
+      "target": "lib_payments_recordCashPayment",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/payments.functions.ts"
+    },
+    {
+      "source": "leases_functions_createLease",
+      "target": "lib_money_nprToPaisa",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/leases.functions.ts"
+    },
+    {
+      "source": "auth_functions_registerLandlord",
+      "target": "lib_auth_getAuth",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/auth.functions.ts"
+    },
+    {
+      "source": "auth_functions_registerLandlord",
+      "target": "lib_db_getDB",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/auth.functions.ts"
+    },
+    {
+      "source": "auth_functions_checkLandlordAuth",
+      "target": "lib_auth_getAuth",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/auth.functions.ts"
+    },
+    {
+      "source": "auth_functions_checkLandlordAuth",
+      "target": "lib_db_getDB",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/auth.functions.ts"
+    },
+    {
+      "source": "invoices_functions_createManualInvoiceFn",
+      "target": "schemas_invoices_createManualInvoiceSchema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "source": "rooms_functions_createRoom",
+      "target": "schemas_rooms_createRoomSchema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/rooms.functions.ts"
+    },
+    {
+      "source": "rooms_functions_updateRoom",
+      "target": "schemas_rooms_updateRoomSchema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/rooms.functions.ts"
+    },
+    {
+      "source": "payments_functions_recordCashPaymentFn",
+      "target": "schemas_payments_recordCashPaymentSchema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/payments.functions.ts"
+    },
+    {
+      "source": "tenants_functions_createTenant",
+      "target": "schemas_tenants_createTenantSchema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/tenants.functions.ts"
+    },
+    {
+      "source": "tenants_functions_updateTenant",
+      "target": "schemas_tenants_updateTenantSchema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/tenants.functions.ts"
+    },
+    {
+      "source": "leases_functions_createLease",
+      "target": "schemas_leases_createLeaseSchema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/leases.functions.ts"
+    },
+    {
+      "source": "properties_functions_createProperty",
+      "target": "schemas_properties_createPropertySchema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/properties.functions.ts"
+    },
+    {
+      "source": "properties_functions_updateProperty",
+      "target": "schemas_properties_updatePropertySchema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/properties.functions.ts"
+    },
+    {
+      "source": "schemas_invoices_createManualInvoiceSchema",
+      "target": "schemas_invoices_invoiceLineItemInputSchema",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/schemas/invoices.ts"
+    },
+    {
+      "source": "schemas_tenants_updateTenantSchema",
+      "target": "schemas_tenants_createTenantSchema",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/schemas/tenants.ts"
+    },
+    {
+      "source": "schemas_properties_updatePropertySchema",
+      "target": "schemas_properties_createPropertySchema",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/schemas/properties.ts"
+    },
+    {
+      "source": "schemas_rooms_updateRoomSchema",
+      "target": "schemas_rooms_createRoomSchema",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/schemas/rooms.ts"
+    },
+    {
+      "source": "schemas_leases_updateLeaseSchema",
+      "target": "schemas_leases_createLeaseSchema",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/schemas/leases.ts"
+    },
+    {
+      "source": "invoices_functions_getInvoices",
+      "target": "invoices_functions_getDashboardData",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "source": "invoices_functions_getInvoiceDetails",
+      "target": "invoices_functions_getDashboardData",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/server/invoices.functions.ts"
+    },
+    {
+      "source": "auth_functions_registerLandlord",
+      "target": "auth_functions_checkLandlordAuth",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "src/server/auth.functions.ts"
+    },
+    {
+      "source": "schemas_leases_createLeaseSchema",
+      "target": "schemas_rooms_createRoomSchema",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/schemas/leases.ts"
+    },
+    {
+      "source": "schemas_leases_createLeaseSchema",
+      "target": "schemas_tenants_createTenantSchema",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/schemas/leases.ts"
+    },
+    {
+      "source": "schemas_invoices_createManualInvoiceSchema",
+      "target": "schemas_leases_createLeaseSchema",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/schemas/invoices.ts"
+    },
+    {
+      "source": "schemas_payments_recordCashPaymentSchema",
+      "target": "schemas_invoices_createManualInvoiceSchema",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/schemas/payments.ts"
+    },
+    {
+      "source": "schemas_rooms_createRoomSchema",
+      "target": "schemas_properties_createPropertySchema",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/schemas/rooms.ts"
+    },
+    {
+      "source": "routes_root",
+      "target": "routes_index",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/__root.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_root",
+      "target": "routes_login",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/__root.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_root",
+      "target": "routes_signup",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/__root.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_root",
+      "target": "routes_authed",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/__root.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_root",
+      "target": "routes_about",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/__root.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_root",
+      "target": "routes_demo_better_auth",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/__root.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_root",
+      "target": "routes_demo_drizzle",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/__root.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_root",
+      "target": "routes_api_auth",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/__root.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed",
+      "target": "routes_authed_dashboard",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed",
+      "target": "routes_authed_tenants",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed",
+      "target": "routes_authed_properties",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed",
+      "target": "routes_authed_leases",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed",
+      "target": "routes_authed_rooms",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed",
+      "target": "routes_authed_invoices_invoiceId",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_index",
+      "target": "routes_authed_dashboard",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/index.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed",
+      "target": "routes_login",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_signup",
+      "target": "routes_login",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/signup.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_login",
+      "target": "routes_index",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/login.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_dashboard",
+      "target": "routes_authed_invoices_invoiceId",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/dashboard.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_signup",
+      "target": "server_auth_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/signup.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed",
+      "target": "server_auth_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_login",
+      "target": "lib_auth_client",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/login.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_demo_better_auth",
+      "target": "lib_auth_client",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/demo/better-auth.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_api_auth",
+      "target": "lib_auth",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/api/auth/$.ts",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_demo_drizzle",
+      "target": "db_instance",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/demo/drizzle.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_demo_drizzle",
+      "target": "db_schema_todos",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/demo/drizzle.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_dashboard",
+      "target": "server_invoices_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/dashboard.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_dashboard",
+      "target": "server_leases_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/dashboard.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_dashboard",
+      "target": "lib_money",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/dashboard.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_dashboard",
+      "target": "lib_dates",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/dashboard.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_tenants",
+      "target": "server_tenants_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/tenants.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_properties",
+      "target": "server_properties_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/properties.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_leases",
+      "target": "server_leases_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/leases.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_leases",
+      "target": "server_rooms_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/leases.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_leases",
+      "target": "server_tenants_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/leases.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_leases",
+      "target": "lib_money",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/leases.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_leases",
+      "target": "lib_dates",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/leases.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_rooms",
+      "target": "server_rooms_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/rooms.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_rooms",
+      "target": "server_properties_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/rooms.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_invoices_invoiceId",
+      "target": "server_invoices_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/invoices.$invoiceId.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_invoices_invoiceId",
+      "target": "server_payments_functions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/invoices.$invoiceId.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_invoices_invoiceId",
+      "target": "lib_money",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/invoices.$invoiceId.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_invoices_invoiceId",
+      "target": "lib_dates",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/invoices.$invoiceId.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_auth",
+      "target": "lib_auth_client",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "src/routes/api/auth/$.ts",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_dashboard",
+      "target": "routes_authed_leases",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/dashboard.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_leases",
+      "target": "routes_authed_rooms",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/leases.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_leases",
+      "target": "routes_authed_tenants",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/leases.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_rooms",
+      "target": "routes_authed_properties",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/rooms.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed_dashboard",
+      "target": "routes_authed_invoices_invoiceId",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/dashboard.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "routes_authed",
+      "target": "routes_authed_dashboard",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx",
+      "weight": 1.0
+    },
+    {
+      "source": "dates_isPastDateInKathmandu",
+      "target": "dates_getTodayInKathmandu",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/dates.ts",
+      "source_location": "26"
+    },
+    {
+      "source": "payments_recordCashPayment",
+      "target": "money_nprToPaisa",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/payments.server.ts",
+      "source_location": "31"
+    },
+    {
+      "source": "payments_recordCashPayment",
+      "target": "dates_getCurrentDateTimeInKathmandu",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/payments.server.ts",
+      "source_location": "30"
+    },
+    {
+      "source": "payments_recordCashPayment",
+      "target": "invoices_recalculateInvoiceStatus",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/payments.server.ts",
+      "source_location": "47"
+    },
+    {
+      "source": "invoices_recalculateInvoiceStatus",
+      "target": "dates_getTodayInKathmandu",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/invoices.server.ts",
+      "source_location": "35"
+    },
+    {
+      "source": "invoices_recalculateInvoiceStatus",
+      "target": "dates_getCurrentDateTimeInKathmandu",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/invoices.server.ts",
+      "source_location": "47"
+    },
+    {
+      "source": "invoices_createManualInvoice",
+      "target": "money_nprToPaisa",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/invoices.server.ts",
+      "source_location": "86"
+    },
+    {
+      "source": "invoices_createManualInvoice",
+      "target": "dates_getCurrentDateTimeInKathmandu",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/invoices.server.ts",
+      "source_location": "81"
+    },
+    {
+      "source": "invoices_createManualInvoice",
+      "target": "invoices_recalculateInvoiceStatus",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/invoices.server.ts",
+      "source_location": "117"
+    },
+    {
+      "source": "money_formatNpr",
+      "target": "money_paisaToNpr",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/money.ts",
+      "source_location": "15"
+    },
+    {
+      "source": "components_LandlordHeader",
+      "target": "auth_client_authClient",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/LandlordHeader.tsx",
+      "source_location": "7"
+    },
+    {
+      "source": "components_LandlordHeader",
+      "target": "components_ThemeToggle",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/LandlordHeader.tsx",
+      "source_location": "90"
+    },
+    {
+      "source": "components_Header",
+      "target": "components_ThemeToggle",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/Header.tsx",
+      "source_location": "94"
+    },
+    {
+      "source": "components_Header",
+      "target": "integrations_BetterAuthHeader",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/Header.tsx",
+      "source_location": "92"
+    },
+    {
+      "source": "payments_recordCashPayment",
+      "target": "invoices_createManualInvoice",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/lib/payments.server.ts"
+    },
+    {
+      "source": "payments_recordCashPayment",
+      "target": "invoices_recalculateInvoiceStatus",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "src/lib/payments.server.ts"
+    },
+    {
+      "source": "payments_RecordCashPaymentInput",
+      "target": "invoices_CreateManualInvoiceInput",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "src/lib/payments.server.ts"
+    },
+    {
+      "source": "auth_getAuth",
+      "target": "auth_client_authClient",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/lib/auth.ts"
+    },
+    {
+      "source": "components_LandlordHeader",
+      "target": "components_Header",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/components/LandlordHeader.tsx"
+    },
+    {
+      "source": "invoices_recalculateInvoiceStatus",
+      "target": "dates_getCurrentDateTimeInKathmandu",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/lib/invoices.server.ts"
+    },
+    {
+      "source": "utils_cn",
+      "target": "components_ThemeToggle",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "src/lib/utils.ts"
+    },
+    {
+      "source": "REQUIREMENTS_Landlord",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a72",
+      "weight": 1.0
+    },
+    {
+      "source": "REQUIREMENTS_Tenant",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a72",
+      "weight": 1.0
+    },
+    {
+      "source": "REQUIREMENTS_PaymentGateway",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a72",
+      "weight": 1.0
+    },
+    {
+      "source": "REQUIREMENTS_Khalti",
+      "target": "REQUIREMENTS_PaymentGateway",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a73.4",
+      "weight": 1.0
+    },
+    {
+      "source": "REQUIREMENTS_eSewa",
+      "target": "REQUIREMENTS_PaymentGateway",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "REQUIREMENTS.md",
+      "source_location": "\u00a73.4",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_TanStackStart",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_CloudflareWorkers",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73, \u00a74",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_CloudflareD1",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_DrizzleORM",
+      "target": "PLAN_CloudflareD1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_BetterAuth",
+      "target": "PLAN_CloudflareD1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_CloudflareR2",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_CronTriggers",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_Resend",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_SparrowSMS",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_Zod",
+      "target": "PLAN_TanStackStart",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_TailwindCSS",
+      "target": "PLAN_TanStackStart",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a73",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_MultiTenancyArchitecture",
+      "target": "REQUIREMENTS_AutomatedRoomRentCollectionSystem",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a72, \u00a75",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_ThreeEntryPoints",
+      "target": "PLAN_DomainLogicLayer",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_ServerFunctions",
+      "target": "PLAN_ThreeEntryPoints",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_ScheduledHandler",
+      "target": "PLAN_ThreeEntryPoints",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_PublicWebhookRoutes",
+      "target": "PLAN_ThreeEntryPoints",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_ServerFunctions",
+      "target": "PLAN_DomainLogicLayer",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_ScheduledHandler",
+      "target": "PLAN_DomainLogicLayer",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_PublicWebhookRoutes",
+      "target": "PLAN_DomainLogicLayer",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_IntegerPaisaInvariant",
+      "target": "REQUIREMENTS_Paisa",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a76",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_DerivedStatusInvariant",
+      "target": "REQUIREMENTS_DerivedStatus",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a76",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_DomainLogicLayer",
+      "target": "PLAN_IntegerPaisaInvariant",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74, \u00a76",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_DomainLogicLayer",
+      "target": "PLAN_DerivedStatusInvariant",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74, \u00a76",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_DomainLogicLayer",
+      "target": "PLAN_AppendOnlyLedgerInvariant",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74, \u00a76",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_DomainLogicLayer",
+      "target": "PLAN_IdempotentGenerationInvariant",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a74, \u00a76",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_InvoiceGenerationFlow",
+      "target": "PLAN_CronTriggers",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.1",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_InvoiceGenerationFlow",
+      "target": "PLAN_IdempotentGenerationInvariant",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.1",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_ReminderFlow",
+      "target": "PLAN_CronTriggers",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.2",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_ReminderFlow",
+      "target": "PLAN_Resend",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.2",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_WalletPaymentFlow",
+      "target": "REQUIREMENTS_Khalti",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.3",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_WalletPaymentFlow",
+      "target": "REQUIREMENTS_eSewa",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.3",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_WalletPaymentFlow",
+      "target": "PLAN_WebhookVerificationInvariant",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.3",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_BankTransferFlow",
+      "target": "PLAN_CloudflareR2",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.4",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_BankTransferFlow",
+      "target": "REQUIREMENTS_VerificationQueue",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a77.4",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_Phase0",
+      "target": "PLAN_Phase1",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_Phase1",
+      "target": "PLAN_Phase2",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_Phase2",
+      "target": "PLAN_Phase3",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_Phase3",
+      "target": "PLAN_Phase4",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_Phase4",
+      "target": "PLAN_Phase5",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_Phase5",
+      "target": "PLAN_Phase6",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a710",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_FileSuffixConvention",
+      "target": "PLAN_DomainLogicLayer",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a78",
+      "weight": 1.0
+    },
+    {
+      "source": "PLAN_FileSuffixConvention",
+      "target": "PLAN_ServerFunctions",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": "\u00a78",
+      "weight": 1.0
+    },
+    {
+      "source": "drizzle_svg",
+      "target": "drizzle_orm",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/drizzle.svg"
+    },
+    {
+      "source": "logo192_png",
+      "target": "react",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/logo192.png"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "rental_property_domain_model",
+      "label": "Rental Property Domain Model",
+      "nodes": [
+        "schema_landlords",
+        "schema_properties",
+        "schema_rooms",
+        "schema_tenants",
+        "schema_leases",
+        "schema_invoices",
+        "schema_invoiceLineItems",
+        "schema_payments",
+        "schema_notificationsLog"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts"
+    },
+    {
+      "id": "better_auth_tables",
+      "label": "Better Auth Tables",
+      "nodes": [
+        "schema_user",
+        "schema_session",
+        "schema_account"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/db/schema.ts"
+    },
+    {
+      "id": "tooling_stack",
+      "label": "Project Tooling Stack",
+      "nodes": [
+        "prettier_config",
+        "eslint_config",
+        "drizzle_config",
+        "vite_config"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": ""
+    },
+    {
+      "id": "authenticated_api_endpoints",
+      "label": "Authenticated API Endpoints",
+      "nodes": [
+        "invoices_functions_getInvoices",
+        "invoices_functions_getInvoiceDetails",
+        "invoices_functions_createManualInvoiceFn",
+        "invoices_functions_getDashboardData",
+        "rooms_functions_getRooms",
+        "rooms_functions_createRoom",
+        "rooms_functions_updateRoom",
+        "payments_functions_recordCashPaymentFn",
+        "tenants_functions_getTenants",
+        "tenants_functions_createTenant",
+        "tenants_functions_updateTenant",
+        "leases_functions_getLeases",
+        "leases_functions_createLease",
+        "leases_functions_endLease",
+        "properties_functions_getProperties",
+        "properties_functions_createProperty",
+        "properties_functions_updateProperty"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/"
+    },
+    {
+      "id": "authed_routes",
+      "label": "Authenticated Route Group",
+      "nodes": [
+        "routes_authed",
+        "routes_authed_dashboard",
+        "routes_authed_tenants",
+        "routes_authed_properties",
+        "routes_authed_leases",
+        "routes_authed_rooms",
+        "routes_authed_invoices_invoiceId"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed.tsx"
+    },
+    {
+      "id": "crud_pages",
+      "label": "CRUD Management Pages",
+      "nodes": [
+        "routes_authed_tenants",
+        "routes_authed_properties",
+        "routes_authed_leases",
+        "routes_authed_rooms"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/"
+    },
+    {
+      "id": "demo_routes",
+      "label": "Demo Routes Group",
+      "nodes": [
+        "routes_demo_better_auth",
+        "routes_demo_drizzle"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/demo/"
+    },
+    {
+      "id": "auth_flow",
+      "label": "Authentication Flow",
+      "nodes": [
+        "routes_login",
+        "routes_signup",
+        "routes_authed",
+        "routes_api_auth",
+        "server_auth_functions",
+        "lib_auth_client",
+        "lib_auth"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "src/routes/"
+    },
+    {
+      "id": "billing_data_flow",
+      "label": "Invoice & Payment Data Flow",
+      "nodes": [
+        "routes_authed_dashboard",
+        "routes_authed_invoices_invoiceId",
+        "server_invoices_functions",
+        "server_payments_functions",
+        "lib_money",
+        "lib_dates"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/routes/_authed/"
+    },
+    {
+      "id": "property_management_core",
+      "label": "Property Management Core Entities",
+      "nodes": [
+        "server_properties_functions",
+        "server_rooms_functions",
+        "server_tenants_functions",
+        "server_leases_functions"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "src/routes/_authed/"
+    },
+    {
+      "id": "date_timezone_utilities",
+      "label": "Kathmandu Timezone Date Utilities",
+      "nodes": [
+        "dates_getTodayInKathmandu",
+        "dates_getCurrentDateTimeInKathmandu",
+        "dates_isPastDateInKathmandu"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/dates.ts"
+    },
+    {
+      "id": "money_conversion_utilities",
+      "label": "NPR/Paisa Currency Conversion Utils",
+      "nodes": [
+        "money_nprToPaisa",
+        "money_paisaToNpr",
+        "money_formatNpr"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/money.ts"
+    },
+    {
+      "id": "invoice_payment_pipeline",
+      "label": "Invoice and Payment Server-Side Pipeline",
+      "nodes": [
+        "payments_recordCashPayment",
+        "invoices_recalculateInvoiceStatus",
+        "invoices_createManualInvoice"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "src/lib/payments.server.ts"
+    },
+    {
+      "id": "build_phases_sequence",
+      "label": "Build Phases Sequence",
+      "nodes": [
+        "PLAN_Phase0",
+        "PLAN_Phase1",
+        "PLAN_Phase2",
+        "PLAN_Phase3",
+        "PLAN_Phase4",
+        "PLAN_Phase5",
+        "PLAN_Phase6"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md"
+    },
+    {
+      "id": "three_entry_points_architecture",
+      "label": "Three Entry Points Architecture",
+      "nodes": [
+        "PLAN_ServerFunctions",
+        "PLAN_ScheduledHandler",
+        "PLAN_PublicWebhookRoutes"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md"
+    },
+    {
+      "id": "domain_invariants",
+      "label": "Domain Invariants",
+      "nodes": [
+        "PLAN_IntegerPaisaInvariant",
+        "PLAN_DerivedStatusInvariant",
+        "PLAN_IdempotentGenerationInvariant",
+        "PLAN_AppendOnlyLedgerInvariant",
+        "PLAN_WebhookVerificationInvariant"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md"
+    },
+    {
+      "id": "nepali_payment_gateways",
+      "label": "Nepali Payment Gateways",
+      "nodes": [
+        "REQUIREMENTS_Khalti",
+        "REQUIREMENTS_eSewa"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "REQUIREMENTS.md"
+    },
+    {
+      "id": "tech_stack_selection",
+      "label": "Tech Stack Selection",
+      "nodes": [
+        "PLAN_TanStackStart",
+        "PLAN_CloudflareWorkers",
+        "PLAN_CloudflareD1",
+        "PLAN_DrizzleORM",
+        "PLAN_BetterAuth",
+        "PLAN_CloudflareR2",
+        "PLAN_CronTriggers",
+        "PLAN_Resend",
+        "PLAN_SparrowSMS",
+        "PLAN_Zod",
+        "PLAN_TailwindCSS"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md"
+    }
+  ],
+  "input_tokens": 65000,
+  "output_tokens": 16200
+}

@@ -7,7 +7,7 @@ import { z } from 'zod'
 import { env as cfEnv } from 'cloudflare:workers'
 
 export const registerLandlord = createServerFn({ method: 'POST' })
-  .validator(
+  .inputValidator(
     z.object({
       name: z.string().min(1, 'Name is required'),
       email: z.string().email('Invalid email address'),

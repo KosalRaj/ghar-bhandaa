@@ -34,7 +34,7 @@ export const getInvoices = createServerFn({ method: 'GET' })
 
 export const getInvoiceDetails = createServerFn({ method: 'GET' })
   .middleware([landlordAuthMiddleware])
-  .validator(z.object({ id: z.string() }))
+  .inputValidator(z.object({ id: z.string() }))
   .handler(async ({ data, context }) => {
     const { db, landlordId } = context
 
@@ -88,7 +88,7 @@ export const getInvoiceDetails = createServerFn({ method: 'GET' })
 
 export const createManualInvoiceFn = createServerFn({ method: 'POST' })
   .middleware([landlordAuthMiddleware])
-  .validator(createManualInvoiceSchema)
+  .inputValidator(createManualInvoiceSchema)
   .handler(async ({ data, context }) => {
     const { db, landlordId } = context
     return await createManualInvoice(db, landlordId, data)

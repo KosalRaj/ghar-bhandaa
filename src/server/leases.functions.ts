@@ -36,7 +36,7 @@ export const getLeases = createServerFn({ method: 'GET' })
 
 export const createLease = createServerFn({ method: 'POST' })
   .middleware([landlordAuthMiddleware])
-  .validator(createLeaseSchema)
+  .inputValidator(createLeaseSchema)
   .handler(async ({ data, context }) => {
     const { db, landlordId } = context
     const id = crypto.randomUUID()
@@ -62,7 +62,7 @@ export const createLease = createServerFn({ method: 'POST' })
 
 export const endLease = createServerFn({ method: 'POST' })
   .middleware([landlordAuthMiddleware])
-  .validator(
+  .inputValidator(
     z.object({
       id: z.string(),
       endDate: z.string(),
