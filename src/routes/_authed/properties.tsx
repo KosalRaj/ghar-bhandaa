@@ -1,6 +1,40 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
-import { getProperties, createProperty, updateProperty } from '#/server/properties.functions'
+import {
+  getProperties,
+  createProperty,
+  updateProperty,
+} from '#/server/properties.functions'
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '#/components/ui/card'
+import { Button } from '#/components/ui/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogPanel,
+  DialogPopup,
+  DialogTitle,
+} from '#/components/ui/dialog'
+import { Field, FieldLabel } from '#/components/ui/field'
+import { Input } from '#/components/ui/input'
+import { Alert, AlertDescription } from '#/components/ui/alert'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '#/components/ui/empty'
+import { toastManager } from '#/components/ui/toast'
+import { Building2, Plus, Edit2, AlertCircle, MapPin } from 'lucide-react'
 
 export const Route = createFileRoute('/_authed/properties')({
   loader: async () => {
@@ -15,8 +49,12 @@ function PropertiesPage() {
 
   // Modal / Form States
   const [showAddModal, setShowAddModal] = useState(false)
-  const [editingProperty, setEditingProperty] = useState<{ id: string; name: string; address: string } | null>(null)
-  
+  const [editingProperty, setEditingProperty] = useState<{
+    id: string
+    name: string
+    address: string
+  } | null>(null)
+
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -29,10 +67,17 @@ function PropertiesPage() {
     setSubmitting(true)
 
     try {
-      await createProperty({ name, address })
+      await createProperty({
+        data: { name, address },
+      })
       setName('')
       setAddress('')
       setShowAddModal(false)
+      toastManager.add({
+        type: 'success',
+        title: 'Property Added',
+        description: `Successfully added ${name}.`,
+      })
       router.invalidate()
     } catch (err: any) {
       setError(err?.message || 'Failed to add property')
@@ -50,12 +95,19 @@ function PropertiesPage() {
 
     try {
       await updateProperty({
-        id: editingProperty.id,
-        data: { name, address },
+        data: {
+          id: editingProperty.id,
+          data: { name, address },
+        },
       })
       setEditingProperty(null)
       setName('')
       setAddress('')
+      toastManager.add({
+        type: 'success',
+        title: 'Property Updated',
+        description: `Successfully updated ${name}.`,
+      })
       router.invalidate()
     } catch (err: any) {
       setError(err?.message || 'Failed to update property')
@@ -64,10 +116,11 @@ function PropertiesPage() {
     }
   }
 
-  const startEdit = (prop: typeof properties[0]) => {
+  const startEdit = (prop: (typeof properties)[0]) => {
     setEditingProperty(prop)
     setName(prop.name)
     setAddress(prop.address)
+    setError(null)
   }
 
   const cancelForm = () => {
@@ -78,124 +131,156 @@ function PropertiesPage() {
     setError(null)
   }
 
+  const isModalOpen = showAddModal || editingProperty !== null
+
   return (
-    <div className="page-wrap">
+    <div className="page-wrap flex flex-col gap-8">
       {/* Heading */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <span className="island-kicker">Assets</span>
           <h1 className="display-title text-3xl font-bold tracking-tight text-[var(--sea-ink)]">
             Properties Registry
           </h1>
         </div>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="rounded-full bg-[var(--lagoon-deep)] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#246f76] transition-transform hover:-translate-y-0.5 shadow-md"
+        <Button
+          onClick={() => {
+            setName('')
+            setAddress('')
+            setError(null)
+            setShowAddModal(true)
+          }}
+          className="self-start md:self-auto rounded-full"
         >
-          + Add Property
-        </button>
+          <Plus className="size-4" aria-hidden="true" />
+          Add Property
+        </Button>
       </div>
 
       {/* Grid List */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {properties.length > 0 ? (
-          properties.map((prop) => (
-            <div key={prop.id} className="island-shell rounded-2xl p-6 flex flex-col justify-between">
-              <div>
-                <h3 className="text-lg font-bold text-[var(--sea-ink)] mb-2">{prop.name}</h3>
-                <p className="text-sm text-[var(--sea-ink-soft)] mb-4">{prop.address}</p>
-              </div>
-              <div className="flex justify-end gap-2 border-t border-[var(--line)] pt-4">
-                <button
+      {properties.length > 0 ? (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {properties.map((prop) => (
+            <Card
+              key={prop.id}
+              className="rounded-3xl border-[var(--line)] flex flex-col justify-between hover:shadow-md transition-shadow"
+            >
+              <CardHeader className="p-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-2 rounded-xl bg-[var(--lagoon)]/15 text-[var(--lagoon-deep)]">
+                    <Building2 className="size-5" aria-hidden="true" />
+                  </div>
+                  <CardTitle className="text-lg font-bold text-[var(--sea-ink)]">
+                    {prop.name}
+                  </CardTitle>
+                </div>
+                <CardDescription className="text-sm flex items-start gap-1 text-[var(--sea-ink-soft)]">
+                  <MapPin className="size-4 shrink-0 mt-0.5" aria-hidden="true" />
+                  {prop.address}
+                </CardDescription>
+              </CardHeader>
+              <CardFooter className="flex justify-end border-t border-[var(--line)] p-4 bg-muted/20 rounded-b-3xl">
+                <Button
+                  variant="outline"
+                  size="sm"
                   onClick={() => startEdit(prop)}
-                  className="rounded-full border border-[var(--chip-line)] bg-white/50 px-4 py-1.5 text-xs font-semibold text-[var(--sea-ink)] hover:bg-white transition-colors"
+                  className="rounded-full text-xs"
                 >
+                  <Edit2 className="size-3.5" aria-hidden="true" />
                   Edit Property
-                </button>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="island-shell rounded-2xl p-8 col-span-full text-center text-[var(--sea-ink-soft)]">
-            No properties registered. Click "+ Add Property" to create your first property asset.
-          </div>
-        )}
-      </div>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <Card className="rounded-3xl border-[var(--line)] p-8">
+          <Empty>
+            <EmptyMedia variant="icon">
+              <Building2 className="text-muted-foreground" />
+            </EmptyMedia>
+            <EmptyHeader>
+              <EmptyTitle>No Properties Registered</EmptyTitle>
+              <EmptyDescription>
+                You haven't added any buildings or property assets yet. Click "Add Property" to create one.
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
+        </Card>
+      )}
 
       {/* Add / Edit Modal */}
-      {(showAddModal || editingProperty) && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-6 backdrop-blur-sm">
-          <div className="island-shell w-full max-w-md rounded-[2.5rem] p-6 sm:p-8">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <span className="island-kicker">{editingProperty ? 'Edit' : 'Create'}</span>
-                <h3 className="display-title text-2xl font-bold text-[var(--sea-ink)]">
-                  {editingProperty ? 'Edit Property' : 'Add Property'}
-                </h3>
-              </div>
-              <button
-                onClick={cancelForm}
-                className="rounded-full bg-white/40 dark:bg-black/20 p-2 text-[var(--sea-ink-soft)] hover:text-red-500"
-              >
-                ✕
-              </button>
-            </div>
+      <Dialog
+        open={isModalOpen}
+        onOpenChange={(open) => {
+          if (!open) cancelForm()
+        }}
+      >
+        <DialogPopup className="sm:max-w-md">
+          <DialogHeader>
+            <span className="island-kicker block mb-1">
+              {editingProperty ? 'Edit' : 'Create'}
+            </span>
+            <DialogTitle>
+              {editingProperty ? 'Edit Property' : 'Add Property'}
+            </DialogTitle>
+            <DialogDescription>
+              {editingProperty
+                ? 'Update property details and address.'
+                : 'Register a new building or property asset for room allocation.'}
+            </DialogDescription>
+          </DialogHeader>
 
-            <form onSubmit={editingProperty ? handleEditSubmit : handleAddSubmit} className="space-y-4">
+          <form
+            onSubmit={editingProperty ? handleEditSubmit : handleAddSubmit}
+            className="contents"
+          >
+            <DialogPanel className="flex flex-col gap-4">
               {error && (
-                <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">
-                  {error}
-                </div>
+                <Alert variant="error">
+                  <AlertCircle />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
               )}
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Property Name
-                </label>
-                <input
+              <Field>
+                <FieldLabel>Property Name</FieldLabel>
+                <Input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Lalita Niwas"
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:border-[var(--lagoon-deep)] focus:bg-white focus:outline-none"
+                  placeholder="e.g. Baneshwor House, Lakeside Villa"
                 />
-              </div>
+              </Field>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Address
-                </label>
-                <input
+              <Field>
+                <FieldLabel>Address / Location</FieldLabel>
+                <Input
                   type="text"
                   required
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Baluwatar, Kathmandu"
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:border-[var(--lagoon-deep)] focus:bg-white focus:outline-none"
+                  placeholder="e.g. New Baneshwor, Kathmandu"
                 />
-              </div>
+              </Field>
+            </DialogPanel>
 
-              <div className="flex gap-3 justify-end pt-4">
-                <button
-                  type="button"
-                  onClick={cancelForm}
-                  className="rounded-full border border-[var(--chip-line)] bg-white/50 px-5 py-2 text-sm font-semibold text-[var(--sea-ink)] hover:bg-white"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="rounded-full bg-[var(--lagoon-deep)] px-6 py-2 text-sm font-semibold text-white hover:bg-[#246f76] disabled:opacity-50"
-                >
-                  {submitting ? 'Saving...' : editingProperty ? 'Update Property' : 'Add Property'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            <DialogFooter>
+              <DialogClose
+                render={
+                  <Button variant="ghost" type="button" onClick={cancelForm}>
+                    Cancel
+                  </Button>
+                }
+              />
+              <Button type="submit" loading={submitting}>
+                {editingProperty ? 'Save Changes' : 'Create Property'}
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogPopup>
+      </Dialog>
     </div>
   )
 }

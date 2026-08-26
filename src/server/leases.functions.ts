@@ -1,11 +1,24 @@
+/**
+ * @file Leases Server Functions.
+ * @description RPC server functions for managing residential rental leases and lifecycle states.
+ */
+
 import { createServerFn } from '@tanstack/react-start'
 import { landlordAuthMiddleware } from '#/middleware/auth'
 import { createLeaseSchema } from '#/schemas/leases'
 import { leases, rooms, tenants, properties } from '#/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { nprToPaisa } from '#/lib/money'
+import { getCurrentDateTimeInKathmandu } from '#/lib/dates'
 import { z } from 'zod'
 
+/**
+ * Retrieves all leases under the authenticated landlord, enriched with room, property, and tenant metadata.
+ *
+ * @returns Array of enriched lease records ordered by `status` and `startDate`.
+ * @throws 401 Unauthorized if unauthenticated.
+ * @throws 403 Forbidden if not registered as a landlord.
+ */
 export const getLeases = createServerFn({ method: 'GET' })
   .middleware([landlordAuthMiddleware])
   .handler(async ({ context }) => {
@@ -34,13 +47,54 @@ export const getLeases = createServerFn({ method: 'GET' })
       .orderBy(leases.status, leases.startDate)
   })
 
+/**
+ * Creates a new active lease agreement.
+ *
+ * @param data.roomId - UUID of the room to lease.
+ * @param data.tenantId - UUID of the tenant entering the lease.
+ * @param data.rentAmountNpr - Monthly rent amount in NPR.
+ * @param data.depositAmountNpr - Security deposit amount in NPR.
+ * @param data.billingDay - Recurring billing day of the month (1-28).
+ * @param data.startDate - Commencement date formatted as YYYY-MM-DD.
+ * @param data.endDate - Optional termination date formatted as YYYY-MM-DD.
+ * @returns UUID string of the newly created lease.
+ * @throws 401 Unauthorized if unauthenticated.
+ * @throws 403 Forbidden if not registered as a landlord.
+ * @throws Error if the specified room or tenant does not exist or does not belong to `landlordId`.
+ *
+ * @remarks
+ * Invariants:
+ * - Room and Tenant ownership are verified against `landlordId` before insertion (IDOR prevention).
+ * - Rent and Deposit amounts are converted from NPR to integer paisa via `nprToPaisa`.
+ * - Lease is initialized with `status: 'active'`.
+ */
 export const createLease = createServerFn({ method: 'POST' })
   .middleware([landlordAuthMiddleware])
   .inputValidator(createLeaseSchema)
   .handler(async ({ data, context }) => {
     const { db, landlordId } = context
+
+    // Verify room and tenant belong to the authenticated landlord
+    const [room, tenant] = await Promise.all([
+      db.query.rooms.findFirst({
+        where: and(eq(rooms.id, data.roomId), eq(rooms.landlordId, landlordId)),
+      }),
+      db.query.tenants.findFirst({
+        where: and(
+          eq(tenants.id, data.tenantId),
+          eq(tenants.landlordId, landlordId),
+        ),
+      }),
+    ])
+
+    if (!room) {
+      throw new Error('Room not found or unauthorized')
+    }
+    if (!tenant) {
+      throw new Error('Tenant not found or unauthorized')
+    }
+
     const id = crypto.randomUUID()
-    
     const rentAmountPaisa = nprToPaisa(data.rentAmountNpr)
     const depositAmountPaisa = nprToPaisa(data.depositAmountNpr)
 
@@ -55,18 +109,32 @@ export const createLease = createServerFn({ method: 'POST' })
       startDate: data.startDate,
       endDate: data.endDate || null,
       status: 'active',
-      createdAt: new Date().toISOString(),
+      createdAt: getCurrentDateTimeInKathmandu(),
     })
     return id
   })
 
+/**
+ * Terminates an active lease by setting its status to `'ended'` and recording its `endDate`.
+ *
+ * @param data.id - UUID of the lease to terminate.
+ * @param data.endDate - Termination date formatted as YYYY-MM-DD.
+ * @returns UUID string of the ended lease.
+ * @throws 401 Unauthorized if unauthenticated.
+ * @throws 403 Forbidden if not registered as a landlord.
+ *
+ * @remarks
+ * Invariant: Mutates only leases where `leases.id === id AND leases.landlordId === landlordId`.
+ */
 export const endLease = createServerFn({ method: 'POST' })
   .middleware([landlordAuthMiddleware])
   .inputValidator(
     z.object({
-      id: z.string(),
-      endDate: z.string(),
-    })
+      id: z.string().min(1, 'Lease ID is required'),
+      endDate: z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2}$/, 'End date must be YYYY-MM-DD'),
+    }),
   )
   .handler(async ({ data, context }) => {
     const { db, landlordId } = context

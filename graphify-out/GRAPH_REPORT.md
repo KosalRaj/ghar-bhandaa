@@ -1,57 +1,95 @@
-# Graph Report - .  (2026-05-24)
+# Graph Report - ghar-bhandaa  (2026-08-26)
 
 ## Corpus Check
-- Corpus is ~21,530 words - fits in a single context window. You may not need a graph.
+- 84 files · ~45,751 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 328 nodes · 501 edges · 33 communities (17 shown, 16 thin omitted)
-- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 23 edges (avg confidence: 0.82)
-- Token cost: 65,000 input · 16,200 output
+- 843 nodes · 1478 edges · 67 communities (48 shown, 19 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 23 edges (avg confidence: 0.82)
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `1715250f`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Dashboard & Authenticated Routes|Dashboard & Authenticated Routes]]
-- [[_COMMUNITY_UI Components & Theme|UI Components & Theme]]
-- [[_COMMUNITY_Server Functions & Domain Logic|Server Functions & Domain Logic]]
-- [[_COMMUNITY_Auth & Utilities Layer|Auth & Utilities Layer]]
-- [[_COMMUNITY_Infrastructure & Architecture Plan|Infrastructure & Architecture Plan]]
-- [[_COMMUNITY_Properties & Rooms Management|Properties & Rooms Management]]
-- [[_COMMUNITY_Auth & Layout Middleware|Auth & Layout Middleware]]
-- [[_COMMUNITY_Core Database Schema|Core Database Schema]]
-- [[_COMMUNITY_Domain Invariants & Entry Points|Domain Invariants & Entry Points]]
-- [[_COMMUNITY_Tenants CRUD|Tenants CRUD]]
-- [[_COMMUNITY_Drizzle Demo Page|Drizzle Demo Page]]
-- [[_COMMUNITY_Date & Money Processing|Date & Money Processing]]
-- [[_COMMUNITY_Header Auth Components|Header Auth Components]]
-- [[_COMMUNITY_Build Phases Plan|Build Phases Plan]]
-- [[_COMMUNITY_Landlord Registration & Auth|Landlord Registration & Auth]]
-- [[_COMMUNITY_Linter & Formatter Config|Linter & Formatter Config]]
-- [[_COMMUNITY_Prettier Config|Prettier Config]]
-- [[_COMMUNITY_Vite Config|Vite Config]]
-- [[_COMMUNITY_Cloudflare Types|Cloudflare Types]]
-- [[_COMMUNITY_Router Setup|Router Setup]]
-- [[_COMMUNITY_NPR Currency Formatting|NPR Currency Formatting]]
-- [[_COMMUNITY_Payment Invoice Input Types|Payment Invoice Input Types]]
-- [[_COMMUNITY_Footer Component|Footer Component]]
-- [[_COMMUNITY_Invoice Requirements|Invoice Requirements]]
-- [[_COMMUNITY_Lease Requirements|Lease Requirements]]
-- [[_COMMUNITY_Payment Requirements|Payment Requirements]]
-- [[_COMMUNITY_Nepal Time Requirements|Nepal Time Requirements]]
-- [[_COMMUNITY_PWA Requirements|PWA Requirements]]
-- [[_COMMUNITY_Testing Strategy|Testing Strategy]]
-- [[_COMMUNITY_Drizzle Logo|Drizzle Logo]]
-- [[_COMMUNITY_React PWA Icon|React PWA Icon]]
+- [[_COMMUNITY_Community 0|Community 0]]
+- [[_COMMUNITY_Community 1|Community 1]]
+- [[_COMMUNITY_Community 2|Community 2]]
+- [[_COMMUNITY_Community 3|Community 3]]
+- [[_COMMUNITY_Community 4|Community 4]]
+- [[_COMMUNITY_Community 5|Community 5]]
+- [[_COMMUNITY_Community 6|Community 6]]
+- [[_COMMUNITY_Community 7|Community 7]]
+- [[_COMMUNITY_Community 8|Community 8]]
+- [[_COMMUNITY_Community 9|Community 9]]
+- [[_COMMUNITY_Community 10|Community 10]]
+- [[_COMMUNITY_Community 11|Community 11]]
+- [[_COMMUNITY_Community 12|Community 12]]
+- [[_COMMUNITY_Community 13|Community 13]]
+- [[_COMMUNITY_Community 14|Community 14]]
+- [[_COMMUNITY_Community 15|Community 15]]
+- [[_COMMUNITY_Community 16|Community 16]]
+- [[_COMMUNITY_Community 17|Community 17]]
+- [[_COMMUNITY_Community 18|Community 18]]
+- [[_COMMUNITY_Community 19|Community 19]]
+- [[_COMMUNITY_Community 20|Community 20]]
+- [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 22|Community 22]]
+- [[_COMMUNITY_Community 23|Community 23]]
+- [[_COMMUNITY_Community 24|Community 24]]
+- [[_COMMUNITY_Community 25|Community 25]]
+- [[_COMMUNITY_Community 26|Community 26]]
+- [[_COMMUNITY_Community 27|Community 27]]
+- [[_COMMUNITY_Community 28|Community 28]]
+- [[_COMMUNITY_Community 29|Community 29]]
+- [[_COMMUNITY_Community 30|Community 30]]
+- [[_COMMUNITY_Community 31|Community 31]]
+- [[_COMMUNITY_Community 32|Community 32]]
+- [[_COMMUNITY_Community 33|Community 33]]
+- [[_COMMUNITY_Community 34|Community 34]]
+- [[_COMMUNITY_Community 35|Community 35]]
+- [[_COMMUNITY_Community 36|Community 36]]
+- [[_COMMUNITY_Community 37|Community 37]]
+- [[_COMMUNITY_Community 38|Community 38]]
+- [[_COMMUNITY_Community 39|Community 39]]
+- [[_COMMUNITY_Community 40|Community 40]]
+- [[_COMMUNITY_Community 41|Community 41]]
+- [[_COMMUNITY_Community 42|Community 42]]
+- [[_COMMUNITY_Community 43|Community 43]]
+- [[_COMMUNITY_Community 44|Community 44]]
+- [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 46|Community 46]]
+- [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 48|Community 48]]
+- [[_COMMUNITY_Community 50|Community 50]]
+- [[_COMMUNITY_Community 51|Community 51]]
+- [[_COMMUNITY_Community 52|Community 52]]
+- [[_COMMUNITY_Community 53|Community 53]]
+- [[_COMMUNITY_Community 54|Community 54]]
+- [[_COMMUNITY_Community 58|Community 58]]
+- [[_COMMUNITY_Community 59|Community 59]]
+- [[_COMMUNITY_Community 60|Community 60]]
+- [[_COMMUNITY_Community 61|Community 61]]
+- [[_COMMUNITY_Community 62|Community 62]]
+- [[_COMMUNITY_Community 63|Community 63]]
+- [[_COMMUNITY_Community 64|Community 64]]
+- [[_COMMUNITY_Community 65|Community 65]]
+- [[_COMMUNITY_Community 66|Community 66]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `landlordAuthMiddleware` - 17 edges
-2. `Automated Room Rent Collection System` - 11 edges
-3. `Authenticated Layout Guard` - 9 edges
-4. `Leases CRUD Route` - 9 edges
-5. `Domain Logic Layer (src/lib)` - 9 edges
-6. `landlords table` - 8 edges
-7. `Root Layout` - 8 edges
-8. `Dashboard Route` - 8 edges
-9. `landlordAuthMiddleware` - 7 edges
-10. `getTodayInKathmandu()` - 7 edges
+1. `cn()` - 86 edges
+2. `landlordAuthMiddleware` - 17 edges
+3. `Automated Room Rent Collection System — Build Plan` - 15 edges
+4. `Button()` - 14 edges
+5. `formatNpr()` - 12 edges
+6. `3. Detailed Audit Findings & Applied Remediations` - 12 edges
+7. `Building For Production` - 12 edges
+8. `Card()` - 11 edges
+9. `CardTitle()` - 11 edges
+10. `Alert()` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Drizzle ORM Config` --references--> `landlords table`  [EXTRACTED]
@@ -85,87 +123,203 @@
 - **Nepali Payment Gateways** — REQUIREMENTS_Khalti, REQUIREMENTS_eSewa [EXTRACTED 1.00]
 - **Tech Stack Selection** — PLAN_TanStackStart, PLAN_CloudflareWorkers, PLAN_CloudflareD1, PLAN_DrizzleORM, PLAN_BetterAuth, PLAN_CloudflareR2, PLAN_CronTriggers, PLAN_Resend, PLAN_SparrowSMS, PLAN_Zod, PLAN_TailwindCSS [EXTRACTED 1.00]
 
-## Communities (33 total, 16 thin omitted)
+## Communities (67 total, 19 thin omitted)
 
-### Community 0 - "Dashboard & Authenticated Routes"
+### Community 0 - "Community 0"
 Cohesion: 0.07
-Nodes (43): DashboardPage(), Route, InvoiceDetailsPage(), Route, Route, Database, account, invoiceLineItems (+35 more)
+Nodes (81): cn(), getLeases, getProperties, getRooms, getTenants, Alert(), AlertAction(), AlertDescription() (+73 more)
 
-### Community 1 - "UI Components & Theme"
+### Community 1 - "Community 1"
 Cohesion: 0.05
-Nodes (28): ThemeMode, Route, authClient, Route, Route, Route, Route, getRouter() (+20 more)
+Nodes (49): 1. Installation, 2. Configure Environment Variables, 3. Initialize Local Database, 4. Start Development Server, Adding a Database (Optional), Adding A Route, Adding Links, API Routes (+41 more)
 
-### Community 2 - "Server Functions & Domain Logic"
+### Community 2 - "Community 2"
+Cohesion: 0.05
+Nodes (35): tenants, createTenantSchema, updateTenantSchema, createTenant, updateTenant, atomicDb, bobInvoice, bobLease (+27 more)
+
+### Community 3 - "Community 3"
+Cohesion: 0.05
+Nodes (43): 1.1 Required Tools, 1.2 Initial Installation, 1.3 Environment Variables Configuration, 1. Prerequisites & Environment Setup, 2.1 Database Configuration Files, 2.2 Schema Migration Workflow, 2. Cloudflare D1 Database & Drizzle Migrations, 3. Local Development (+35 more)
+
+### Community 4 - "Community 4"
+Cohesion: 0.07
+Nodes (36): Append-Only Payment Ledger, Bank Transfer Verification Flow, Better Auth, Cloudflare D1 (SQLite), Cloudflare R2, Cloudflare Workers, Cloudflare Cron Triggers, Derived Invoice Status Rule (+28 more)
+
+### Community 5 - "Community 5"
+Cohesion: 0.06
+Nodes (33): 10. Build phases, 11. Environment & secrets, 12. Gotchas (read before coding), 13. Testing strategy, 14. Suggested agentic AI workflow, 1. How an AI agent should use this document, 2. Product overview, 3. Technology stack (decided — do not substitute) (+25 more)
+
+### Community 6 - "Community 6"
+Cohesion: 0.06
+Nodes (31): Route, Route, Route, Route, Route, Route, Route, Route (+23 more)
+
+### Community 7 - "Community 7"
+Cohesion: 0.06
+Nodes (31): 1. Executive Summary, 2. Master Findings Matrix, 3.10 AUTH-01: Non-Atomic Registration Rollback (Severity: LOW), 3.11 LNK-01: Dead Link to Demo Page in Header (Severity: LOW), 3.1 SEC-01: Cross-Tenant Property Association in `createRoom` (Severity: HIGH), 3.2 SEC-02: Cross-Tenant Room & Tenant Association in `createLease` (Severity: HIGH), 3.3 INV-01: Flawed Global Outstanding Balance Calculation (Severity: HIGH), 3.4 FIN-01: Unbounded Cash Overpayments in `recordCashPayment` (Severity: HIGH) (+23 more)
+
+### Community 8 - "Community 8"
 Cohesion: 0.08
 Nodes (32): createManualInvoiceFn Server Function, getDashboardData Server Function, getInvoiceDetails Server Function, getInvoices Server Function, createLease Server Function, endLease Server Function, getLeases Server Function, createManualInvoice (+24 more)
 
-### Community 3 - "Auth & Utilities Layer"
-Cohesion: 0.15
-Nodes (25): Auth Library (getAuth), Better Auth Client, Date Utilities (Kathmandu), Money Format Utilities, About Route, Auth API Handler Route, Authenticated Layout Guard, Dashboard Route (+17 more)
+### Community 9 - "Community 9"
+Cohesion: 0.07
+Nodes (28): 10. Billing Day Range Limitation, 1. Nepal / Kathmandu Timezone Handling (`Asia/Kathmandu`, UTC+05:45), 1. Server Functions RPC Layer (`src/server/*.functions.ts`), 1. System Overview & Technology Stack, 2. Monetary Amounts & Integer Paisa Arithmetic, 2. Scheduled Handlers (Cloudflare Cron Triggers), 2. The Three-Entry-Point Architectural Model, 3. Append-Only Payment Ledger & Financial Integrity (+20 more)
 
-### Community 4 - "Infrastructure & Architecture Plan"
-Cohesion: 0.09
-Nodes (25): Bank Transfer Verification Flow, Better Auth, Cloudflare D1 (SQLite), Cloudflare R2, Cloudflare Workers, Cloudflare Cron Triggers, Drizzle ORM, Idempotent Invoice Generation (+17 more)
+### Community 10 - "Community 10"
+Cohesion: 0.07
+Nodes (27): 1. Purpose & scope, 2. Actors, 3.1 Accounts & authentication, 3.2 Property, room, tenant & lease management, 3.3 Invoice generation & billing, 3.4 Payments — online wallets, 3.5 Payments — bank transfer & verification, 3.6 Payment integrity (+19 more)
 
-### Community 5 - "Properties & Rooms Management"
-Cohesion: 0.16
-Nodes (12): Route, Route, createPropertySchema, updatePropertySchema, createRoomSchema, updateRoomSchema, createProperty, getProperties (+4 more)
+### Community 11 - "Community 11"
+Cohesion: 0.13
+Nodes (28): Database Instance, Todos DB Schema, Auth Library (getAuth), Better Auth Client, Date Utilities (Kathmandu), Money Format Utilities, About Route, Auth API Handler Route (+20 more)
 
-### Community 6 - "Auth & Layout Middleware"
-Cohesion: 0.18
-Nodes (8): Route, getDB(), landlords, getAuth(), Route, Route, checkLandlordAuth, registerLandlord
+### Community 12 - "Community 12"
+Cohesion: 0.1
+Nodes (21): addDaysInKathmandu(), getTodayInKathmandu(), isPastDateInKathmandu(), fixedDate, iso, today, d1000, dangerousAmounts (+13 more)
 
-### Community 7 - "Core Database Schema"
+### Community 13 - "Community 13"
+Cohesion: 0.13
+Nodes (9): applyThemeMode(), getInitialMode(), ThemeMode, ThemeToggle(), Route, authClient, Avatar(), AvatarFallback() (+1 more)
+
+### Community 14 - "Community 14"
 Cohesion: 0.18
 Nodes (18): getDB Factory, Drizzle ORM Config, BetterAuthHeader Component, Landlord Auth Middleware, account table, invoice_line_items table, invoices table, landlords table (+10 more)
 
-### Community 8 - "Domain Invariants & Entry Points"
+### Community 15 - "Community 15"
+Cohesion: 0.24
+Nodes (10): Route, getDB(), account, landlords, notificationsLog, session, user, verification (+2 more)
+
+### Community 16 - "Community 16"
+Cohesion: 0.19
+Nodes (12): Database, invoices, payments, getCurrentDateTimeInKathmandu(), CreateManualInvoiceInput, recalculateInvoiceStatus(), recordCashPayment(), RecordCashPaymentInput (+4 more)
+
+### Community 17 - "Community 17"
+Cohesion: 0.16
+Nodes (9): Route, getSwipeDirection(), SwipeDirection, TOAST_ICONS, ToastData, ToastPosition, ToastProvider(), ToastProviderProps (+1 more)
+
+### Community 18 - "Community 18"
+Cohesion: 0.18
+Nodes (9): createManualInvoice(), createdInvoice, InvoiceRecord, LeaseRecord, LineItemRecord, lineItems, lineItemSum, mockDb (+1 more)
+
+### Community 19 - "Community 19"
+Cohesion: 0.18
+Nodes (10): Acceptance Criteria, Code Quality & Correctness, Deliverables & Artifacts, Initial Request — 2026-08-26T12:20:52+05:45, Original User Request, R1. Comprehensive Code Review & Invariant Audit, R2. Comprehensive Documentation Suite, R3. In-Code Documentation & Type Annotations (+2 more)
+
+### Community 20 - "Community 20"
+Cohesion: 0.33
+Nodes (7): DashboardPage(), InvoiceDetailsPage(), formatNpr(), nprToPaisa(), paisaToNpr(), formatted, testCases
+
+### Community 21 - "Community 21"
+Cohesion: 0.28
+Nodes (7): segmentedControlItemSizeClassNames, segmentedControlItemVariants, SegmentedControlSize, TabsListContext, TabsPanel(), TabsSize, TabsVariant
+
+### Community 22 - "Community 22"
 Cohesion: 0.25
-Nodes (11): Append-Only Payment Ledger, Derived Invoice Status Rule, Domain Logic Layer (src/lib), File Suffix Convention, Integer Paisa Money Rule, Public Webhook Routes Entry Point, Scheduled Handler Entry Point, Server Functions Entry Point (+3 more)
+Nodes (7): invoiceLineItems, createManualInvoiceSchema, invoiceLineItemInputSchema, createManualInvoiceFn, getDashboardData, getInvoiceDetails, getInvoices
 
-### Community 9 - "Tenants CRUD"
-Cohesion: 0.31
-Nodes (6): Route, createTenantSchema, updateTenantSchema, createTenant, getTenants, updateTenant
+### Community 23 - "Community 23"
+Cohesion: 0.22
+Nodes (9): 2.6 Invoices Domain (`src/server/invoices.functions.ts`), code:typescript (Promise<), code:typescript (Promise<{), code:typescript (z.object({), code:typescript (Promise<{), `createManualInvoiceFn`, `getDashboardData`, `getInvoiceDetails` (+1 more)
 
-### Community 10 - "Drizzle Demo Page"
+### Community 24 - "Community 24"
+Cohesion: 0.36
+Nodes (4): Footer(), AuthedLayout(), Route, checkLandlordAuth
+
+### Community 25 - "Community 25"
+Cohesion: 0.36
+Nodes (5): properties, createPropertySchema, updatePropertySchema, createProperty, updateProperty
+
+### Community 26 - "Community 26"
 Cohesion: 0.25
-Nodes (6): Database Instance, Todos DB Schema, createTodo, getTodos, Route, Drizzle Demo Route
+Nodes (7): 1.1 Server Functions (RPC), 1. Overview & Protocol Architecture, 3. Public Better Auth REST Endpoints (`/api/auth/*`), 4. HTTP Error Handling & Status Codes, API & Server Functions Catalog, code:typescript (// Client usage example:), code:block22 (┌───────────────────────────────────────────────────────────)
 
-### Community 11 - "Date & Money Processing"
+### Community 27 - "Community 27"
+Cohesion: 0.38
+Nodes (5): rooms, createRoomSchema, updateRoomSchema, createRoom, updateRoom
+
+### Community 28 - "Community 28"
+Cohesion: 0.33
+Nodes (5): leases, createLeaseSchema, updateLeaseSchema, createLease, endLease
+
+### Community 29 - "Community 29"
+Cohesion: 0.29
+Nodes (6): Architecture, Code Layout, Feature Inventory, Key Architectural Invariants, Milestones, Project: ghar-bhandaa Code Review, Invariant Audit & Documentation Suite
+
+### Community 30 - "Community 30"
+Cohesion: 0.29
+Nodes (7): 2.2 Properties Domain (`src/server/properties.functions.ts`), code:typescript (Array<{), code:typescript (z.object({), code:typescript (z.object({), `createProperty`, `getProperties`, `updateProperty`
+
+### Community 31 - "Community 31"
+Cohesion: 0.29
+Nodes (7): 2.4 Tenants Domain (`src/server/tenants.functions.ts`), code:typescript (Array<{), code:typescript (z.object({), code:typescript (z.object({), `createTenant`, `getTenants`, `updateTenant`
+
+### Community 32 - "Community 32"
+Cohesion: 0.29
+Nodes (7): 2.5 Leases Domain (`src/server/leases.functions.ts`), code:typescript (Promise<), code:typescript (z.object({), code:typescript (z.object({), `createLease`, `endLease`, `getLeases`
+
+### Community 33 - "Community 33"
+Cohesion: 0.29
+Nodes (7): 2.3 Rooms Domain (`src/server/rooms.functions.ts`), code:typescript (z.object({), code:typescript (Promise<), code:typescript (z.object({), `createRoom`, `getRooms`, `updateRoom`
+
+### Community 34 - "Community 34"
 Cohesion: 0.48
 Nodes (7): getCurrentDateTimeInKathmandu, getTodayInKathmandu, isPastDateInKathmandu, createManualInvoice, recalculateInvoiceStatus, nprToPaisa, recordCashPayment
 
-### Community 12 - "Header Auth Components"
+### Community 35 - "Community 35"
 Cohesion: 0.33
 Nodes (7): authClient, getAuth, Header, LandlordHeader, ThemeToggle, BetterAuthHeader, cn
 
-### Community 13 - "Build Phases Plan"
+### Community 36 - "Community 36"
 Cohesion: 0.29
 Nodes (7): Phase 0: Project Setup, Phase 1: Core Records + Manual Billing, Phase 2: Automation, Phase 3: Bank Transfer + Verification, Phase 4: Online Wallet Payments, Phase 5: Hardening + Extras, Phase 6: Multi-Landlord Readiness
 
-### Community 14 - "Landlord Registration & Auth"
+### Community 37 - "Community 37"
+Cohesion: 0.4
+Nodes (3): createTodo, getTodos, Route
+
+### Community 38 - "Community 38"
+Cohesion: 0.6
+Nodes (3): getRouter(), Register, routeTree
+
+### Community 39 - "Community 39"
+Cohesion: 0.5
+Nodes (3): landlordAuthMiddleware, recordCashPaymentSchema, recordCashPaymentFn
+
+### Community 40 - "Community 40"
+Cohesion: 0.4
+Nodes (4): CloudflareBindings, D1Database, D1Result, R2Bucket
+
+### Community 41 - "Community 41"
+Cohesion: 0.4
+Nodes (5): 2.7 Payments Domain (`src/server/payments.functions.ts`), 2. Server Functions Catalog by Domain, code:block2 (┌───────────────────────────────────────────────────────────), code:typescript (z.object({), `recordCashPaymentFn`
+
+### Community 42 - "Community 42"
+Cohesion: 0.4
+Nodes (5): 2.1 Authentication Domain (`src/server/auth.functions.ts`), `checkLandlordAuth`, code:typescript (z.object({), code:typescript (Promise<{), `registerLandlord`
+
+### Community 44 - "Community 44"
 Cohesion: 0.83
 Nodes (4): checkLandlordAuth Server Function, registerLandlord Server Function, getAuth, getDB
 
 ## Knowledge Gaps
-- **94 isolated node(s):** `config`, `config`, `Register`, `SignupRoute`, `LoginRoute` (+89 more)
+- **333 isolated node(s):** `config`, `SignupRoute`, `LoginRoute`, `AuthedRoute`, `IndexRoute` (+328 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **19 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Drizzle Demo Route` connect `Drizzle Demo Page` to `Auth & Utilities Layer`?**
-  _High betweenness centrality (0.080) - this node is a cross-community bridge._
-- **Why does `Root Layout` connect `Auth & Utilities Layer` to `Drizzle Demo Page`?**
-  _High betweenness centrality (0.076) - this node is a cross-community bridge._
-- **Are the 4 inferred relationships involving `Domain Logic Layer (src/lib)` (e.g. with `Integer Paisa Money Rule` and `Derived Invoice Status Rule`) actually correct?**
-  _`Domain Logic Layer (src/lib)` has 4 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `config`, `config`, `Register` to the rest of the system?**
-  _94 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Dashboard & Authenticated Routes` be split into smaller, more focused modules?**
+- **Why does `Todos DB Schema` connect `Community 11` to `Community 37`?**
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+- **What connects `config`, `SignupRoute`, `LoginRoute` to the rest of the system?**
+  _333 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.07 - nodes in this community are weakly interconnected._
-- **Should `UI Components & Theme` be split into smaller, more focused modules?**
+- **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
-- **Should `Server Functions & Domain Logic` be split into smaller, more focused modules?**
-  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
+- **Should `Community 2` be split into smaller, more focused modules?**
+  _Cohesion score 0.05 - nodes in this community are weakly interconnected._
+- **Should `Community 3` be split into smaller, more focused modules?**
+  _Cohesion score 0.05 - nodes in this community are weakly interconnected._
+- **Should `Community 4` be split into smaller, more focused modules?**
+  _Cohesion score 0.07 - nodes in this community are weakly interconnected._

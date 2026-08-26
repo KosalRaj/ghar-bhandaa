@@ -1,6 +1,41 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
-import { getTenants, createTenant, updateTenant } from '#/server/tenants.functions'
+import {
+  getTenants,
+  createTenant,
+  updateTenant,
+} from '#/server/tenants.functions'
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '#/components/ui/card'
+import { Avatar, AvatarFallback } from '#/components/ui/avatar'
+import { Button } from '#/components/ui/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogPanel,
+  DialogPopup,
+  DialogTitle,
+} from '#/components/ui/dialog'
+import { Field, FieldLabel } from '#/components/ui/field'
+import { Input } from '#/components/ui/input'
+import { Textarea } from '#/components/ui/textarea'
+import { Alert, AlertDescription } from '#/components/ui/alert'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '#/components/ui/empty'
+import { toastManager } from '#/components/ui/toast'
+import { Users, Plus, Edit2, AlertCircle, Mail, Phone } from 'lucide-react'
 
 export const Route = createFileRoute('/_authed/tenants')({
   loader: async () => {
@@ -15,7 +50,9 @@ function TenantsPage() {
 
   // Modal / Form States
   const [showAddModal, setShowAddModal] = useState(false)
-  const [editingTenant, setEditingTenant] = useState<typeof tenants[0] | null>(null)
+  const [editingTenant, setEditingTenant] = useState<
+    (typeof tenants)[0] | null
+  >(null)
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -32,13 +69,20 @@ function TenantsPage() {
 
     try {
       await createTenant({
-        name,
-        email,
-        phone: phone || null,
-        notes: notes || null,
+        data: {
+          name,
+          email,
+          phone: phone || null,
+          notes: notes || null,
+        },
       })
       resetForm()
       setShowAddModal(false)
+      toastManager.add({
+        type: 'success',
+        title: 'Tenant Registered',
+        description: `Successfully registered tenant ${name}.`,
+      })
       router.invalidate()
     } catch (err: any) {
       setError(err?.message || 'Failed to add tenant')
@@ -56,16 +100,23 @@ function TenantsPage() {
 
     try {
       await updateTenant({
-        id: editingTenant.id,
         data: {
-          name,
-          email,
-          phone: phone || null,
-          notes: notes || null,
+          id: editingTenant.id,
+          data: {
+            name,
+            email,
+            phone: phone || null,
+            notes: notes || null,
+          },
         },
       })
       resetForm()
       setEditingTenant(null)
+      toastManager.add({
+        type: 'success',
+        title: 'Tenant Updated',
+        description: `Successfully updated tenant profile for ${name}.`,
+      })
       router.invalidate()
     } catch (err: any) {
       setError(err?.message || 'Failed to update tenant')
@@ -74,12 +125,13 @@ function TenantsPage() {
     }
   }
 
-  const startEdit = (tenant: typeof tenants[0]) => {
+  const startEdit = (tenant: (typeof tenants)[0]) => {
     setEditingTenant(tenant)
     setName(tenant.name)
     setEmail(tenant.email)
     setPhone(tenant.phone || '')
     setNotes(tenant.notes || '')
+    setError(null)
   }
 
   const resetForm = () => {
@@ -96,158 +148,203 @@ function TenantsPage() {
     setEditingTenant(null)
   }
 
+  const isModalOpen = showAddModal || editingTenant !== null
+
   return (
-    <div className="page-wrap">
+    <div className="page-wrap flex flex-col gap-8">
       {/* Heading */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <span className="island-kicker">Renter Records</span>
           <h1 className="display-title text-3xl font-bold tracking-tight text-[var(--sea-ink)]">
             Tenants Registry
           </h1>
         </div>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="rounded-full bg-[var(--lagoon-deep)] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#246f76] transition-transform hover:-translate-y-0.5 shadow-md"
+        <Button
+          onClick={() => {
+            resetForm()
+            setShowAddModal(true)
+          }}
+          className="self-start md:self-auto rounded-full"
         >
-          + Add Tenant
-        </button>
+          <Plus className="size-4" aria-hidden="true" />
+          Add Tenant
+        </Button>
       </div>
 
       {/* Grid List */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {tenants.length > 0 ? (
-          tenants.map((tenant) => (
-            <div key={tenant.id} className="island-shell rounded-2xl p-6 flex flex-col justify-between">
-              <div>
-                <h3 className="text-lg font-bold text-[var(--sea-ink)] mb-2">{tenant.name}</h3>
-                <div className="text-sm text-[var(--sea-ink-soft)] space-y-1 mb-4">
-                  <div><strong>Email:</strong> {tenant.email}</div>
-                  {tenant.phone && <div><strong>Phone:</strong> {tenant.phone}</div>}
-                  {tenant.notes && (
-                    <div className="mt-2 text-xs italic bg-white/20 p-2 rounded-lg border border-[var(--line)]">
-                      "{tenant.notes}"
+      {tenants.length > 0 ? (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {tenants.map((tenant) => {
+            const initials = tenant.name
+              ? tenant.name
+                  .split(' ')
+                  .map((n) => n[0])
+                  .join('')
+                  .toUpperCase()
+                  .slice(0, 2)
+              : 'T'
+
+            return (
+              <Card
+                key={tenant.id}
+                className="rounded-3xl border-[var(--line)] flex flex-col justify-between hover:shadow-md transition-shadow"
+              >
+                <CardHeader className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Avatar className="size-10">
+                      <AvatarFallback className="text-xs font-bold">
+                        {initials}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <CardTitle className="text-lg font-bold text-[var(--sea-ink)]">
+                        {tenant.name}
+                      </CardTitle>
+                      <div className="text-xs text-[var(--sea-ink-soft)] flex items-center gap-1">
+                        <Mail className="size-3" aria-hidden="true" />
+                        {tenant.email}
+                      </div>
                     </div>
-                  )}
-                </div>
-              </div>
-              <div className="flex justify-end gap-2 border-t border-[var(--line)] pt-4">
-                <button
-                  onClick={() => startEdit(tenant)}
-                  className="rounded-full border border-[var(--chip-line)] bg-white/50 px-4 py-1.5 text-xs font-semibold text-[var(--sea-ink)] hover:bg-white transition-colors"
-                >
-                  Edit Profile
-                </button>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="island-shell rounded-2xl p-8 col-span-full text-center text-[var(--sea-ink-soft)]">
-            No tenants registered. Click "+ Add Tenant" to onboard a tenant.
-          </div>
-        )}
-      </div>
+                  </div>
+
+                  <div className="space-y-1.5 text-xs text-[var(--sea-ink-soft)]">
+                    {tenant.phone && (
+                      <div className="flex items-center gap-1.5">
+                        <Phone className="size-3.5 text-muted-foreground" aria-hidden="true" />
+                        <span>{tenant.phone}</span>
+                      </div>
+                    )}
+                    {tenant.notes && (
+                      <div className="mt-2 text-xs italic bg-muted/40 p-2.5 rounded-xl border border-[var(--line)] text-foreground">
+                        "{tenant.notes}"
+                      </div>
+                    )}
+                  </div>
+                </CardHeader>
+                <CardFooter className="flex justify-end border-t border-[var(--line)] p-4 bg-muted/20 rounded-b-3xl">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => startEdit(tenant)}
+                    className="rounded-full text-xs"
+                  >
+                    <Edit2 className="size-3.5" aria-hidden="true" />
+                    Edit Profile
+                  </Button>
+                </CardFooter>
+              </Card>
+            )
+          })}
+        </div>
+      ) : (
+        <Card className="rounded-3xl border-[var(--line)] p-8">
+          <Empty>
+            <EmptyMedia variant="icon">
+              <Users className="text-muted-foreground" />
+            </EmptyMedia>
+            <EmptyHeader>
+              <EmptyTitle>No Tenants Registered</EmptyTitle>
+              <EmptyDescription>
+                You haven't onboarded any tenants yet. Click "Add Tenant" to register a tenant.
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
+        </Card>
+      )}
 
       {/* Add / Edit Modal */}
-      {(showAddModal || editingTenant) && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-6 backdrop-blur-sm">
-          <div className="island-shell w-full max-w-md rounded-[2.5rem] p-6 sm:p-8">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <span className="island-kicker">{editingTenant ? 'Edit' : 'Create'}</span>
-                <h3 className="display-title text-2xl font-bold text-[var(--sea-ink)]">
-                  {editingTenant ? 'Edit Tenant' : 'Add Tenant'}
-                </h3>
-              </div>
-              <button
-                onClick={cancelForm}
-                className="rounded-full bg-white/40 dark:bg-black/20 p-2 text-[var(--sea-ink-soft)] hover:text-red-500"
-              >
-                ✕
-              </button>
-            </div>
+      <Dialog
+        open={isModalOpen}
+        onOpenChange={(open) => {
+          if (!open) cancelForm()
+        }}
+      >
+        <DialogPopup className="sm:max-w-md">
+          <DialogHeader>
+            <span className="island-kicker block mb-1">
+              {editingTenant ? 'Edit' : 'Create'}
+            </span>
+            <DialogTitle>
+              {editingTenant ? 'Edit Tenant Profile' : 'Add Tenant'}
+            </DialogTitle>
+            <DialogDescription>
+              {editingTenant
+                ? 'Update contact details and tenant profile notes.'
+                : 'Onboard a new tenant with email and phone.'}
+            </DialogDescription>
+          </DialogHeader>
 
-            <form onSubmit={editingTenant ? handleEditSubmit : handleAddSubmit} className="space-y-4">
+          <form
+            onSubmit={editingTenant ? handleEditSubmit : handleAddSubmit}
+            className="contents"
+          >
+            <DialogPanel className="flex flex-col gap-4">
               {error && (
-                <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">
-                  {error}
-                </div>
+                <Alert variant="error">
+                  <AlertCircle />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
               )}
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Full Name
-                </label>
-                <input
+              <Field>
+                <FieldLabel>Full Name</FieldLabel>
+                <Input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Ram Bahadur"
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:border-[var(--lagoon-deep)] focus:bg-white focus:outline-none"
+                  placeholder="e.g. Ram Bahadur"
                 />
-              </div>
+              </Field>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Email Address
-                </label>
-                <input
+              <Field>
+                <FieldLabel>Email Address</FieldLabel>
+                <Input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="ram@example.com"
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:border-[var(--lagoon-deep)] focus:bg-white focus:outline-none"
                 />
-              </div>
+              </Field>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Phone Number
-                </label>
-                <input
+              <Field>
+                <FieldLabel>Phone Number</FieldLabel>
+                <Input
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="98XXXXXXXX"
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:border-[var(--lagoon-deep)] focus:bg-white focus:outline-none"
                 />
-              </div>
+              </Field>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Notes
-                </label>
-                <textarea
+              <Field>
+                <FieldLabel>Notes / Emergency Contacts (Optional)</FieldLabel>
+                <Textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Additional contact details, references, etc."
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:border-[var(--lagoon-deep)] focus:bg-white focus:outline-none"
+                  placeholder="Additional contact details, ID references, etc."
                   rows={3}
                 />
-              </div>
+              </Field>
+            </DialogPanel>
 
-              <div className="flex gap-3 justify-end pt-4">
-                <button
-                  type="button"
-                  onClick={cancelForm}
-                  className="rounded-full border border-[var(--chip-line)] bg-white/50 px-5 py-2 text-sm font-semibold text-[var(--sea-ink)] hover:bg-white"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="rounded-full bg-[var(--lagoon-deep)] px-6 py-2 text-sm font-semibold text-white hover:bg-[#246f76] disabled:opacity-50"
-                >
-                  {submitting ? 'Saving...' : editingTenant ? 'Update Tenant' : 'Add Tenant'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            <DialogFooter>
+              <DialogClose
+                render={
+                  <Button variant="ghost" type="button" onClick={cancelForm}>
+                    Cancel
+                  </Button>
+                }
+              />
+              <Button type="submit" loading={submitting}>
+                {editingTenant ? 'Save Changes' : 'Add Tenant'}
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogPopup>
+      </Dialog>
     </div>
   )
 }

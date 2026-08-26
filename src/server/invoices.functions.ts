@@ -1,11 +1,33 @@
+/**
+ * @file Invoices and Financial Dashboard Server Functions.
+ * @description RPC server functions for managing invoices, fetching detailed invoice statements,
+ * creating manual invoices, and computing landlord portfolio dashboard metrics.
+ */
+
 import { createServerFn } from '@tanstack/react-start'
 import { landlordAuthMiddleware } from '#/middleware/auth'
 import { createManualInvoiceSchema } from '#/schemas/invoices'
 import { createManualInvoice } from '#/lib/invoices.server'
-import { invoices, tenants, leases, rooms, properties, invoiceLineItems, payments } from '#/db/schema'
+import {
+  invoices,
+  tenants,
+  leases,
+  rooms,
+  properties,
+  invoiceLineItems,
+  payments,
+} from '#/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { z } from 'zod'
 
+/**
+ * Retrieves all invoices issued across properties owned by the authenticated landlord.
+ * Joins tenant, lease, room, and property metadata.
+ *
+ * @returns Array of enriched invoice records ordered by billing `period` and `dueDate`.
+ * @throws 401 Unauthorized if unauthenticated.
+ * @throws 403 Forbidden if not registered as a landlord.
+ */
 export const getInvoices = createServerFn({ method: 'GET' })
   .middleware([landlordAuthMiddleware])
   .handler(async ({ context }) => {
@@ -32,9 +54,19 @@ export const getInvoices = createServerFn({ method: 'GET' })
       .orderBy(invoices.period, invoices.dueDate)
   })
 
+/**
+ * Retrieves full details for a specific invoice including related tenant, lease, room,
+ * property, line items, and payment history.
+ *
+ * @param data.id - UUID of the invoice to fetch.
+ * @returns Object containing `{ invoice, tenant, lease, room, property, lineItems, payments }`.
+ * @throws 401 Unauthorized if unauthenticated.
+ * @throws 403 Forbidden if not registered as a landlord.
+ * @throws Error ('Invoice not found') if the invoice does not exist or does not belong to `landlordId`.
+ */
 export const getInvoiceDetails = createServerFn({ method: 'GET' })
   .middleware([landlordAuthMiddleware])
-  .inputValidator(z.object({ id: z.string() }))
+  .inputValidator(z.object({ id: z.string().min(1, 'Invoice ID is required') }))
   .handler(async ({ data, context }) => {
     const { db, landlordId } = context
 
@@ -86,6 +118,15 @@ export const getInvoiceDetails = createServerFn({ method: 'GET' })
     }
   })
 
+/**
+ * Server function endpoint to manually generate an invoice with line items.
+ *
+ * @param data - The validated manual invoice creation input.
+ * @returns UUID string of the newly created invoice.
+ * @throws 401 Unauthorized if unauthenticated.
+ * @throws 403 Forbidden if not registered as a landlord.
+ * @throws Error if lease is not found or unauthorized.
+ */
 export const createManualInvoiceFn = createServerFn({ method: 'POST' })
   .middleware([landlordAuthMiddleware])
   .inputValidator(createManualInvoiceSchema)
@@ -94,6 +135,19 @@ export const createManualInvoiceFn = createServerFn({ method: 'POST' })
     return await createManualInvoice(db, landlordId, data)
   })
 
+/**
+ * Aggregates portfolio-wide financial metrics and recent invoices for the landlord dashboard.
+ *
+ * Calculations performed:
+ * - `totalCollected`: Sum of all confirmed payments in integer paisa.
+ * - `totalOutstanding`: Sum of remaining balances (`amount - confirmedPayments`) across all invoices in integer paisa.
+ * - `activeLeasesCount`: Total count of active leases.
+ * - `overdueInvoicesCount`: Total count of invoices currently in `'overdue'` status.
+ *
+ * @returns Dashboard payload containing `stats` summary and `invoices` list.
+ * @throws 401 Unauthorized if unauthenticated.
+ * @throws 403 Forbidden if not registered as a landlord.
+ */
 export const getDashboardData = createServerFn({ method: 'GET' })
   .middleware([landlordAuthMiddleware])
   .handler(async ({ context }) => {
@@ -122,25 +176,43 @@ export const getDashboardData = createServerFn({ method: 'GET' })
 
     // 2. Fetch all confirmed payments
     const confirmedPayments = await db.query.payments.findMany({
-      where: and(eq(payments.landlordId, landlordId), eq(payments.status, 'confirmed')),
+      where: and(
+        eq(payments.landlordId, landlordId),
+        eq(payments.status, 'confirmed'),
+      ),
     })
 
-    const totalCollectedPaisa = confirmedPayments.reduce((acc, p) => acc + p.amount, 0)
+    const totalCollectedPaisa = confirmedPayments.reduce(
+      (acc, p) => acc + p.amount,
+      0,
+    )
 
-    // 3. Calculate outstanding (sum of unpaid invoice balances)
-    // For outstanding we sum up the invoice amount minus its confirmed payments
-    let totalInvoiceAmountPaisa = 0
-    for (const inv of allInvoices) {
-      totalInvoiceAmountPaisa += inv.amount
+    // 3. Calculate outstanding balance per invoice (sum of invoice amount minus confirmed payments per invoice)
+    const paymentsByInvoice = new Map<string, number>()
+    for (const p of confirmedPayments) {
+      paymentsByInvoice.set(
+        p.invoiceId,
+        (paymentsByInvoice.get(p.invoiceId) || 0) + p.amount,
+      )
     }
-    const totalOutstandingPaisa = Math.max(0, totalInvoiceAmountPaisa - totalCollectedPaisa)
+
+    let totalOutstandingPaisa = 0
+    for (const inv of allInvoices) {
+      const paid = paymentsByInvoice.get(inv.id) || 0
+      totalOutstandingPaisa += Math.max(0, inv.amount - paid)
+    }
 
     // 4. Fetch active leases count
     const activeLeases = await db.query.leases.findMany({
-      where: and(eq(leases.landlordId, landlordId), eq(leases.status, 'active')),
+      where: and(
+        eq(leases.landlordId, landlordId),
+        eq(leases.status, 'active'),
+      ),
     })
 
-    const overdueCount = allInvoices.filter((inv) => inv.status === 'overdue').length
+    const overdueCount = allInvoices.filter(
+      (inv) => inv.status === 'overdue',
+    ).length
 
     return {
       stats: {

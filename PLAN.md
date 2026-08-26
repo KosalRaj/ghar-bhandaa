@@ -28,6 +28,7 @@ A web application that automates monthly rent billing and collection for a landl
 renting individual rooms/units to tenants.
 
 **Goals**
+
 - Automatically generate a monthly invoice per occupied room.
 - Send payment reminders before, on, and after the due date.
 - Accept payment via Nepali wallets (Khalti, eSewa) and bank transfer.
@@ -35,9 +36,11 @@ renting individual rooms/units to tenants.
 - Give each tenant a portal to view invoices and pay.
 
 **In scope (MVP)**
+
 - A **single landlord** with multiple rooms and tenants.
 
 **Out of scope for MVP, but the data model must not block it**
+
 - Multiple landlords / property-management companies (multi-tenancy).
 - Native mobile apps (the web app must work as an installable PWA in the meantime).
 - Accounting exports, tax reports, maintenance tickets.
@@ -49,22 +52,22 @@ later becomes a query filter and an auth scope, not a rewrite.
 
 ## 3. Technology stack (decided — do not substitute)
 
-| Concern | Choice | Reason |
-|---|---|---|
-| Framework | **TanStack Start v1 (React)** | Full-stack React, deploys cleanly to Cloudflare Workers, shares logic with a future React Native app |
-| Runtime / hosting | **Cloudflare Workers** (via Nitro) + **Cloudflare Pages** for static assets | Free tier; a Cloudflare PoP inside Kathmandu gives the lowest possible latency for users in Nepal |
-| Database | **Cloudflare D1** (SQLite) | Runs natively on Workers, free, no project-pausing, co-located with the Worker |
-| ORM | **Drizzle ORM** (`drizzle-orm/d1`) | Type-safe, first-class D1 support, migrations via drizzle-kit |
-| Auth | **Better Auth** with the D1/Drizzle adapter | Works on Workers, sessions stored in D1, no external dependency |
-| File storage | **Cloudflare R2** | Free tier (10 GB); stores bank-transfer proof screenshots |
-| Scheduled jobs | **Cloudflare Cron Triggers** | Built into Workers, free; runs invoicing + reminders |
-| Email | **Resend** | Generous free tier; transactional invoices/receipts |
-| SMS (Phase 5+) | **Sparrow SMS** (Nepal gateway) | Reliable local delivery; paid per message |
-| Payments | **Khalti** + **eSewa** merchant APIs | Standard Nepali wallet checkout + server-side verification |
-| Validation | **Zod** | Single source of truth for input schemas, shared client/server |
-| Styling | **Tailwind CSS** | Fast, consistent; fine for a CRUD dashboard |
-| Package manager | **pnpm** | — |
-| Language | **TypeScript**, `strict: true` | — |
+| Concern           | Choice                                                                      | Reason                                                                                               |
+| ----------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Framework         | **TanStack Start v1 (React)**                                               | Full-stack React, deploys cleanly to Cloudflare Workers, shares logic with a future React Native app |
+| Runtime / hosting | **Cloudflare Workers** (via Nitro) + **Cloudflare Pages** for static assets | Free tier; a Cloudflare PoP inside Kathmandu gives the lowest possible latency for users in Nepal    |
+| Database          | **Cloudflare D1** (SQLite)                                                  | Runs natively on Workers, free, no project-pausing, co-located with the Worker                       |
+| ORM               | **Drizzle ORM** (`drizzle-orm/d1`)                                          | Type-safe, first-class D1 support, migrations via drizzle-kit                                        |
+| Auth              | **Better Auth** with the D1/Drizzle adapter                                 | Works on Workers, sessions stored in D1, no external dependency                                      |
+| File storage      | **Cloudflare R2**                                                           | Free tier (10 GB); stores bank-transfer proof screenshots                                            |
+| Scheduled jobs    | **Cloudflare Cron Triggers**                                                | Built into Workers, free; runs invoicing + reminders                                                 |
+| Email             | **Resend**                                                                  | Generous free tier; transactional invoices/receipts                                                  |
+| SMS (Phase 5+)    | **Sparrow SMS** (Nepal gateway)                                             | Reliable local delivery; paid per message                                                            |
+| Payments          | **Khalti** + **eSewa** merchant APIs                                        | Standard Nepali wallet checkout + server-side verification                                           |
+| Validation        | **Zod**                                                                     | Single source of truth for input schemas, shared client/server                                       |
+| Styling           | **Tailwind CSS**                                                            | Fast, consistent; fine for a CRUD dashboard                                                          |
+| Package manager   | **pnpm**                                                                    | —                                                                                                    |
+| Language          | **TypeScript**, `strict: true`                                              | —                                                                                                    |
 
 **Why not Supabase Postgres:** Cloudflare Workers cannot open arbitrary TCP
 connections, so Drizzle-over-Postgres needs Hyperdrive (a paid add-on) or an HTTP
@@ -117,7 +120,7 @@ flowchart TD
 
 ### Critical rule: server functions are publicly reachable
 
-A route-level auth guard protects the *page*, not the server function. Server
+A route-level auth guard protects the _page_, not the server function. Server
 functions are reachable by direct POST regardless of which page renders them.
 **Every server function that touches data must run the auth + ownership middleware.**
 
@@ -195,7 +198,9 @@ Plus the tables Better Auth requires (`user`, `session`, `account`, `verificatio
 created by Better Auth's schema generator.
 
 ### Recommended Indexes (for NFR-2 performance)
+
 To guarantee that pages/dashboard resolve in < 1 second as data grows, the database must contain:
+
 - `properties`: index on `landlord_id`
 - `rooms`: index on `(landlord_id, property_id)`
 - `tenants`: index on `landlord_id`, unique index on `email`
@@ -220,9 +225,9 @@ conventions developers must remember.
    - `0 < sum < amount` → `partial`
    - `sum == 0` and `due_date` is in the past → `overdue`
    - otherwise → `unpaid`
-   Every code path that confirms or rejects a payment must call this function.
+     Every code path that confirms or rejects a payment must call this function.
 3. **Invoice generation is idempotent.** Insert with `ON CONFLICT (lease_id, period)
-   DO NOTHING`. A retried or double-fired cron must never double-bill.
+DO NOTHING`. A retried or double-fired cron must never double-bill.
 4. **Payments are append-only.** A row's `status` may move forward
    (`initiated → confirmed`, `pending_verification → confirmed/rejected`) but rows are
    never deleted. Refunds/corrections are new rows.
@@ -248,6 +253,7 @@ conventions developers must remember.
 ## 7. Core flows
 
 ### 7.1 Monthly invoice generation (automated)
+
 1. Cron fires daily (see Section 9).
 2. Handler computes today's date in `Asia/Kathmandu`.
 3. For every `active` lease whose `billing_day` == today's day-of-month, call
@@ -258,6 +264,7 @@ conventions developers must remember.
    document it and bill full month).
 
 ### 7.2 Reminders (automated)
+
 1. Same daily cron, after invoice generation.
 2. Select invoices not in `paid` status and send, guarded by `notifications_log`:
    - `reminder_before` — N days before `due_date` (N configurable, default 3).
@@ -267,6 +274,7 @@ conventions developers must remember.
 4. Write a `notifications_log` row per send.
 
 ### 7.3 Wallet payment (Khalti / eSewa)
+
 1. Tenant clicks "Pay" → server function `initiateWalletPayment(invoiceId, method)`.
 2. Create a `payments` row, `status: initiated`, return the gateway checkout URL.
 3. Tenant completes payment on the gateway.
@@ -276,6 +284,7 @@ conventions developers must remember.
 5. As a safety net, also verify on redirect-back (do not rely on the webhook alone).
 
 ### 7.4 Bank transfer + manual verification
+
 1. Tenant transfers money in their banking app, then in the portal submits the
    reference number and uploads a screenshot.
 2. Server function `recordBankTransfer` uploads the image to R2 (using private bucket settings) and creates a
@@ -332,6 +341,7 @@ wrangler.toml            # D1 + R2 bindings, cron schedule, env vars
 ```
 
 **File-suffix convention (enforce strictly):**
+
 - `*.functions.ts` — `createServerFn` wrappers; safe to import from client code.
 - `*.server.ts` — server-only logic; import only inside server-function handlers,
   cron, or webhook routes. Never import into a component.
@@ -342,11 +352,14 @@ wrangler.toml            # D1 + R2 bindings, cron schedule, env vars
 ## 9. Scheduled jobs (Cloudflare Cron)
 
 In `wrangler.toml`:
+
 ```toml
 [triggers]
 crons = ["0 1 * * *"]   # 01:00 UTC daily = 06:45 NPT
 ```
+
 The Worker's `scheduled` handler (or the `/api/cron/run` route it calls) must:
+
 1. Compute today in `Asia/Kathmandu`.
 2. Run invoice generation (Section 7.1).
 3. Run reminders (Section 7.2).
@@ -363,6 +376,7 @@ Each phase ends with a **Definition of Done (DoD)**. Do not advance until every 
 checked and the app builds + deploys.
 
 ### Phase 0 — Project setup
+
 - Scaffold TanStack Start (React) with the Cloudflare Workers target; pnpm; TS strict.
 - Configure Tailwind, ESLint, Prettier.
 - Create the D1 database and R2 bucket; wire bindings in `wrangler.toml`.
@@ -373,6 +387,7 @@ checked and the app builds + deploys.
   migration applied; a landlord can sign up and log in.
 
 ### Phase 1 — Core records + manual billing (usable MVP)
+
 - CRUD server functions + UI for properties, rooms, tenants, leases.
 - `createManualInvoice` + `recalculateInvoiceStatus` in `lib/`.
 - Landlord can manually create an invoice and manually mark a cash payment.
@@ -381,6 +396,7 @@ checked and the app builds + deploys.
   cash payment, and see status flip to `paid`/`partial` correctly.
 
 ### Phase 2 — Automation
+
 - `generateInvoiceForLease` + the daily Cron Trigger (Section 9).
 - Reminder selection + dispatch via Resend; `notifications_log` writes + dedup.
 - Tenant portal: tenant login, view their invoices.
@@ -389,6 +405,7 @@ checked and the app builds + deploys.
   invoices.
 
 ### Phase 3 — Bank transfer + verification queue
+
 - `recordBankTransfer` (uploads proof to R2), `listPendingVerifications`,
   `verifyPayment`.
 - Landlord verification-queue UI: view proof, approve/reject.
@@ -396,6 +413,7 @@ checked and the app builds + deploys.
   it confirms the payment and recalculates invoice status; rejecting notifies tenant.
 
 ### Phase 4 — Online wallet payments
+
 - Khalti + eSewa: `initiateWalletPayment`, checkout redirect, public webhook routes
   with signature verification, redirect-back verification fallback.
 - Email receipt on confirmed payment.
@@ -404,6 +422,7 @@ checked and the app builds + deploys.
   rejected.
 
 ### Phase 5 — Hardening + extras
+
 - SMS reminders via Sparrow SMS.
 - PWA manifest + service worker so the web app installs on phones, implementing cache-first strategies for static assets (JS, CSS, fonts) to ensure instant loading regardless of local connectivity (NFR-1).
 - Automated D1 backup (scheduled export to R2).
@@ -412,6 +431,7 @@ checked and the app builds + deploys.
   production.
 
 ### Phase 6 — Multi-landlord readiness (future)
+
 - Confirm every query is `landlord_id`-scoped; add scoped integration tests.
 - Landlord onboarding/signup flow; optional subscription billing.
 - **DoD:** two landlords' data is fully isolated, verified by tests.

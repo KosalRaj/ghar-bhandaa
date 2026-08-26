@@ -9,20 +9,20 @@
       "binding": "DB",
       "database_name": "ghar-bhandaa-db",
       "database_id": "d1-placeholder-id-for-local-dev",
-      "migrations_dir": "drizzle"
-    }
+      "migrations_dir": "drizzle",
+    },
   ],
   "r2_buckets": [
     {
       "binding": "PROOFS",
       "bucket_name": "ghar-bhandaa-proofs",
-      "preview_bucket_name": "ghar-bhandaa-proofs-preview"
-    }
+      "preview_bucket_name": "ghar-bhandaa-proofs-preview",
+    },
   ],
   "triggers": {
-    "crons": ["0 1 * * *"]
+    "crons": ["0 1 * * *"],
   },
   "vars": {
-    "APP_BASE_URL": "http://localhost:3000"
-  }
+    "APP_BASE_URL": "http://localhost:3000",
+  },
 }

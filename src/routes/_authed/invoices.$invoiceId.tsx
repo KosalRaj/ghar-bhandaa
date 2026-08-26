@@ -4,16 +4,56 @@ import { getInvoiceDetails } from '#/server/invoices.functions'
 import { recordCashPaymentFn } from '#/server/payments.functions'
 import { formatNpr } from '#/lib/money'
 import { getTodayInKathmandu } from '#/lib/dates'
+import {
+  Card,
+  CardHeader,
+  CardPanel,
+  CardTitle,
+} from '#/components/ui/card'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '#/components/ui/table'
+import { Badge } from '#/components/ui/badge'
+import { Button } from '#/components/ui/button'
+import { Separator } from '#/components/ui/separator'
+import {
+  Dialog,
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogPanel,
+  DialogPopup,
+  DialogTitle,
+} from '#/components/ui/dialog'
+import { Field, FieldLabel } from '#/components/ui/field'
+import { Input } from '#/components/ui/input'
+import { Alert, AlertDescription } from '#/components/ui/alert'
+import { toastManager } from '#/components/ui/toast'
+import {
+  ArrowLeft,
+  Banknote,
+  AlertCircle,
+  CheckCircle2,
+  Receipt,
+  User,
+} from 'lucide-react'
 
 export const Route = createFileRoute('/_authed/invoices/$invoiceId')({
   loader: async ({ params }) => {
-    return await getInvoiceDetails({ id: params.invoiceId })
+    return await getInvoiceDetails({ data: { id: params.invoiceId } })
   },
   component: InvoiceDetailsPage,
 })
 
 function InvoiceDetailsPage() {
-  const { invoice, tenant, lease, room, property, lineItems, payments } = Route.useLoaderData()
+  const { invoice, tenant, lease, room, property, lineItems, payments } =
+    Route.useLoaderData()
   const router = useRouter()
 
   // Cash payment form states
@@ -45,7 +85,9 @@ function InvoiceDetailsPage() {
     }
 
     if (amountNpr > remainingNpr) {
-      setError(`Payment cannot exceed the remaining balance of ${formatNpr(remainingPaisa)}`)
+      setError(
+        `Payment cannot exceed the remaining balance of ${formatNpr(remainingPaisa)}`,
+      )
       return
     }
 
@@ -53,11 +95,18 @@ function InvoiceDetailsPage() {
 
     try {
       await recordCashPaymentFn({
-        invoiceId: invoice.id,
-        amountNpr,
-        confirmedAt: paymentDate,
+        data: {
+          invoiceId: invoice.id,
+          amountNpr,
+          confirmedAt: paymentDate,
+        },
       })
       setShowPaymentModal(false)
+      toastManager.add({
+        type: 'success',
+        title: 'Payment Recorded',
+        description: `Successfully registered payment of ${formatNpr(amountNpr * 100)}.`,
+      })
       router.invalidate()
     } catch (err: any) {
       setError(err?.message || 'Failed to record cash payment')
@@ -67,132 +116,213 @@ function InvoiceDetailsPage() {
   }
 
   return (
-    <div className="page-wrap">
+    <div className="page-wrap flex flex-col gap-6">
       {/* Back link */}
-      <Link to="/dashboard" className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--sea-ink-soft)] hover:text-[var(--sea-ink)] mb-6">
-        &larr; Back to Dashboard
-      </Link>
+      <div>
+        <Button
+          variant="ghost"
+          size="sm"
+          render={
+            <Link to="/dashboard">
+              <ArrowLeft className="size-4" aria-hidden="true" />
+              Back to Dashboard
+            </Link>
+          }
+        />
+      </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Left column: Invoice Details & Items */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Invoice Summary */}
-          <div className="island-shell rounded-3xl p-6 md:p-8">
-            <div className="flex justify-between items-start mb-6">
+        <div className="lg:col-span-2 flex flex-col gap-6">
+          {/* Invoice Summary Card */}
+          <Card className="rounded-3xl border-[var(--line)] p-6 md:p-8">
+            <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
               <div>
-                <span className="island-kicker">Invoice Period: {invoice.period}</span>
-                <h2 className="display-title text-2xl font-bold text-[var(--sea-ink)] mt-1">
+                <span className="island-kicker">
+                  Invoice Period: {invoice.period}
+                </span>
+                <h2 className="display-title text-2xl sm:text-3xl font-bold text-[var(--sea-ink)] mt-1">
                   Invoice details
                 </h2>
-                <p className="text-xs text-[var(--sea-ink-soft)] mt-1">ID: {invoice.id}</p>
+                <p className="text-xs text-[var(--sea-ink-soft)] mt-1">
+                  ID: {invoice.id}
+                </p>
               </div>
 
-              <span
-                className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
+              <Badge
+                variant={
                   invoice.status === 'paid'
-                    ? 'bg-green-50 text-green-700 border border-green-200'
+                    ? 'success'
                     : invoice.status === 'partial'
-                      ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                      ? 'warning'
                       : invoice.status === 'overdue'
-                        ? 'bg-red-50 text-red-700 border border-red-200'
-                        : 'bg-gray-100 text-gray-700 border border-gray-200'
-                }`}
+                        ? 'error'
+                        : 'secondary'
+                }
+                size="lg"
+                className="capitalize font-bold px-3 py-1"
               >
                 {invoice.status}
-              </span>
+              </Badge>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 text-sm text-[var(--sea-ink-soft)]">
+            <div className="grid gap-4 sm:grid-cols-2 text-sm text-[var(--sea-ink-soft)] bg-white/40 dark:bg-black/20 p-4 rounded-2xl border border-[var(--line)]">
               <div>
-                <strong>Due Date:</strong> {invoice.dueDate}
+                <span className="text-xs font-semibold uppercase block text-muted-foreground">Due Date</span>
+                <span className="font-semibold text-foreground">{invoice.dueDate}</span>
               </div>
               <div>
-                <strong>Total Amount:</strong> <span className="font-bold text-[var(--sea-ink)]">{formatNpr(invoice.amount)}</span>
+                <span className="text-xs font-semibold uppercase block text-muted-foreground">Total Amount</span>
+                <span className="font-bold text-foreground text-base">
+                  {formatNpr(invoice.amount)}
+                </span>
               </div>
               <div>
-                <strong>Total Paid:</strong> <span className="font-bold text-[var(--palm)]">{formatNpr(totalPaidPaisa)}</span>
+                <span className="text-xs font-semibold uppercase block text-muted-foreground">Total Paid</span>
+                <span className="font-bold text-[var(--palm)] text-base">
+                  {formatNpr(totalPaidPaisa)}
+                </span>
               </div>
               <div>
-                <strong>Remaining Balance:</strong> <span className="font-bold text-red-600">{formatNpr(remainingPaisa)}</span>
+                <span className="text-xs font-semibold uppercase block text-muted-foreground">Remaining Balance</span>
+                <span className="font-bold text-destructive text-base">
+                  {formatNpr(remainingPaisa)}
+                </span>
               </div>
             </div>
 
             {/* Pay Action Button */}
             {invoice.status !== 'paid' && (
-              <button
-                onClick={handleOpenPaymentModal}
-                className="mt-6 w-full sm:w-auto rounded-full bg-[var(--lagoon-deep)] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#246f76] transition-transform hover:-translate-y-0.5 shadow-md"
-              >
-                Record Cash Payment
-              </button>
+              <div className="mt-6">
+                <Button
+                  onClick={handleOpenPaymentModal}
+                  className="rounded-full"
+                >
+                  <Banknote className="size-4" aria-hidden="true" />
+                  Record Cash Payment
+                </Button>
+              </div>
             )}
-          </div>
+          </Card>
 
-          {/* Line Items */}
-          <div className="island-shell rounded-3xl p-6 md:p-8">
-            <h3 className="text-lg font-bold text-[var(--sea-ink)] mb-4">Itemized charges</h3>
-            <table className="w-full text-left border-collapse text-sm">
-              <thead>
-                <tr className="border-b border-[var(--line)] text-xs font-semibold uppercase text-[var(--sea-ink-soft)]">
-                  <th className="py-2 px-3">Description</th>
-                  <th className="py-2 px-3">Type</th>
-                  <th className="py-2 px-3 text-right">Amount</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[var(--line)] text-[var(--sea-ink)]">
-                {lineItems.map((item) => (
-                  <tr key={item.id}>
-                    <td className="py-3 px-3 font-medium">{item.description}</td>
-                    <td className="py-3 px-3 capitalize text-xs text-[var(--sea-ink-soft)]">{item.kind}</td>
-                    <td className="py-3 px-3 text-right font-semibold">{formatNpr(item.amount)}</td>
-                  </tr>
-                ))}
-                <tr className="font-bold border-t-2 border-[var(--sea-ink)]">
-                  <td colSpan={2} className="py-3 px-3 text-right">Grand Total:</td>
-                  <td className="py-3 px-3 text-right text-[var(--lagoon-deep)]">{formatNpr(invoice.amount)}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          {/* Line Items Card */}
+          <Card className="rounded-3xl border-[var(--line)] p-6 md:p-8">
+            <CardHeader className="p-0 pb-4">
+              <CardTitle className="text-lg">Itemized charges</CardTitle>
+            </CardHeader>
+            <CardPanel className="p-0">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Description</TableHead>
+                    <TableHead>Type</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {lineItems.map((item) => (
+                    <TableRow key={item.id}>
+                      <TableCell className="font-medium">
+                        {item.description}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className="capitalize text-xs">
+                          {item.kind}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right font-semibold">
+                        {formatNpr(item.amount)}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  <TableRow className="font-bold border-t-2 border-[var(--line)]">
+                    <TableCell colSpan={2} className="text-right">
+                      Grand Total:
+                    </TableCell>
+                    <TableCell className="text-right text-[var(--lagoon-deep)] text-base">
+                      {formatNpr(invoice.amount)}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardPanel>
+          </Card>
         </div>
 
         {/* Right column: Tenant & Payments history */}
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           {/* Tenant Card */}
-          <div className="island-shell rounded-3xl p-6">
+          <Card className="rounded-3xl border-[var(--line)] p-6">
             <span className="island-kicker">Tenant</span>
-            <h3 className="text-lg font-bold text-[var(--sea-ink)] mt-1 mb-3">{tenant?.name}</h3>
+            <CardTitle className="text-lg mt-1 mb-3 flex items-center gap-2">
+              <User className="size-4 text-[var(--lagoon-deep)]" aria-hidden="true" />
+              {tenant?.name}
+            </CardTitle>
             <div className="text-sm text-[var(--sea-ink-soft)] space-y-2">
-              <div><strong>Email:</strong> {tenant?.email}</div>
-              {tenant?.phone && <div><strong>Phone:</strong> {tenant.phone}</div>}
-              {room && (
-                <div className="mt-4 pt-4 border-t border-[var(--line)]">
-                  <div><strong>Room:</strong> {room.name}</div>
-                  <div><strong>Property:</strong> {property?.name}</div>
-                  <div><strong>Billing Day:</strong> {lease?.billingDay}th of month</div>
+              <div>
+                <span className="text-xs uppercase text-muted-foreground block font-semibold">Email</span>
+                <span>{tenant?.email}</span>
+              </div>
+              {tenant?.phone && (
+                <div>
+                  <span className="text-xs uppercase text-muted-foreground block font-semibold">Phone</span>
+                  <span>{tenant.phone}</span>
                 </div>
               )}
+              {room && (
+                <>
+                  <Separator className="my-3" />
+                  <div className="space-y-1.5 text-xs">
+                    <div>
+                      <strong className="text-foreground">Room:</strong> {room.name}
+                    </div>
+                    <div>
+                      <strong className="text-foreground">Property:</strong> {property?.name}
+                    </div>
+                    <div>
+                      <strong className="text-foreground">Billing Day:</strong> {lease?.billingDay}th of month
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-          </div>
+          </Card>
 
-          {/* Payments History Ledger */}
-          <div className="island-shell rounded-3xl p-6">
+          {/* Payments History Ledger Card */}
+          <Card className="rounded-3xl border-[var(--line)] p-6">
             <span className="island-kicker">Ledger</span>
-            <h3 className="text-lg font-bold text-[var(--sea-ink)] mt-1 mb-4">Payment history</h3>
-            <div className="space-y-4">
+            <CardTitle className="text-lg mt-1 mb-4 flex items-center gap-2">
+              <Receipt className="size-4 text-[var(--lagoon-deep)]" aria-hidden="true" />
+              Payment history
+            </CardTitle>
+            <div className="flex flex-col gap-3">
               {payments.length > 0 ? (
                 payments.map((p) => (
-                  <div key={p.id} className="flex justify-between items-start text-xs border-b border-[var(--line)] pb-3">
+                  <div
+                    key={p.id}
+                    className="flex justify-between items-start text-xs border-b border-[var(--line)] pb-3 last:border-0"
+                  >
                     <div>
-                      <div className="font-bold text-[var(--sea-ink)] capitalize">{p.method} Payment</div>
-                      <div className="text-[var(--sea-ink-soft)] mt-1">Confirmed: {p.confirmedAt}</div>
-                      {p.gatewayRef && <div className="text-[var(--sea-ink-soft)] mt-0.5">Ref: {p.gatewayRef}</div>}
+                      <div className="font-bold text-[var(--sea-ink)] capitalize flex items-center gap-1.5">
+                        <CheckCircle2 className="size-3.5 text-success" aria-hidden="true" />
+                        {p.method} Payment
+                      </div>
+                      <div className="text-muted-foreground mt-1">
+                        Confirmed: {p.confirmedAt}
+                      </div>
+                      {p.gatewayRef && (
+                        <div className="text-muted-foreground mt-0.5">
+                          Ref: {p.gatewayRef}
+                        </div>
+                      )}
                     </div>
                     <div className="text-right">
-                      <div className="font-bold text-[var(--palm)]">{formatNpr(p.amount)}</div>
-                      <span className="inline-flex rounded-full bg-green-50 border border-green-200 px-2 py-0.25 text-[10px] text-green-700 font-bold mt-1 uppercase">
+                      <div className="font-bold text-[var(--palm)] text-sm">
+                        {formatNpr(p.amount)}
+                      </div>
+                      <Badge variant="success" size="sm" className="mt-1 uppercase">
                         {p.status}
-                      </span>
+                      </Badge>
                     </div>
                   </div>
                 ))
@@ -202,88 +332,75 @@ function InvoiceDetailsPage() {
                 </div>
               )}
             </div>
-          </div>
+          </Card>
         </div>
       </div>
 
       {/* Record Cash Payment Modal */}
-      {showPaymentModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-6 backdrop-blur-sm">
-          <div className="island-shell w-full max-w-sm rounded-[2.5rem] p-6 sm:p-8">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <span className="island-kicker">Ledger</span>
-                <h3 className="display-title text-2xl font-bold text-[var(--sea-ink)]">
-                  Record Cash Payment
-                </h3>
-              </div>
-              <button
-                onClick={() => setShowPaymentModal(false)}
-                className="rounded-full bg-white/40 dark:bg-black/20 p-2 text-[var(--sea-ink-soft)] hover:text-red-500"
-              >
-                ✕
-              </button>
-            </div>
+      <Dialog open={showPaymentModal} onOpenChange={setShowPaymentModal}>
+        <DialogPopup className="sm:max-w-md">
+          <DialogHeader>
+            <span className="island-kicker block mb-1">Ledger</span>
+            <DialogTitle>Record Cash Payment</DialogTitle>
+            <DialogDescription>
+              Record an in-person cash payment received from the tenant.
+            </DialogDescription>
+          </DialogHeader>
 
-            <form onSubmit={handlePaymentSubmit} className="space-y-4">
+          <form onSubmit={handlePaymentSubmit} className="contents">
+            <DialogPanel className="flex flex-col gap-4">
               {error && (
-                <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">
-                  {error}
-                </div>
+                <Alert variant="error">
+                  <AlertCircle />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
               )}
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Amount Received (NPR)
-                </label>
-                <input
+              <Field>
+                <FieldLabel>Amount Received (NPR)</FieldLabel>
+                <Input
                   type="number"
                   required
                   min="0.01"
                   step="0.01"
                   max={remainingNpr}
                   value={amountNpr || ''}
-                  onChange={(e) => setAmountNpr(parseFloat(e.target.value) || 0)}
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
+                  onChange={(e) =>
+                    setAmountNpr(parseFloat(e.target.value) || 0)
+                  }
                 />
-                <p className="text-[10px] text-[var(--sea-ink-soft)] mt-1">
-                  Maximum allowed: {formatNpr(remainingPaisa)}
+                <p className="text-[11px] text-muted-foreground mt-1">
+                  Maximum allowable: {formatNpr(remainingPaisa)}
                 </p>
-              </div>
+              </Field>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Payment Date
-                </label>
-                <input
+              <Field>
+                <FieldLabel>Payment Date</FieldLabel>
+                <Input
                   type="date"
                   required
                   value={paymentDate}
                   onChange={(e) => setPaymentDate(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
                 />
-              </div>
+              </Field>
+            </DialogPanel>
 
-              <div className="flex gap-3 justify-end pt-4">
-                <button
-                  type="button"
-                  onClick={() => setShowPaymentModal(false)}
-                  className="rounded-full border border-[var(--chip-line)] bg-white/50 px-5 py-2 text-sm font-semibold text-[var(--sea-ink)] hover:bg-white"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="rounded-full bg-[var(--palm)] px-6 py-2 text-sm font-semibold text-white hover:bg-[#224e35] disabled:opacity-50"
-                >
-                  {submitting ? 'Recording...' : 'Record Payment'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            <DialogFooter>
+              <DialogClose
+                render={
+                  <Button variant="ghost" type="button">
+                    Cancel
+                  </Button>
+                }
+              />
+              <Button type="submit" loading={submitting}>
+                <Banknote className="size-4" aria-hidden="true" />
+                Record Payment
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogPopup>
+      </Dialog>
     </div>
   )
 }

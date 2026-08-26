@@ -5,6 +5,50 @@ import { getRooms } from '#/server/rooms.functions'
 import { getTenants } from '#/server/tenants.functions'
 import { formatNpr } from '#/lib/money'
 import { getTodayInKathmandu } from '#/lib/dates'
+import {
+  Card,
+  CardDescription,
+  CardTitle,
+} from '#/components/ui/card'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '#/components/ui/table'
+import { Badge } from '#/components/ui/badge'
+import { Button } from '#/components/ui/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogPanel,
+  DialogPopup,
+  DialogTitle,
+} from '#/components/ui/dialog'
+import { Field, FieldLabel } from '#/components/ui/field'
+import { Input } from '#/components/ui/input'
+import {
+  Select,
+  SelectPopup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '#/components/ui/select'
+import { Alert, AlertDescription } from '#/components/ui/alert'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '#/components/ui/empty'
+import { toastManager } from '#/components/ui/toast'
+import { FileSignature, Plus, AlertCircle, Ban } from 'lucide-react'
 
 export const Route = createFileRoute('/_authed/leases')({
   loader: async () => {
@@ -62,16 +106,23 @@ function LeasesPage() {
 
     try {
       await createLease({
-        roomId,
-        tenantId,
-        rentAmountNpr,
-        depositAmountNpr,
-        billingDay,
-        startDate,
-        endDate: endDate || null,
+        data: {
+          roomId,
+          tenantId,
+          rentAmountNpr,
+          depositAmountNpr,
+          billingDay,
+          startDate,
+          endDate: endDate || null,
+        },
       })
       resetForm()
       setShowAddModal(false)
+      toastManager.add({
+        type: 'success',
+        title: 'Lease Created',
+        description: 'New lease contract successfully initiated.',
+      })
       router.invalidate()
     } catch (err: any) {
       setError(err?.message || 'Failed to create lease')
@@ -89,10 +140,17 @@ function LeasesPage() {
 
     try {
       await endLease({
-        id: endingLeaseId,
-        endDate: closeDate,
+        data: {
+          id: endingLeaseId,
+          endDate: closeDate,
+        },
       })
       setEndingLeaseId(null)
+      toastManager.add({
+        type: 'success',
+        title: 'Lease Terminated',
+        description: `Lease has been concluded as of ${closeDate}.`,
+      })
       router.invalidate()
     } catch (err: any) {
       setError(err?.message || 'Failed to end lease')
@@ -119,315 +177,319 @@ function LeasesPage() {
   }
 
   return (
-    <div className="page-wrap">
+    <div className="page-wrap flex flex-col gap-8">
       {/* Heading */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <span className="island-kicker">Contracts</span>
           <h1 className="display-title text-3xl font-bold tracking-tight text-[var(--sea-ink)]">
             Leases Registry
           </h1>
         </div>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="rounded-full bg-[var(--lagoon-deep)] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#246f76] transition-transform hover:-translate-y-0.5 shadow-md"
+        <Button
+          onClick={() => {
+            resetForm()
+            setShowAddModal(true)
+          }}
+          className="self-start md:self-auto rounded-full"
         >
-          + Create Lease
-        </button>
+          <Plus className="size-4" aria-hidden="true" />
+          Create Lease
+        </Button>
       </div>
 
-      {/* Leases Table */}
-      <div className="island-shell rounded-3xl p-6 md:p-8">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-[var(--line)] text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                <th className="py-3 px-4">Tenant</th>
-                <th className="py-3 px-4">Room & Property</th>
-                <th className="py-3 px-4 text-right">Rent</th>
-                <th className="py-3 px-4 text-right">Deposit</th>
-                <th className="py-3 px-4 text-center">Billing Day</th>
-                <th className="py-3 px-4">Period</th>
-                <th className="py-3 px-4">Status</th>
-                <th className="py-3 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[var(--line)] text-sm text-[var(--sea-ink)]">
-              {leases.length > 0 ? (
-                leases.map((lease) => (
-                  <tr key={lease.id} className="hover:bg-white/20 transition-colors">
-                    <td className="py-4 px-4 font-semibold">{lease.tenantName}</td>
-                    <td className="py-4 px-4">
-                      <span className="font-semibold">{lease.roomName}</span>
-                      <span className="text-xs text-[var(--sea-ink-soft)] block">{lease.propertyName}</span>
-                    </td>
-                    <td className="py-4 px-4 text-right font-bold">{formatNpr(lease.rentAmount)}</td>
-                    <td className="py-4 px-4 text-right">{formatNpr(lease.depositAmount)}</td>
-                    <td className="py-4 px-4 text-center font-semibold">{lease.billingDay}</td>
-                    <td className="py-4 px-4">
-                      <div className="text-xs font-medium">Start: {lease.startDate}</div>
-                      {lease.endDate && <div className="text-xs text-[var(--sea-ink-soft)]">End: {lease.endDate}</div>}
-                    </td>
-                    <td className="py-4 px-4">
-                      <span
-                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${
-                          lease.status === 'active'
-                            ? 'bg-green-50 text-green-700 border border-green-200'
-                            : 'bg-gray-100 text-gray-700 border border-gray-200'
-                        }`}
-                      >
-                        {lease.status}
-                      </span>
-                    </td>
-                    <td className="py-4 px-4 text-right">
-                      {lease.status === 'active' && (
-                        <button
-                          onClick={() => setEndingLeaseId(lease.id)}
-                          className="rounded-full border border-red-200 bg-red-50/50 hover:bg-red-50 text-red-600 px-3 py-1 text-xs font-semibold transition-colors"
-                        >
-                          End Lease
-                        </button>
-                      )}
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={8} className="py-8 text-center text-[var(--sea-ink-soft)]">
-                    No leases registered. Click "+ Create Lease" to link a tenant to a room.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+      {/* Leases Card Table */}
+      <Card className="rounded-3xl border-[var(--line)] p-6 md:p-8">
+        <div className="mb-6">
+          <CardTitle className="text-lg">Active & Historical Leases</CardTitle>
+          <CardDescription className="text-xs">
+            Manage tenancy agreements, recurring rent rates, and billing cycles.
+          </CardDescription>
         </div>
-      </div>
+
+        {leases.length > 0 ? (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Tenant</TableHead>
+                <TableHead>Room & Property</TableHead>
+                <TableHead className="text-right">Rent</TableHead>
+                <TableHead className="text-right">Deposit</TableHead>
+                <TableHead className="text-center">Billing Day</TableHead>
+                <TableHead>Period</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {leases.map((lease) => (
+                <TableRow key={lease.id}>
+                  <TableCell className="font-semibold">
+                    {lease.tenantName}
+                  </TableCell>
+                  <TableCell>
+                    <div className="font-medium">{lease.roomName}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {lease.propertyName}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-right font-bold">
+                    {formatNpr(lease.rentAmount)}
+                  </TableCell>
+                  <TableCell className="text-right font-medium">
+                    {formatNpr(lease.depositAmount)}
+                  </TableCell>
+                  <TableCell className="text-center font-semibold">
+                    Day {lease.billingDay}
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-xs font-medium">
+                      Start: {lease.startDate}
+                    </div>
+                    {lease.endDate && (
+                      <div className="text-xs text-muted-foreground">
+                        End: {lease.endDate}
+                      </div>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant={lease.status === 'active' ? 'success' : 'secondary'}
+                      className="capitalize font-bold"
+                    >
+                      {lease.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {lease.status === 'active' && (
+                      <Button
+                        variant="outline"
+                        size="xs"
+                        onClick={() => setEndingLeaseId(lease.id)}
+                        className="rounded-full text-destructive hover:text-destructive hover:bg-destructive/10 border-destructive/30"
+                      >
+                        End Lease
+                      </Button>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        ) : (
+          <Empty>
+            <EmptyMedia variant="icon">
+              <FileSignature className="text-muted-foreground" />
+            </EmptyMedia>
+            <EmptyHeader>
+              <EmptyTitle>No Leases Registered</EmptyTitle>
+              <EmptyDescription>
+                No active or historic leases found. Click "Create Lease" to link a tenant to a room.
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
+        )}
+      </Card>
 
       {/* Add Lease Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-6 backdrop-blur-sm">
-          <div className="island-shell w-full max-w-md rounded-[2.5rem] p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <span className="island-kicker">Setup</span>
-                <h3 className="display-title text-2xl font-bold text-[var(--sea-ink)]">
-                  Create Lease Agreement
-                </h3>
-              </div>
-              <button
-                onClick={cancelForm}
-                className="rounded-full bg-white/40 dark:bg-black/20 p-2 text-[var(--sea-ink-soft)] hover:text-red-500"
-              >
-                ✕
-              </button>
-            </div>
+      <Dialog open={showAddModal} onOpenChange={setShowAddModal}>
+        <DialogPopup className="sm:max-w-lg">
+          <DialogHeader>
+            <span className="island-kicker block mb-1">Setup</span>
+            <DialogTitle>Create Lease Agreement</DialogTitle>
+            <DialogDescription>
+              Assign an available room to a tenant with custom rent, deposit, and billing day.
+            </DialogDescription>
+          </DialogHeader>
 
-            <form onSubmit={handleAddSubmit} className="space-y-4">
+          <form onSubmit={handleAddSubmit} className="contents">
+            <DialogPanel className="flex flex-col gap-4">
               {error && (
-                <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">
-                  {error}
-                </div>
+                <Alert variant="error">
+                  <AlertCircle />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
               )}
 
               {/* Room Selector */}
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Select Room
-                </label>
-                <select
-                  required
+              <Field>
+                <FieldLabel>Select Room</FieldLabel>
+                <Select
                   value={roomId}
-                  onChange={(e) => setRoomId(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
+                  onValueChange={(val) => setRoomId(val as string)}
                 >
-                  <option value="">-- Choose Room --</option>
-                  {rooms.map((r) => (
-                    <option key={r.id} value={r.id}>
-                      {r.name} ({r.propertyName})
-                    </option>
-                  ))}
-                </select>
-              </div>
+                  <SelectTrigger>
+                    <SelectValue placeholder="-- Choose Room --" />
+                  </SelectTrigger>
+                  <SelectPopup>
+                    {rooms.map((r) => (
+                      <SelectItem key={r.id} value={r.id}>
+                        {r.name} ({r.propertyName})
+                      </SelectItem>
+                    ))}
+                  </SelectPopup>
+                </Select>
+              </Field>
 
               {/* Tenant Selector */}
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Select Tenant
-                </label>
-                <select
-                  required
+              <Field>
+                <FieldLabel>Select Tenant</FieldLabel>
+                <Select
                   value={tenantId}
-                  onChange={(e) => setTenantId(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
+                  onValueChange={(val) => setTenantId(val as string)}
                 >
-                  <option value="">-- Choose Tenant --</option>
-                  {tenants.map((t) => (
-                    <option key={t.id} value={t.id}>
-                      {t.name} ({t.email})
-                    </option>
-                  ))}
-                </select>
-              </div>
+                  <SelectTrigger>
+                    <SelectValue placeholder="-- Choose Tenant --" />
+                  </SelectTrigger>
+                  <SelectPopup>
+                    {tenants.map((t) => (
+                      <SelectItem key={t.id} value={t.id}>
+                        {t.name} ({t.email})
+                      </SelectItem>
+                    ))}
+                  </SelectPopup>
+                </Select>
+              </Field>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 {/* Rent Amount */}
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                    Rent Amount (NPR / Month)
-                  </label>
-                  <input
+                <Field>
+                  <FieldLabel>Rent Amount (NPR / Month)</FieldLabel>
+                  <Input
                     type="number"
                     required
                     min="1"
                     value={rentAmountNpr || ''}
-                    onChange={(e) => setRentAmountNpr(parseFloat(e.target.value) || 0)}
+                    onChange={(e) =>
+                      setRentAmountNpr(parseFloat(e.target.value) || 0)
+                    }
                     placeholder="12000"
-                    className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
                   />
-                </div>
+                </Field>
 
                 {/* Deposit Amount */}
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                    Deposit (NPR)
-                  </label>
-                  <input
+                <Field>
+                  <FieldLabel>Deposit Amount (NPR)</FieldLabel>
+                  <Input
                     type="number"
                     required
                     min="0"
                     value={depositAmountNpr || ''}
-                    onChange={(e) => setDepositAmountNpr(parseFloat(e.target.value) || 0)}
+                    onChange={(e) =>
+                      setDepositAmountNpr(parseFloat(e.target.value) || 0)
+                    }
                     placeholder="12000"
-                    className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
                   />
-                </div>
+                </Field>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 {/* Billing Day */}
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                    Billing Day (1-28)
-                  </label>
-                  <input
+                <Field>
+                  <FieldLabel>Billing Day (1-28)</FieldLabel>
+                  <Input
                     type="number"
                     required
                     min="1"
                     max="28"
                     value={billingDay}
-                    onChange={(e) => setBillingDay(parseInt(e.target.value) || 1)}
-                    className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
+                    onChange={(e) =>
+                      setBillingDay(parseInt(e.target.value) || 1)
+                    }
                   />
-                </div>
+                </Field>
 
                 {/* Start Date */}
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                    Start Date
-                  </label>
-                  <input
+                <Field>
+                  <FieldLabel>Start Date</FieldLabel>
+                  <Input
                     type="date"
                     required
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
                   />
-                </div>
+                </Field>
               </div>
 
               {/* End Date */}
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  End Date (Optional)
-                </label>
-                <input
+              <Field>
+                <FieldLabel>End Date (Optional)</FieldLabel>
+                <Input
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
                 />
-              </div>
+              </Field>
+            </DialogPanel>
 
-              <div className="flex gap-3 justify-end pt-4">
-                <button
-                  type="button"
-                  onClick={cancelForm}
-                  className="rounded-full border border-[var(--chip-line)] bg-white/50 px-5 py-2 text-sm font-semibold text-[var(--sea-ink)] hover:bg-white"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="rounded-full bg-[var(--lagoon-deep)] px-6 py-2 text-sm font-semibold text-white hover:bg-[#246f76] disabled:opacity-50"
-                >
-                  {submitting ? 'Creating...' : 'Create Lease'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            <DialogFooter>
+              <DialogClose
+                render={
+                  <Button variant="ghost" type="button" onClick={cancelForm}>
+                    Cancel
+                  </Button>
+                }
+              />
+              <Button type="submit" loading={submitting}>
+                Create Lease
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogPopup>
+      </Dialog>
 
       {/* End Lease Modal */}
-      {endingLeaseId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-6 backdrop-blur-sm">
-          <div className="island-shell w-full max-w-sm rounded-[2.5rem] p-6 sm:p-8">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <span className="island-kicker">Closure</span>
-                <h3 className="display-title text-2xl font-bold text-[var(--sea-ink)]">
-                  Terminate Lease
-                </h3>
-              </div>
-              <button
-                onClick={cancelForm}
-                className="rounded-full bg-white/40 dark:bg-black/20 p-2 text-[var(--sea-ink-soft)] hover:text-red-500"
-              >
-                ✕
-              </button>
-            </div>
+      <Dialog
+        open={endingLeaseId !== null}
+        onOpenChange={(open) => {
+          if (!open) cancelForm()
+        }}
+      >
+        <DialogPopup className="sm:max-w-md">
+          <DialogHeader>
+            <span className="island-kicker block mb-1">Closure</span>
+            <DialogTitle>Terminate Lease</DialogTitle>
+            <DialogDescription>
+              Mark this lease as terminated and set the closure date.
+            </DialogDescription>
+          </DialogHeader>
 
-            <form onSubmit={handleEndSubmit} className="space-y-4">
+          <form onSubmit={handleEndSubmit} className="contents">
+            <DialogPanel className="flex flex-col gap-4">
               {error && (
-                <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">
-                  {error}
-                </div>
+                <Alert variant="error">
+                  <AlertCircle />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
               )}
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                  Select End Date
-                </label>
-                <input
+              <Field>
+                <FieldLabel>Termination Date</FieldLabel>
+                <Input
                   type="date"
                   required
                   value={closeDate}
                   onChange={(e) => setCloseDate(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-[var(--line)] bg-white/50 px-3 py-2 text-sm text-[var(--sea-ink)] focus:outline-none"
                 />
-              </div>
+              </Field>
+            </DialogPanel>
 
-              <div className="flex gap-3 justify-end pt-4">
-                <button
-                  type="button"
-                  onClick={cancelForm}
-                  className="rounded-full border border-[var(--chip-line)] bg-white/50 px-5 py-2 text-sm font-semibold text-[var(--sea-ink)] hover:bg-white"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="rounded-full bg-red-600 px-6 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-50"
-                >
-                  {submitting ? 'Ending...' : 'Terminate Lease'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            <DialogFooter>
+              <DialogClose
+                render={
+                  <Button variant="ghost" type="button" onClick={cancelForm}>
+                    Cancel
+                  </Button>
+                }
+              />
+              <Button variant="destructive" type="submit" loading={submitting}>
+                <Ban className="size-4" aria-hidden="true" />
+                Terminate Lease
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogPopup>
+      </Dialog>
     </div>
   )
 }

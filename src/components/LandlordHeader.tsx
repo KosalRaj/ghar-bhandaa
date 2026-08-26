@@ -1,5 +1,7 @@
 import { Link, useNavigate } from '@tanstack/react-router'
 import { authClient } from '#/lib/auth-client'
+import { Avatar, AvatarFallback } from '#/components/ui/avatar'
+import { Button } from '#/components/ui/button'
 import ThemeToggle from './ThemeToggle'
 
 export default function LandlordHeader() {
@@ -7,16 +9,22 @@ export default function LandlordHeader() {
   const { data: session } = authClient.useSession()
 
   const handleSignOut = async () => {
-    await authClient.signOut({
-      onSuccess: () => {
-        navigate({ to: '/login' })
-      },
-    })
+    await authClient.signOut()
+    await navigate({ to: '/login' })
   }
 
+  const initials = session?.user?.name
+    ? session.user.name
+        .split(' ')
+        .map((n) => n[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2)
+    : 'L'
+
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--header-bg)] px-4 backdrop-blur-lg">
-      <nav className="page-wrap flex flex-wrap items-center justify-between py-3 sm:py-4">
+    <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--header-bg)] px-4 backdrop-blur-lg">
+      <nav className="page-wrap flex flex-wrap items-center justify-between py-3 sm:py-3.5">
         {/* Brand */}
         <h2 className="m-0 flex-shrink-0 text-base font-semibold tracking-tight">
           <Link
@@ -28,8 +36,8 @@ export default function LandlordHeader() {
           </Link>
         </h2>
 
-        {/* Links */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-semibold">
+        {/* Navigation Links */}
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium">
           <Link
             to="/dashboard"
             className="nav-link"
@@ -68,24 +76,26 @@ export default function LandlordHeader() {
         </div>
 
         {/* User Info / Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           {session?.user && (
-            <div className="hidden items-center gap-2 md:flex">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--lagoon)]/20 text-xs font-semibold text-[var(--lagoon-deep)]">
-                {session.user.name?.charAt(0).toUpperCase() || 'L'}
-              </div>
+            <div className="hidden items-center gap-2 sm:flex">
+              <Avatar className="size-7">
+                <AvatarFallback>{initials}</AvatarFallback>
+              </Avatar>
               <span className="text-xs font-medium text-[var(--sea-ink-soft)] max-w-28 truncate">
                 {session.user.name}
               </span>
             </div>
           )}
 
-          <button
+          <Button
             onClick={handleSignOut}
-            className="rounded-full border border-[var(--chip-line)] bg-white/50 px-3 py-1.5 text-xs font-semibold text-[var(--sea-ink)] hover:bg-white hover:text-[var(--lagoon-deep)] focus:outline-none transition-colors"
+            variant="outline"
+            size="sm"
+            className="rounded-full text-xs"
           >
             Sign Out
-          </button>
+          </Button>
 
           <ThemeToggle />
         </div>
