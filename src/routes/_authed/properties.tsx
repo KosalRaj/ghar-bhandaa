@@ -26,8 +26,10 @@ import {
 import { Field, FieldLabel } from '#/components/ui/field'
 import { Input } from '#/components/ui/input'
 import { Alert, AlertDescription } from '#/components/ui/alert'
+import { cn } from '#/lib/utils'
 import {
   Empty,
+  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
@@ -160,10 +162,13 @@ function PropertiesPage() {
       {/* Grid List */}
       {properties.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {properties.map((prop) => (
+          {properties.map((prop, index) => (
             <Card
               key={prop.id}
-              className="rounded-3xl border-[var(--line)] flex flex-col justify-between hover:shadow-md transition-shadow"
+              className={cn(
+                'rounded-3xl border-[var(--line)] flex flex-col justify-between hover:shadow-md transition-shadow stagger-item',
+                `stagger-${(index % 6) + 1}`,
+              )}
             >
               <CardHeader className="p-6">
                 <div className="flex items-center gap-2 mb-2">
@@ -209,6 +214,21 @@ function PropertiesPage() {
                 "Add Property" to create one.
               </EmptyDescription>
             </EmptyHeader>
+            <EmptyContent>
+              <Button
+                onClick={() => {
+                  setName('')
+                  setAddress('')
+                  setError(null)
+                  setShowAddModal(true)
+                }}
+                size="sm"
+                className="rounded-full"
+              >
+                <Plus className="size-4" aria-hidden="true" />
+                Add First Property
+              </Button>
+            </EmptyContent>
           </Empty>
         </Card>
       )}

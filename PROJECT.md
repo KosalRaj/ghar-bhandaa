@@ -1,60 +1,88 @@
-# Project: ghar-bhandaa Code Review, Invariant Audit & Documentation Suite
+# Project: Ghar-Bhandaa UI/UX Overhaul & Motion Integration
 
 ## Architecture
 
 `ghar-bhandaa` is an automated room rent collection and property management system for Nepal built on TanStack Start (React 19), Cloudflare Workers (SSR + Cron Triggers), Cloudflare D1 (SQLite via Drizzle ORM), Cloudflare R2 (Receipt storage), and Better Auth.
 
-### Key Architectural Invariants
+### UI/UX & Motion Modernization Architecture
 
-1. **Nepal / Kathmandu (`Asia/Kathmandu`, UTC+05:45) Timezone**: All date calculations (due dates, billing periods, overdue triggers) are computed relative to Kathmandu timezone.
-2. **Integer Paisa Currency Arithmetic**: Monetary values in the database are stored as integers representing paisa (1 NPR = 100 Paisa). Floating-point arithmetic is strictly forbidden in DB/storage.
-3. **Append-Only Payment Ledger**: Payments are recorded as immutable ledger entries. Invoices derive status deterministically from confirmed payments.
-4. **Derived Invoice Lifecycle Statuses**: Statuses (`unpaid`, `partial`, `overdue`, `paid`) are dynamically derived and updated based on confirmed payment totals and Kathmandu due dates.
-5. **Multi-Tenant Landlord Isolation**: Strict function-level authorization via `landlordAuthMiddleware` ensuring landlords can only query, create, or associate resources within their own tenancy.
+1. **coss Primitives & Particles System**:
+   - Primitives built purely on `@base-ui/react` (v1.7.0) with Tailwind CSS v4. Zero `@radix-ui` dependencies.
+   - Comprehensive shared library in `src/components/ui/`: `Button`, `Dialog`, `AlertDialog`, `Menu`, `Drawer`, `Card`, `Table`, `Field`, `Input`, `Select`, `Tabs`, `Toast`, `Empty`, `Badge`, `Skeleton`, `Tooltip`, `InputGroup`, `AnimatedNumber`.
+   - Particles patterns: empty state CTAs (`EmptyContent`), responsive table-to-card adaptive layouts, accessible mobile sheets.
+2. **transitions.dev & transitions-polish Motion Architecture**:
+   - Centralized `:root` token scale in `src/styles.css` covering 5 dimensions: Durations (`40ms`–`500ms`), Easings (`cubic-bezier(0.22, 1, 0.36, 1)`), Distances (`4px`–`30px`), Scales (`0.96`–`0.99`), and Blurs (`2px`–`8px`).
+   - Open/close asymmetry: Dialogs/Modals open at 250ms (`--duration-fast`, scale 0.96) and close at 150ms (`--duration-quick`, scale 0.96); Popovers/Dropdowns open at 250ms (scale 0.97) and close at 150ms (scale 0.99).
+   - Micro-interactions: Number pop-in (`t-digit-group`), Form error shake (`t-input-shake`), Success check (`t-success-check`), and bounded staggers (<300ms total, 40ms offset).
+   - Accessibility: Universal `@media (prefers-reduced-motion: reduce)` zero-motion overrides.
+3. **Core Domain Invariants (Zero Regression)**:
+   - **Integer Paisa Currency Arithmetic**: Monetary values are integers in paisa (`1 NPR = 100 Paisa`). No floats in storage/DB.
+   - **Nepal / Kathmandu (`Asia/Kathmandu`, UTC+05:45) Timezone**: All billing cycles, due dates, and overdue states are calculated in Kathmandu time. Billing days constrained to 1–28.
+   - **Landlord Authentication & Tenancy Isolation**: Route guard in `_authed.tsx` and server middleware `landlordAuthMiddleware`.
+
+---
 
 ## Feature Inventory
 
-| #   | Feature                                      | Description                                                                                                     | Milestone | Source |
-| --- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------- | ------ |
-| 1   | Landlord Auth & Middleware                   | Session verification, registration, and tenancy scoping                                                         | M1        | Survey |
-| 2   | Multi-Tenant IDOR Protection                 | Validation of property, room, tenant ownership on relational creation                                           | M1        | Survey |
-| 3   | Integer Paisa Currency Math                  | `nprToPaisa`, `paisaToNpr`, `formatNpr` utilities and schema constraints                                        | M1        | Survey |
-| 4   | Kathmandu Timezone Handling                  | `getTodayInKathmandu`, `getCurrentDateTimeInKathmandu`, `isPastDateInKathmandu`                                 | M1        | Survey |
-| 5   | Append-Only Payment Ledger & Balance Check   | Cash payment recording with server-side remaining balance validation                                            | M1        | Survey |
-| 6   | Deterministic Invoice Status Machine         | State recalculation (`unpaid`, `partial`, `overdue`, `paid`) with overdue precedence                            | M1        | Survey |
-| 7   | Dashboard Metric Aggregation                 | Per-invoice outstanding balance calculation, collected totals, active counts                                    | M1        | Survey |
-| 8   | Multi-Tenant Tenant Uniqueness               | Composite uniqueness on `(landlordId, email)`                                                                   | M1        | Survey |
-| 9   | Tooling & Test Suite Setup                   | `typecheck` script, `tsconfig` fix, Vitest unit test suites for lib utilities                                   | M1        | Survey |
-| 10  | TSDoc Schema Annotations                     | Complete TSDoc/JSDoc for 13 SQLite tables in `src/db/schema.ts`                                                 | M2        | Survey |
-| 11  | TSDoc DB Client Annotations                  | JSDoc for `getDB` and `Database` type in `src/db/index.ts`                                                      | M2        | Survey |
-| 12  | TSDoc Domain Utilities Annotations           | JSDoc for all functions in `src/lib/` (`dates`, `money`, `invoices.server`, `payments.server`, `auth`, `utils`) | M2        | Survey |
-| 13  | TSDoc Auth Middleware Annotations            | JSDoc for `landlordAuthMiddleware` in `src/middleware/auth.ts`                                                  | M2        | Survey |
-| 14  | TSDoc Server Functions Annotations           | JSDoc for all 16 server functions in `src/server/*.functions.ts`                                                | M2        | Survey |
-| 15  | TSDoc Zod Schemas Annotations                | JSDoc for schemas in `src/schemas/*.ts`                                                                         | M2        | Survey |
-| 16  | Architecture & Domain Guide                  | `docs/architecture.md` (System design, data flows, D1/R2, invariants)                                           | M3        | Survey |
-| 17  | API & Server Functions Catalog               | `docs/api-catalog.md` (16 server functions, schemas, auth, error modes)                                         | M3        | Survey |
-| 18  | Developer & Operations Guide                 | `docs/developer-guide.md` (Local setup, migrations, tests, deployment, cron)                                    | M3        | Survey |
-| 19  | Consolidated Audit Report                    | `docs/audit-report.md` (Executive summary, findings, severities, resolutions)                                   | M3        | Survey |
-| 20  | Repository README & Link Fixes               | Update `README.md` to D1/Drizzle stack and fix dead links                                                       | M3        | Survey |
-| 21  | Full Verification & Forensic Integrity Audit | End-to-end typecheck, lint, test execution, and forensic audit                                                  | Final     | Survey |
+| #   | Feature | Description | Milestone | Source |
+|---|---|---|---|---|
+| 1 | Motion Token Architecture | `:root` tokens in `src/styles.css` (durations, easings, distances, scales, blurs) | M1 | Survey |
+| 2 | Open/Close Asymmetry | Asymmetric open (250ms) vs close (150ms) for Dialogs, Modals, and Dropdowns | M1 | Survey |
+| 3 | Prefers-Reduced-Motion Guard | Comprehensive `@media (prefers-reduced-motion: reduce)` override block | M1 | Survey |
+| 4 | Micro-Interaction Animations | Number pop-in, Form error shake, Success check, Bounded staggers (<300ms) | M1 | Survey |
+| 5 | coss Primitive Additions | Add `AlertDialog`, `Menu`, `Drawer`, `Skeleton`, `Tooltip`, `InputGroup` | M1 | Survey |
+| 6 | coss Component Modernization | Modernize `Toast` (`anchoredToastManager`), `Empty` (`EmptyContent`), `Table`, `Dialog` | M1 | Survey |
+| 7 | Public Landing Page | Build rich public landing page at `/` (`src/routes/index.tsx`) with Hero, features, demo, CTAs | M2 | Survey |
+| 8 | Public Header & Footer | Responsive public navigation header with CTAs and informative footer | M2 | Survey |
+| 9 | ThemeToggle Icon Morph | Animated Sun/Moon icon swap with smooth cross-fade rotation | M2 | Survey |
+| 10 | Sign In & Sign Up Overhaul | Card entrance, tactile fields, password visibility toggle, error shake on invalid submit | M2 | Survey |
+| 11 | Landlord Shell & Mobile Nav | `LandlordHeader.tsx` with responsive mobile drawer navigation and active indicator transition | M3 | Survey |
+| 12 | Dashboard Overhaul | Animated number pop-ins for financial stats, responsive table/card fallback, modal line items fix | M3 | Survey |
+| 13 | Properties, Rooms & Tenants | Staggered card reveals, refined edit/create dialogs, empty state action buttons | M3 | Survey |
+| 14 | Leases Registry Overhaul | 8-column table to mobile card-list responsive fallback, `AlertDialog` for lease termination | M3 | Survey |
+| 15 | Invoice Details & Ledger | Payment modal validation shake, success check on confirmation, refined 2-col/1-col layout | M3 | Survey |
+| 16 | Domain Invariants Preservation | Strict preservation of integer paisa math, Kathmandu date handling, and landlord auth guards | M1–M4 | Survey |
+| 17 | Verification Quality Gates | `pnpm run typecheck`, `pnpm run lint`, `pnpm run test`, `pnpm run build` | M4 | Survey |
+| 18 | Adversarial UI & Motion Tests | Validate reduced-motion fallbacks, mobile viewports, and edge cases | M4 | Survey |
+| 19 | Forensic Integrity Audit | Systematic audit for authentic logic, zero facades, zero hardcoding | M4 | Survey |
+
+---
 
 ## Milestones
 
-| #     | Name                               | Scope                                                                                                                                                | Dependencies | Status |
-| ----- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------ |
-| M1    | Invariant Audit Fixes & Test Suite | Fix 11 security/invariant issues (IDOR, balance checks, status machine, schema unique index, date handling), add typecheck script & unit test suites | none         | DONE   |
-| M2    | In-Code TSDoc Annotations          | Add comprehensive TSDoc comments across schema, DB client, lib utilities, middleware, server functions, and schemas                                  | M1           | DONE   |
-| M3    | Comprehensive Documentation Suite  | Create `docs/architecture.md`, `docs/api-catalog.md`, `docs/developer-guide.md`, `docs/audit-report.md`, and update `README.md`                      | M1, M2       | DONE   |
-| Final | Verification & Audit Gate          | `pnpm run typecheck`, `pnpm run lint`, `pnpm test`, Reviewer & Challenger verification, Forensic Audit                                               | M1, M2, M3   | DONE   |
+| # | Name | Scope | Dependencies | Status |
+|---|------|-------|-------------|--------|
+| M1 | Design System & Motion System Core | `src/styles.css` motion tokens & rules; `src/components/ui/` coss primitives & modernizations | none | DONE |
+| M2 | Public & Authentication Views Overhaul | Landing page (`/`), Public Header/Footer, ThemeToggle icon morph, `/login`, `/signup` | M1 | DONE |
+| M3 | Landlord Management Portal Overhaul | `LandlordHeader` with mobile drawer; `/dashboard`, `/properties`, `/rooms`, `/tenants`, `/leases`, `/invoices/$invoiceId` | M1 | DONE |
+| M4 | Verification, Adversarial Hardening & Audit | Typecheck, lint, full Vitest test pass, UI/motion test coverage, Challenger, Forensic Audit | M1, M2, M3 | DONE |
+
+---
+
+## Interface Contracts
+
+### Design System ↔ Routes
+- **Motion Classes**:
+  - `.t-digit-group` / `.t-digit`: Animated financial numbers via `<AnimatedNumber />`.
+  - `.t-input-shake`: Added on validation error to shake form fields.
+  - `.t-success-check`: Added to payment/creation confirmation moments.
+  - `.stagger-item` with `.stagger-1` through `.stagger-6`: 40ms offset staggered grid entrance.
+- **Components**:
+  - `AlertDialog`: Semantic barrier for destructive actions (`open`, `onOpenChange`, `title`, `description`, `confirmText`, `cancelText`, `onConfirm`, `variant="destructive"`).
+  - `Drawer`: Slide-over sheet for mobile navigation on viewports `< 768px`.
+  - `Empty`: Must render `EmptyContent` with action buttons across all empty datasets.
+  - `Table`: Must provide clean mobile overflow or responsive card-list fallback.
+
+---
 
 ## Code Layout
 
-- `src/db/`: SQLite schema definitions and D1 database client factory
-- `src/lib/`: Framework-agnostic core domain logic (money, dates, invoices, payments, auth)
-- `src/lib/__tests__/`: Unit and domain invariant test suites
-- `src/middleware/`: Request middleware (landlord authentication and session binding)
-- `src/server/`: TanStack Start RPC server functions (`createServerFn`)
-- `src/schemas/`: Zod validation schemas for server function inputs
-- `src/routes/`: TanStack Router file-based route definitions
-- `docs/`: Comprehensive project documentation suite
-- `drizzle/`: SQL schema migration files
+- `src/styles.css`: Centralized stylesheet with `:root` motion tokens, asymmetric rules, and `@media (prefers-reduced-motion: reduce)`.
+- `src/components/ui/`: Base UI / coss shared primitives (`button.tsx`, `dialog.tsx`, `alert-dialog.tsx`, `drawer.tsx`, `menu.tsx`, `card.tsx`, `table.tsx`, `empty.tsx`, `input.tsx`, `toast.tsx`, `skeleton.tsx`, `tooltip.tsx`, `input-group.tsx`, `animated-number.tsx`).
+- `src/components/`: Layout and shell components (`Header.tsx`, `LandlordHeader.tsx`, `Footer.tsx`, `ThemeToggle.tsx`).
+- `src/routes/index.tsx`: Public landing page.
+- `src/routes/login.tsx`, `src/routes/signup.tsx`: Authentication screens.
+- `src/routes/_authed.tsx`: Authenticated layout shell.
+- `src/routes/_authed/`: Landlord management portal routes (`dashboard.tsx`, `properties.tsx`, `rooms.tsx`, `tenants.tsx`, `leases.tsx`, `invoices.$invoiceId.tsx`).
+- `src/lib/`: Domain business logic (money, dates, invoices, payments).
+- `src/server/`: Server functions.

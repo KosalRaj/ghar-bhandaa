@@ -22,8 +22,10 @@ import { Field, FieldLabel } from '#/components/ui/field'
 import { Input } from '#/components/ui/input'
 import { Textarea } from '#/components/ui/textarea'
 import { Alert, AlertDescription } from '#/components/ui/alert'
+import { cn } from '#/lib/utils'
 import {
   Empty,
+  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
@@ -170,7 +172,7 @@ function TenantsPage() {
       {/* Grid List */}
       {tenants.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {tenants.map((tenant) => {
+          {tenants.map((tenant, index) => {
             const initials = tenant.name
               ? tenant.name
                   .split(' ')
@@ -183,7 +185,10 @@ function TenantsPage() {
             return (
               <Card
                 key={tenant.id}
-                className="rounded-3xl border-[var(--line)] flex flex-col justify-between hover:shadow-md transition-shadow"
+                className={cn(
+                  'rounded-3xl border-[var(--line)] flex flex-col justify-between hover:shadow-md transition-shadow stagger-item',
+                  `stagger-${(index % 6) + 1}`,
+                )}
               >
                 <CardHeader className="p-6">
                   <div className="flex items-center gap-3 mb-3">
@@ -248,6 +253,19 @@ function TenantsPage() {
                 register a tenant.
               </EmptyDescription>
             </EmptyHeader>
+            <EmptyContent>
+              <Button
+                onClick={() => {
+                  resetForm()
+                  setShowAddModal(true)
+                }}
+                size="sm"
+                className="rounded-full"
+              >
+                <Plus className="size-4" aria-hidden="true" />
+                Register First Tenant
+              </Button>
+            </EmptyContent>
           </Empty>
         </Card>
       )}

@@ -165,6 +165,9 @@ function Toasts({
 export const toastManager: ReturnType<typeof Toast.createToastManager> =
   Toast.createToastManager()
 
+export const anchoredToastManager: ReturnType<typeof Toast.createToastManager> =
+  Toast.createToastManager()
+
 export type ToastPosition =
   | 'top-left'
   | 'top-center'
@@ -192,4 +195,75 @@ export function ToastProvider({
   )
 }
 
+function AnchoredToasts({
+  portalProps,
+}: {
+  portalProps?: React.ComponentProps<typeof Toast.Portal>
+}): React.ReactElement {
+  const { toasts } = Toast.useToastManager()
+
+  return (
+    <Toast.Portal data-slot="toast-portal" {...portalProps}>
+      {toasts.map((toast) => {
+        const Icon = toast.type
+          ? TOAST_ICONS[toast.type as keyof typeof TOAST_ICONS]
+          : null
+        const toastData = toast.data as ToastData | undefined
+        const isTooltipStyle = toastData?.tooltipStyle ?? true
+
+        return (
+          <Toast.Positioner
+            key={toast.id}
+            toast={toast}
+            data-slot="toast-positioner"
+            className="z-60 select-none focus:outline-none"
+            {...toast.positionerProps}
+          >
+            <Toast.Root
+              className={cn(
+                'relative flex items-center gap-2 rounded-lg border bg-popover not-dark:bg-clip-padding px-3 py-1.5 text-xs text-popover-foreground shadow-md transition-[opacity,transform] duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0',
+                isTooltipStyle &&
+                  'bg-foreground text-background shadow-lg text-xs font-medium py-1 px-2.5 rounded-md border-transparent',
+              )}
+              toast={toast}
+              {...toastData?.rootProps}
+            >
+              {Icon && (
+                <Icon className="size-3.5 shrink-0 in-data-[type=loading]:animate-spin" />
+              )}
+              <Toast.Content className="flex items-center gap-1.5">
+                <Toast.Title className="font-medium" data-slot="toast-title" />
+                {!isTooltipStyle && toast.description && (
+                  <Toast.Description
+                    className="text-muted-foreground"
+                    data-slot="toast-description"
+                  />
+                )}
+              </Toast.Content>
+            </Toast.Root>
+          </Toast.Positioner>
+        )
+      })}
+    </Toast.Portal>
+  )
+}
+
+export interface AnchoredToastProviderProps extends Toast.Provider.Props {
+  portalProps?: React.ComponentProps<typeof Toast.Portal>
+}
+
+export function AnchoredToastProvider({
+  children,
+  portalProps,
+  ...props
+}: AnchoredToastProviderProps): React.ReactElement {
+  return (
+    <Toast.Provider toastManager={anchoredToastManager} {...props}>
+      {children}
+      <AnchoredToasts portalProps={portalProps} />
+    </Toast.Provider>
+  )
+}
+
 export { Toast as ToastPrimitive }
+

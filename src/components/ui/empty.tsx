@@ -53,6 +53,7 @@ export function EmptyHeader({
 export function EmptyMedia({
   className,
   variant = 'default',
+  children,
   ...props
 }: React.ComponentProps<'div'> &
   VariantProps<typeof emptyMediaVariants>): React.ReactElement {
@@ -63,10 +64,9 @@ export function EmptyMedia({
       data-variant={variant}
       {...props}
     >
-      <div
-        className={cn(emptyMediaVariants({ className, variant }))}
-        {...props}
-      />
+      <div className={cn(emptyMediaVariants({ variant }))}>
+        {children}
+      </div>
     </div>
   )
 }
@@ -110,7 +110,7 @@ export function EmptyContent({
   return (
     <div
       className={cn(
-        'flex w-full min-w-0 max-w-sm flex-col items-center gap-3 text-balance text-sm',
+        'flex w-full min-w-0 max-w-sm flex-wrap items-center justify-center gap-3 text-balance text-sm mt-2 [[data-slot=empty-header]+&]:mt-2',
         className,
       )}
       data-slot="empty-content"

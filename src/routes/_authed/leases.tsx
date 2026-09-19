@@ -39,11 +39,21 @@ import { Alert, AlertDescription } from '#/components/ui/alert'
 import { DatePicker } from '#/components/ui/date-picker'
 import {
   Empty,
+  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
 } from '#/components/ui/empty'
+import {
+  AlertDialog,
+  AlertDialogClose,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogPopup,
+  AlertDialogTitle,
+} from '#/components/ui/alert-dialog'
 import { toastManager } from '#/components/ui/toast'
 import { FileSignature, Plus, AlertCircle, Ban } from 'lucide-react'
 
@@ -205,76 +215,158 @@ function LeasesPage() {
         </div>
 
         {leases.length > 0 ? (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Tenant</TableHead>
-                <TableHead>Room & Property</TableHead>
-                <TableHead className="text-right">Rent</TableHead>
-                <TableHead className="text-right">Deposit</TableHead>
-                <TableHead className="text-center">Billing Day</TableHead>
-                <TableHead>Period</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
+          <>
+            {/* Desktop Table View */}
+            <div className="hidden md:block">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Tenant</TableHead>
+                    <TableHead>Room & Property</TableHead>
+                    <TableHead className="text-right">Rent</TableHead>
+                    <TableHead className="text-right">Deposit</TableHead>
+                    <TableHead className="text-center">Billing Day</TableHead>
+                    <TableHead>Period</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {leases.map((lease) => (
+                    <TableRow key={lease.id}>
+                      <TableCell className="font-semibold">
+                        {lease.tenantName}
+                      </TableCell>
+                      <TableCell>
+                        <div className="font-medium">{lease.roomName}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {lease.propertyName}
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-right font-bold">
+                        {formatNpr(lease.rentAmount)}
+                      </TableCell>
+                      <TableCell className="text-right font-medium">
+                        {formatNpr(lease.depositAmount)}
+                      </TableCell>
+                      <TableCell className="text-center font-semibold">
+                        Day {lease.billingDay}
+                      </TableCell>
+                      <TableCell>
+                        <div className="text-xs font-medium">
+                          Start: {lease.startDate}
+                        </div>
+                        {lease.endDate && (
+                          <div className="text-xs text-muted-foreground">
+                            End: {lease.endDate}
+                          </div>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={
+                            lease.status === 'active' ? 'success' : 'secondary'
+                          }
+                          className="capitalize font-bold"
+                        >
+                          {lease.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {lease.status === 'active' && (
+                          <Button
+                            variant="outline"
+                            size="xs"
+                            onClick={() => setEndingLeaseId(lease.id)}
+                            className="rounded-full text-destructive hover:text-destructive hover:bg-destructive/10 border-destructive/30"
+                          >
+                            End Lease
+                          </Button>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* Mobile Card List View */}
+            <div className="flex flex-col gap-3 md:hidden">
               {leases.map((lease) => (
-                <TableRow key={lease.id}>
-                  <TableCell className="font-semibold">
-                    {lease.tenantName}
-                  </TableCell>
-                  <TableCell>
-                    <div className="font-medium">{lease.roomName}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {lease.propertyName}
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right font-bold">
-                    {formatNpr(lease.rentAmount)}
-                  </TableCell>
-                  <TableCell className="text-right font-medium">
-                    {formatNpr(lease.depositAmount)}
-                  </TableCell>
-                  <TableCell className="text-center font-semibold">
-                    Day {lease.billingDay}
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-xs font-medium">
-                      Start: {lease.startDate}
-                    </div>
-                    {lease.endDate && (
+                <div
+                  key={lease.id}
+                  className="p-4 rounded-2xl border border-[var(--line)] bg-muted/10 flex flex-col gap-3"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <div>
+                      <span className="font-semibold text-sm text-[var(--sea-ink)]">
+                        {lease.tenantName}
+                      </span>
                       <div className="text-xs text-muted-foreground">
-                        End: {lease.endDate}
+                        {lease.roomName} • {lease.propertyName}
                       </div>
-                    )}
-                  </TableCell>
-                  <TableCell>
+                    </div>
                     <Badge
-                      variant={
-                        lease.status === 'active' ? 'success' : 'secondary'
-                      }
-                      className="capitalize font-bold"
+                      variant={lease.status === 'active' ? 'success' : 'secondary'}
+                      className="capitalize font-bold text-xs"
                     >
                       {lease.status}
                     </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {lease.status === 'active' && (
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 text-xs py-2 border-y border-[var(--line)]">
+                    <div>
+                      <span className="text-[10px] uppercase text-muted-foreground block font-semibold">
+                        Rent
+                      </span>
+                      <span className="font-bold text-foreground text-sm">
+                        {formatNpr(lease.rentAmount)}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase text-muted-foreground block font-semibold">
+                        Deposit
+                      </span>
+                      <span className="font-medium text-foreground">
+                        {formatNpr(lease.depositAmount)}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase text-muted-foreground block font-semibold">
+                        Billing Day
+                      </span>
+                      <span className="font-medium text-foreground">
+                        Day {lease.billingDay}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase text-muted-foreground block font-semibold">
+                        Period
+                      </span>
+                      <span className="text-muted-foreground">
+                        {lease.startDate}
+                        {lease.endDate ? ` to ${lease.endDate}` : ' (ongoing)'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {lease.status === 'active' && (
+                    <div className="flex justify-end pt-1">
                       <Button
                         variant="outline"
                         size="xs"
                         onClick={() => setEndingLeaseId(lease.id)}
                         className="rounded-full text-destructive hover:text-destructive hover:bg-destructive/10 border-destructive/30"
                       >
+                        <Ban className="size-3.5" aria-hidden="true" />
                         End Lease
                       </Button>
-                    )}
-                  </TableCell>
-                </TableRow>
+                    </div>
+                  )}
+                </div>
               ))}
-            </TableBody>
-          </Table>
+            </div>
+          </>
         ) : (
           <Empty>
             <EmptyMedia variant="icon">
@@ -287,6 +379,19 @@ function LeasesPage() {
                 a tenant to a room.
               </EmptyDescription>
             </EmptyHeader>
+            <EmptyContent>
+              <Button
+                onClick={() => {
+                  resetForm()
+                  setShowAddModal(true)
+                }}
+                size="sm"
+                className="rounded-full"
+              >
+                <Plus className="size-4" aria-hidden="true" />
+                Create First Lease
+              </Button>
+            </EmptyContent>
           </Empty>
         )}
       </Card>
@@ -446,24 +551,25 @@ function LeasesPage() {
         </DialogPopup>
       </Dialog>
 
-      {/* End Lease Modal */}
-      <Dialog
+      {/* End Lease Modal (using AlertDialog for destructive semantic barrier) */}
+      <AlertDialog
         open={endingLeaseId !== null}
         onOpenChange={(open) => {
           if (!open) cancelForm()
         }}
       >
-        <DialogPopup className="sm:max-w-md">
-          <DialogHeader>
-            <span className="island-kicker block mb-1">Closure</span>
-            <DialogTitle>Terminate Lease</DialogTitle>
-            <DialogDescription>
-              Mark this lease as terminated and set the closure date.
-            </DialogDescription>
-          </DialogHeader>
+        <AlertDialogPopup className="sm:max-w-md">
+          <AlertDialogHeader>
+            <span className="island-kicker block mb-1">Destructive Action</span>
+            <AlertDialogTitle>Terminate Lease Contract</AlertDialogTitle>
+            <AlertDialogDescription>
+              Mark this lease as terminated and set the effective closure date.
+              This will conclude active tenancy for this room.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
 
           <form onSubmit={handleEndSubmit} className="contents">
-            <DialogPanel className="flex flex-col gap-4">
+            <div className="px-6 py-2 flex flex-col gap-4">
               {error && (
                 <Alert variant="error">
                   <AlertCircle />
@@ -479,10 +585,10 @@ function LeasesPage() {
                   placeholder="Select termination date"
                 />
               </Field>
-            </DialogPanel>
+            </div>
 
-            <DialogFooter>
-              <DialogClose
+            <AlertDialogFooter>
+              <AlertDialogClose
                 render={
                   <Button variant="ghost" type="button" onClick={cancelForm}>
                     Cancel
@@ -493,10 +599,10 @@ function LeasesPage() {
                 <Ban className="size-4" aria-hidden="true" />
                 Terminate Lease
               </Button>
-            </DialogFooter>
+            </AlertDialogFooter>
           </form>
-        </DialogPopup>
-      </Dialog>
+        </AlertDialogPopup>
+      </AlertDialog>
     </div>
   )
 }

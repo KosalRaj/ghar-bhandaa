@@ -4,6 +4,7 @@ import { getInvoiceDetails } from '#/server/invoices.functions'
 import { recordCashPaymentFn } from '#/server/payments.functions'
 import { formatNpr } from '#/lib/money'
 import { getTodayInKathmandu } from '#/lib/dates'
+import { cn } from '#/lib/utils'
 import { Card, CardHeader, CardPanel, CardTitle } from '#/components/ui/card'
 import {
   Table,
@@ -58,16 +59,29 @@ function InvoiceDetailsPage() {
   const [paymentDate, setPaymentDate] = useState(() => getTodayInKathmandu())
   const [error, setError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
+  const [isShaking, setIsShaking] = useState(false)
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
+  const [lastRecordedPaymentPaisa, setLastRecordedPaymentPaisa] = useState<
+    number | null
+  >(null)
 
   // Calculations
   const totalPaidPaisa = payments.reduce((acc, p) => acc + p.amount, 0)
   const remainingPaisa = Math.max(0, invoice.amount - totalPaidPaisa)
   const remainingNpr = remainingPaisa / 100
 
+  const triggerShake = () => {
+    setIsShaking(false)
+    requestAnimationFrame(() => {
+      setIsShaking(true)
+    })
+  }
+
   const handleOpenPaymentModal = () => {
     setAmountNpr(remainingNpr)
     setPaymentDate(getTodayInKathmandu())
     setError(null)
+    setIsShaking(false)
     setShowPaymentModal(true)
   }
 
@@ -77,6 +91,7 @@ function InvoiceDetailsPage() {
 
     if (amountNpr <= 0) {
       setError('Payment amount must be greater than 0')
+      triggerShake()
       return
     }
 
@@ -84,6 +99,7 @@ function InvoiceDetailsPage() {
       setError(
         `Payment cannot exceed the remaining balance of ${formatNpr(remainingPaisa)}`,
       )
+      triggerShake()
       return
     }
 
@@ -97,7 +113,9 @@ function InvoiceDetailsPage() {
           confirmedAt: paymentDate,
         },
       })
+      setLastRecordedPaymentPaisa(Math.round(amountNpr * 100))
       setShowPaymentModal(false)
+      setShowSuccessModal(true)
       toastManager.add({
         type: 'success',
         title: 'Payment Recorded',
@@ -106,6 +124,7 @@ function InvoiceDetailsPage() {
       router.invalidate()
     } catch (err: any) {
       setError(err?.message || 'Failed to record cash payment')
+      triggerShake()
     } finally {
       setSubmitting(false)
     }
@@ -384,17 +403,30 @@ function InvoiceDetailsPage() {
 
               <Field>
                 <FieldLabel>Amount Received (NPR)</FieldLabel>
-                <Input
-                  type="number"
-                  required
-                  min="0.01"
-                  step="0.01"
-                  max={remainingNpr}
-                  value={amountNpr || ''}
-                  onChange={(e) =>
-                    setAmountNpr(parseFloat(e.target.value) || 0)
-                  }
-                />
+                <div
+                  className={cn(
+                    'w-full transition-transform',
+                    isShaking && 't-input-shake',
+                  )}
+                  onAnimationEnd={() => setIsShaking(false)}
+                >
+                  <Input
+                    type="number"
+                    required
+                    min="0.01"
+                    step="0.01"
+                    max={remainingNpr}
+                    value={amountNpr || ''}
+                    onChange={(e) => {
+                      setIsShaking(false)
+                      setAmountNpr(parseFloat(e.target.value) || 0)
+                    }}
+                    className={cn(
+                      isShaking &&
+                        'border-destructive focus-visible:ring-destructive',
+                    )}
+                  />
+                </div>
                 <p className="text-[11px] text-muted-foreground mt-1">
                   Maximum allowable: {formatNpr(remainingPaisa)}
                 </p>
@@ -424,6 +456,48 @@ function InvoiceDetailsPage() {
               </Button>
             </DialogFooter>
           </form>
+        </DialogPopup>
+      </Dialog>
+
+      {/* Celebratory Payment Success Modal */}
+      <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
+        <DialogPopup className="sm:max-w-md text-center p-8">
+          <div className="flex flex-col items-center justify-center gap-4 py-2">
+            <span
+              className="t-success-check"
+              data-state="in"
+              aria-label="Payment successful animation"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="size-16 text-emerald-500 stroke-emerald-500"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 13l4 4L19 7" pathLength={20} />
+              </svg>
+            </span>
+
+            <div>
+              <DialogTitle className="display-title text-2xl font-bold text-[var(--sea-ink)]">
+                Payment Recorded!
+              </DialogTitle>
+              <DialogDescription className="text-sm text-muted-foreground mt-1.5">
+                {lastRecordedPaymentPaisa !== null
+                  ? `Successfully collected ${formatNpr(lastRecordedPaymentPaisa)} in cash.`
+                  : 'Cash payment registered and ledger updated.'}
+              </DialogDescription>
+            </div>
+
+            <Button
+              onClick={() => setShowSuccessModal(false)}
+              className="rounded-full px-8 mt-2"
+            >
+              Done
+            </Button>
+          </div>
         </DialogPopup>
       </Dialog>
     </div>

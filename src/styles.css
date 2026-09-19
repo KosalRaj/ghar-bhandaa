@@ -66,6 +66,108 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.871 0.006 286.286);
+
+  /* ==========================================================================
+     GHAR-BHANDAA MOTION & ANIMATION SYSTEM (transitions.dev & transitions-polish)
+     ========================================================================== */
+
+  /* --- Durations --- */
+  --duration-stagger: 40ms;       /* per-item stagger offset */
+  --duration-micro: 80ms;         /* tooltip/path delay, shake segment, active tap */
+  --duration-quick: 150ms;        /* modal/dropdown close, hover in/out, tooltip appear */
+  --duration-fast: 250ms;         /* dropdown/modal open, tabs sliding, page slide */
+  --duration-medium: 350ms;       /* panel close, toast dismiss */
+  --duration-slow: 400ms;         /* panel/drawer open, skeleton reveal */
+  --duration-very-slow: 500ms;    /* number pop-in, badge appear, success check */
+
+  /* --- Easings --- */
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);    /* default surface curve */
+  --ease-in-out: ease-in-out;                           /* icon/text swap */
+  --ease-out: ease-out;                                 /* tooltip/fade */
+  --ease-linear: linear;                                /* spinners, shimmers */
+  --ease-bounce: cubic-bezier(0.34, 1.36, 0.64, 1);     /* badge pop */
+  --ease-bounce-strong: cubic-bezier(0.34, 3.85, 0.64, 1); /* bouncy avatar return */
+
+  /* --- Distances --- */
+  --distance-micro: 4px;          /* text swap, shake overshoot */
+  --distance-small: 6px;          /* error shake primary segment */
+  --distance-base: 8px;           /* page slide, number pop-in travel */
+  --distance-medium: 12px;        /* surface rise-in, mobile dialog sheet offset */
+  --distance-large: 30px;         /* celebratory check burst */
+
+  /* --- Scales --- */
+  --scale-large: 0.96;            /* modal open/close pre-scale */
+  --scale-medium: 0.97;           /* dropdown open pre-scale */
+  --scale-small: 0.98;            /* active button press, tooltip */
+  --scale-tiny: 0.99;             /* dropdown close pre-scale */
+
+  /* --- Blurs --- */
+  --blur-small: 2px;              /* number pop-in, badge blur */
+  --blur-medium: 3px;             /* page slide, surface cross-fade */
+  --blur-large: 8px;              /* success check burst */
+
+  /* --- Component Semantic Mappings --- */
+  --modal-open-dur: var(--duration-fast);
+  --modal-close-dur: var(--duration-quick);
+  --modal-scale: var(--scale-large);
+  --modal-scale-close: var(--scale-large);
+  --modal-ease: var(--ease-smooth-out);
+
+  --dropdown-open-dur: var(--duration-fast);
+  --dropdown-close-dur: var(--duration-quick);
+  --dropdown-pre-scale: var(--scale-medium);
+  --dropdown-closing-scale: var(--scale-tiny);
+  --dropdown-ease: var(--ease-smooth-out);
+
+  --digit-dur: var(--duration-very-slow);
+  --digit-distance: var(--distance-base);
+  --digit-stagger: 70ms;
+  --digit-blur: var(--blur-small);
+  --digit-ease: cubic-bezier(0.34, 1.45, 0.64, 1);
+  --digit-dir-x: 0;
+  --digit-dir-y: 1;
+
+  --shake-distance: var(--distance-small);
+  --shake-overshoot: var(--distance-micro);
+  --shake-dur-a: var(--duration-micro);
+  --shake-dur-b: 60ms;
+  --shake-ease: var(--ease-smooth-out);
+  --revert-hold: 3000ms;
+  --revert-dur: 280ms;
+
+  --check-opacity-dur: 550ms;
+  --check-rotate-dur: 550ms;
+  --check-rotate-from: 80deg;
+  --check-bob-dur: 450ms;
+  --check-y-amount: 40px;
+  --check-blur-dur: var(--duration-very-slow);
+  --check-blur-from: 10px;
+  --check-path-dur: 550ms;
+  --check-path-delay: var(--duration-micro);
+  --check-ease-out: var(--ease-smooth-out);
+  --check-ease-opacity: var(--ease-smooth-out);
+  --check-ease-rotate: var(--ease-smooth-out);
+  --check-ease-bob: cubic-bezier(0.34, 1.35, 0.64, 1);
+  --check-ease-path: var(--ease-smooth-out);
+
+  --badge-slide-dur: 260ms;
+  --badge-pop-dur: var(--duration-very-slow);
+  --badge-pop-close-dur: 180ms;
+  --badge-fade-dur: var(--duration-slow);
+  --badge-fade-close-dur: 180ms;
+  --badge-blur: var(--blur-small);
+  --badge-offset-x: -8.2px;
+  --badge-offset-y: 12.4px;
+  --badge-slide-ease: var(--ease-smooth-out);
+  --badge-pop-ease: var(--ease-bounce);
+  --badge-close-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --avatar-lift: -4px;
+  --avatar-dur: 320ms;
+  --avatar-scale: 1.05;
+  --avatar-falloff: 0.45;
+  --avatar-ease-in: var(--ease-smooth-out);
+  --avatar-ease-out: var(--ease-bounce-strong);
 }
 
 .dark {
@@ -181,6 +283,7 @@
   --animate-toast-error-odd: toast-error-odd 0.28s cubic-bezier(0.5, 1, 0.89, 1);
   --animate-toast-error-even: toast-error-even 0.28s
     cubic-bezier(0.5, 1, 0.89, 1);
+  --animate-skeleton: skeleton 2s -1s infinite linear;
 }
 
 @keyframes toast-success-odd {
@@ -246,6 +349,12 @@
   }
   100% {
     translate: 0 0;
+  }
+}
+
+@keyframes skeleton {
+  to {
+    background-position: -200% 0;
   }
 }
 
@@ -378,6 +487,10 @@ pre code {
     0 1px 0 var(--inset-glint) inset,
     0 18px 34px rgba(30, 90, 72, 0.1),
     0 4px 14px rgba(23, 58, 64, 0.06);
+  transition:
+    transform var(--duration-quick) var(--ease-smooth-out),
+    box-shadow var(--duration-quick) var(--ease-smooth-out),
+    border-color var(--duration-quick) var(--ease-smooth-out);
 }
 
 .feature-card:hover {
@@ -389,10 +502,16 @@ button,
 .island-shell,
 a {
   transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
+    background-color var(--duration-quick) var(--ease-smooth-out),
+    color var(--duration-quick) var(--ease-smooth-out),
+    border-color var(--duration-quick) var(--ease-smooth-out),
+    transform var(--duration-quick) var(--ease-smooth-out),
+    box-shadow var(--duration-quick) var(--ease-smooth-out);
+}
+
+button:active:not(:disabled),
+[data-slot="button"]:active:not(:disabled) {
+  transform: scale(var(--scale-small));
 }
 
 .island-kicker {
@@ -419,7 +538,7 @@ a {
   transform: scaleX(0);
   transform-origin: left;
   background: linear-gradient(90deg, var(--lagoon), #7ed3bf);
-  transition: transform 170ms ease;
+  transition: transform var(--duration-quick) var(--ease-smooth-out);
 }
 
 .nav-link:hover,
@@ -432,18 +551,317 @@ a {
   transform: scaleX(1);
 }
 
+/* --- Calibrated Surface Rise-In Entrance --- */
 .rise-in {
-  animation: rise-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: surface-rise var(--duration-fast) var(--ease-smooth-out) both;
 }
 
-@keyframes rise-in {
+@keyframes surface-rise {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(var(--distance-base));
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* --- Bounded Stagger Classes (< 300ms Total) --- */
+.stagger-item {
+  animation: surface-rise var(--duration-fast) var(--ease-smooth-out) both;
+}
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: calc(var(--duration-stagger) * 1); } /* 40ms */
+.stagger-3 { animation-delay: calc(var(--duration-stagger) * 2); } /* 80ms */
+.stagger-4 { animation-delay: calc(var(--duration-stagger) * 3); } /* 120ms */
+.stagger-5 { animation-delay: calc(var(--duration-stagger) * 4); } /* 160ms */
+.stagger-6 { animation-delay: calc(var(--duration-stagger) * 5); } /* 200ms */
+
+/* --- Asymmetric Base UI Modal & Alert Dialog Transitions --- */
+[data-slot="dialog-backdrop"],
+[data-slot="alert-dialog-backdrop"] {
+  transition: opacity var(--modal-open-dur) var(--modal-ease);
+}
+[data-slot="dialog-backdrop"][data-starting-style],
+[data-slot="alert-dialog-backdrop"][data-starting-style] {
+  opacity: 0;
+}
+[data-slot="dialog-backdrop"][data-ending-style],
+[data-slot="alert-dialog-backdrop"][data-ending-style] {
+  opacity: 0;
+  transition: opacity var(--modal-close-dur) var(--modal-ease);
+}
+
+[data-slot="dialog-popup"],
+[data-slot="alert-dialog-popup"] {
+  transform: scale(1);
+  opacity: 1;
+  transition:
+    transform var(--modal-open-dur) var(--modal-ease),
+    opacity   var(--modal-open-dur) var(--modal-ease);
+  will-change: transform, opacity;
+}
+[data-slot="dialog-popup"][data-starting-style],
+[data-slot="alert-dialog-popup"][data-starting-style] {
+  transform: scale(var(--modal-scale));
+  opacity: 0;
+}
+[data-slot="dialog-popup"][data-ending-style],
+[data-slot="alert-dialog-popup"][data-ending-style] {
+  transform: scale(var(--modal-scale-close));
+  opacity: 0;
+  transition:
+    transform var(--modal-close-dur) var(--modal-ease),
+    opacity   var(--modal-close-dur) var(--modal-ease);
+}
+
+@media (max-width: 639px) {
+  [data-slot="dialog-popup"][data-starting-style],
+  [data-slot="alert-dialog-popup"][data-starting-style] {
+    transform: translateY(var(--distance-medium));
+    opacity: 0;
+  }
+  [data-slot="dialog-popup"][data-ending-style],
+  [data-slot="alert-dialog-popup"][data-ending-style] {
+    transform: translateY(var(--distance-medium));
+    opacity: 0;
+    transition:
+      transform var(--modal-close-dur) var(--modal-ease),
+      opacity   var(--modal-close-dur) var(--modal-ease);
+  }
+}
+
+/* --- Asymmetric Base UI Popover, Select & Menu Dropdowns --- */
+[data-slot="popover-popup"],
+[data-slot="select-popup"],
+[data-slot="menu-popup"] {
+  transform: scale(1);
+  opacity: 1;
+  transition:
+    transform var(--dropdown-open-dur) var(--dropdown-ease),
+    opacity   var(--dropdown-open-dur) var(--dropdown-ease);
+  will-change: transform, opacity;
+}
+[data-slot="popover-popup"][data-starting-style],
+[data-slot="select-popup"][data-starting-style],
+[data-slot="menu-popup"][data-starting-style] {
+  transform: scale(var(--dropdown-pre-scale));
+  opacity: 0;
+}
+[data-slot="popover-popup"][data-ending-style],
+[data-slot="select-popup"][data-ending-style],
+[data-slot="menu-popup"][data-ending-style] {
+  transform: scale(var(--dropdown-closing-scale));
+  opacity: 0;
+  transition:
+    transform var(--dropdown-close-dur) var(--dropdown-ease),
+    opacity   var(--dropdown-close-dur) var(--dropdown-ease);
+}
+
+/* --- Number Pop-In for Financial Metrics --- */
+@keyframes t-digit-pop-in {
+  0% {
+    transform: translate(
+      calc(var(--digit-distance) * var(--digit-dir-x)),
+      calc(var(--digit-distance) * var(--digit-dir-y))
+    );
+    opacity: 0;
+    filter: blur(var(--digit-blur));
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.t-digit-group {
+  display: inline-flex;
+  align-items: baseline;
+  font-variant-numeric: tabular-nums;
+}
+.t-digit {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+.t-digit-group.is-animating .t-digit {
+  animation: t-digit-pop-in var(--digit-dur) var(--digit-ease) both;
+}
+.t-digit-group.is-animating .t-digit[data-stagger="1"] {
+  animation-delay: var(--digit-stagger);
+}
+.t-digit-group.is-animating .t-digit[data-stagger="2"] {
+  animation-delay: calc(var(--digit-stagger) * 2);
+}
+
+/* --- Form Validation Error State Shake --- */
+.t-input {
+  transition: border-color var(--duration-quick) var(--ease-out);
+  will-change: transform;
+}
+.t-input.is-error {
+  transition: border-color var(--revert-dur) var(--ease-out);
+}
+.t-error-msg {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--revert-dur) var(--ease-out),
+    visibility 0s linear var(--revert-dur);
+}
+.t-input-wrap.is-error .t-error-msg {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--revert-dur) var(--ease-out),
+    visibility 0s linear 0s;
+}
+.t-input.is-shaking,
+.t-input-shake {
+  animation: t-input-shake calc(
+    var(--shake-dur-a) * 2 + var(--shake-dur-b) * 2
+  ) linear;
+}
+@keyframes t-input-shake {
+  0%     { transform: translateX(0);                                animation-timing-function: var(--shake-ease); }
+  28.57% { transform: translateX(var(--shake-distance));            animation-timing-function: var(--shake-ease); }
+  57.14% { transform: translateX(calc(var(--shake-distance) * -1)); animation-timing-function: var(--shake-ease); }
+  78.57% { transform: translateX(var(--shake-overshoot));           animation-timing-function: var(--shake-ease); }
+  100%   { transform: translateX(0); }
+}
+
+/* --- Confirmation Success Check --- */
+.t-success-check {
+  display: inline-block;
+  transform-origin: center;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+.t-success-check svg {
+  display: block;
+  overflow: visible;
+}
+.t-success-check svg path {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+}
+.t-success-check[data-state="in"] {
+  animation:
+    t-check-fade   var(--check-opacity-dur) var(--check-ease-opacity) forwards,
+    t-check-rotate var(--check-rotate-dur)  var(--check-ease-rotate)  forwards,
+    t-check-blur   var(--check-blur-dur)    var(--check-ease-out)     forwards,
+    t-check-bob    var(--check-bob-dur)     var(--check-ease-bob)     forwards;
+}
+.t-success-check[data-state="in"] svg path {
+  animation: t-success-draw var(--check-path-dur) var(--check-ease-path) var(--check-path-delay) forwards;
+}
+@keyframes t-check-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes t-check-rotate {
+  from { transform: rotate(var(--check-rotate-from)); }
+  to   { transform: rotate(0deg); }
+}
+@keyframes t-check-blur {
+  from { filter: blur(var(--check-blur-from)); }
+  to   { filter: blur(0); }
+}
+@keyframes t-check-bob {
+  from { translate: 0 var(--check-y-amount); }
+  to   { translate: 0 0; }
+}
+@keyframes t-success-draw { to { stroke-dashoffset: 0; } }
+@keyframes t-check-draw { to { stroke-dashoffset: 0; } }
+
+/* --- Notification Badge Slide & Pop --- */
+.t-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  pointer-events: none;
+  will-change: transform;
+}
+.t-badge[data-open="true"] {
+  animation: t-badge-slide-in var(--badge-slide-dur) var(--badge-slide-ease);
+}
+@keyframes t-badge-slide-in {
+  from { transform: translate(var(--badge-offset-x), var(--badge-offset-y)); }
+  to   { transform: translate(0, 0); }
+}
+.t-badge-dot {
+  display: block;
+  transform-origin: center;
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+  transition:
+    transform var(--badge-pop-dur)  var(--badge-pop-ease),
+    opacity   var(--badge-fade-dur) var(--badge-pop-ease),
+    filter    var(--badge-pop-dur)  var(--badge-pop-ease);
+  will-change: transform, opacity, filter;
+}
+.t-badge[data-open="false"] .t-badge-dot {
+  transform: scale(0);
+  opacity: 0;
+  filter: blur(var(--badge-blur));
+  transition:
+    transform var(--badge-pop-close-dur)  var(--badge-close-ease),
+    opacity   var(--badge-fade-close-dur) var(--badge-close-ease),
+    filter    var(--badge-pop-close-dur)  var(--badge-close-ease);
+}
+
+/* --- Avatar Group Hover Dynamics --- */
+.t-avatar {
+  transition: transform var(--duration-quick) var(--ease-smooth-out);
+}
+.t-avatar:hover {
+  transform: translateY(var(--avatar-lift)) scale(var(--avatar-scale));
+}
+.t-avatar:not(:hover) {
+  transition: transform var(--duration-fast) var(--ease-bounce-strong);
+}
+
+/* --- Global Prefers-Reduced-Motion Guard --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .t-dropdown,
+  .t-modal,
+  .t-badge,
+  .t-badge-dot,
+  .t-digit-group .t-digit,
+  .t-input,
+  .t-input-shake,
+  .t-success-check,
+  .t-success-check svg path,
+  .stagger-item,
+  .rise-in,
+  [data-slot="dialog-popup"],
+  [data-slot="dialog-backdrop"],
+  [data-slot="alert-dialog-popup"],
+  [data-slot="alert-dialog-backdrop"],
+  [data-slot="popover-popup"],
+  [data-slot="select-popup"],
+  [data-slot="menu-popup"],
+  [data-slot="drawer-popup"],
+  [data-slot="drawer-backdrop"] {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .t-success-check {
+    opacity: 1 !important;
+  }
+  .t-success-check svg path {
+    stroke-dashoffset: 0 !important;
   }
 }
 

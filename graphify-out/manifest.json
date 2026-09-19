@@ -32,20 +32,20 @@
     "hash": "1f7c8d16bd6072ead126357a2047e9dc"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/Footer.tsx": {
-    "mtime": 1787742065.59,
-    "hash": "c7cae0fe158e7a41845265baa94421cb"
+    "mtime": 1789834109.16,
+    "hash": "d27d9313ee2d84a59d5324ac5968a8b6"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/Header.tsx": {
-    "mtime": 1787740935.33,
-    "hash": "f7ced435996bdc6cdd6b49ab1b886dca"
+    "mtime": 1789834093.08,
+    "hash": "df74ed5baa284fdef9539b6d1360e0e3"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/LandlordHeader.tsx": {
-    "mtime": 1787742087.12,
-    "hash": "f0ecc1a159ac76ed485c9354ff77cb79"
+    "mtime": 1789835156.14,
+    "hash": "1d617b3def25cd8e2db07fb335e56c03"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ThemeToggle.tsx": {
-    "mtime": 1787725702.28,
-    "hash": "441a6325341b0934782b64448e8b7dbc"
+    "mtime": 1789834283.55,
+    "hash": "f4bd95a696c98bde7ffad8df7dac3afe"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/spinner.tsx": {
     "mtime": 1787740359.36,
@@ -68,8 +68,8 @@
     "hash": "86750aa879085b26665983f9eaec7404"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/dialog.tsx": {
-    "mtime": 1787740386.01,
-    "hash": "78eec1e20453e90ff458c69544a71036"
+    "mtime": 1789833263.2,
+    "hash": "d0417521d17b8cf6e485d3abcc6f4a2c"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/input.tsx": {
     "mtime": 1787740392.62,
@@ -108,16 +108,16 @@
     "hash": "5eea240b5222b946060e74344bc37167"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/empty.tsx": {
-    "mtime": 1787742092.5,
-    "hash": "cbd8182035a9fcb263d3c837ec4781a7"
+    "mtime": 1789833340.01,
+    "hash": "444045e3c53d16bdad57850926e22ed0"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/avatar.tsx": {
     "mtime": 1787740456.72,
     "hash": "2b0c29cd587f4cb0ff32477b6fb22583"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/toast.tsx": {
-    "mtime": 1787742065.77,
-    "hash": "fd8f90975ca0bd4ee8d63c56bc2c2b07"
+    "mtime": 1789833352.31,
+    "hash": "f704b2eb3f1258addea17a4c4abfa8a5"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/calendar.tsx": {
     "mtime": 1787742932.37,
@@ -138,6 +138,70 @@
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/date-picker.tsx": {
     "mtime": 1787742915.6,
     "hash": "c5454615f76bb59ef9e3be0adbf78773"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/alert-dialog.tsx": {
+    "mtime": 1789833270.35,
+    "hash": "870e2de5c6811da3e367f500384bdefa"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/menu.tsx": {
+    "mtime": 1789833281.34,
+    "hash": "b88a32f7d1b30870d1ae5421d486e8dc"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/drawer.tsx": {
+    "mtime": 1789833304.75,
+    "hash": "7e3d4b13cc10eefb946408d433b53d18"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/skeleton.tsx": {
+    "mtime": 1789833309.86,
+    "hash": "c5d680703f4317ecbf652eb4c4167c64"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/tooltip.tsx": {
+    "mtime": 1789833315.25,
+    "hash": "7327bfd7351c8a7ace73ffc43b84697c"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/input-group.tsx": {
+    "mtime": 1789833327.42,
+    "hash": "8b7f7e43e52da8279d2ddd435b020459"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/animated-number.tsx": {
+    "mtime": 1789833330.58,
+    "hash": "2b73a94956e49d28b799c1dd957407ea"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/__tests__/components.test.ts": {
+    "mtime": 1789833401.28,
+    "hash": "aa01efef560e9e8187e09c5dc0c1a82c"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/ui/__tests__/challenger_components_resilience.test.tsx": {
+    "mtime": 1789833768.95,
+    "hash": "e9d071b8073c939e7c5b6d28f5660cb6"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/__tests__/public_views.test.tsx": {
+    "mtime": 1789834289.99,
+    "hash": "c46df0385e7f8021873d946df857e5fe"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/__tests__/challenger_auth_stress.test.tsx": {
+    "mtime": 1789834619.88,
+    "hash": "c2c84b36af83fe37333cb3e07ccee225"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/__tests__/challenger_ui_m2_empirical.test.tsx": {
+    "mtime": 1789834558.44,
+    "hash": "40065db1b14cf73dbd4c1f55c982b815"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/__tests__/landlord_portal_m3.test.tsx": {
+    "mtime": 1789835181.12,
+    "hash": "0abdd1fb7581072ba65afdb1c6a00135"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/__tests__/challenger_ui_m3_empirical.test.tsx": {
+    "mtime": 1789835708.35,
+    "hash": "3af30f40681f2a7542b3aeb0bac2927a"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/__tests__/challenger_ui_m3_2_empirical.test.tsx": {
+    "mtime": 1789835883.47,
+    "hash": "b1fe871f318ccdd975c9ce7346f43f55"
+  },
+  "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/components/__tests__/challenger_ui_m4_empirical.test.tsx": {
+    "mtime": 1789836311.88,
+    "hash": "6acdeae5d1c433a5248d6b14be9f333a"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/db/index.ts": {
     "mtime": 1787727900.65,
@@ -216,40 +280,40 @@
     "hash": "6f0f3308884daa0e4a254d3f43f4c460"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/index.tsx": {
-    "mtime": 1787725702.3,
-    "hash": "c40dd026b204581b12d3fa6171ddd372"
+    "mtime": 1789834240.34,
+    "hash": "325effc6857d3983f63f75f7071aaea6"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/login.tsx": {
-    "mtime": 1787740536.01,
-    "hash": "d2cd0cc72d4ba03f157391f8cb877f21"
+    "mtime": 1789834244.13,
+    "hash": "5ae2c83319f64073f4b6ff68dcedf637"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/signup.tsx": {
-    "mtime": 1787740543.12,
-    "hash": "d62d9af54d2cd5a95acdff22e9eecbd2"
+    "mtime": 1789834247.2,
+    "hash": "f93525f5f8f3e9f8db4d85e786589c4a"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/_authed/dashboard.tsx": {
-    "mtime": 1787742915.95,
-    "hash": "7dca9f55620cb67df5549244568cab9b"
+    "mtime": 1789834964.27,
+    "hash": "1dff17bc6bf99b67488a4ea42c05bf5f"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/_authed/invoices.$invoiceId.tsx": {
-    "mtime": 1787742814.58,
-    "hash": "0ec51eaf64c99985f43137beedda67c8"
+    "mtime": 1789835137.4,
+    "hash": "e1b3f026eb5b985ca46c1eacc430690b"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/_authed/leases.tsx": {
-    "mtime": 1787742790.76,
-    "hash": "dfa27581b07c7e304c5f0f0585f6c253"
+    "mtime": 1789835077.72,
+    "hash": "07e8e041160a09483b922cdc4049b74a"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/_authed/properties.tsx": {
-    "mtime": 1787742066.16,
-    "hash": "d6dbc76e652ee19d15eba8c0f7094d22"
+    "mtime": 1789834987.19,
+    "hash": "efd55cb4c20bf7dc181717dcb5dc0e4d"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/_authed/rooms.tsx": {
-    "mtime": 1787742777.8,
-    "hash": "8a8fbc5a09249eeaa3c3b1905ce92c4f"
+    "mtime": 1789835003.33,
+    "hash": "db09e3fc9ad36bb3410e629f53a68650"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/_authed/tenants.tsx": {
-    "mtime": 1787742066.21,
-    "hash": "bc2416ef6071d2fa93dac9eb2a7a49b2"
+    "mtime": 1789835023.35,
+    "hash": "c7c62e0c5fac123b9e1b2066a65b8e39"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/src/routes/api/auth/$.ts": {
     "mtime": 1787727124.34,
@@ -332,12 +396,12 @@
     "hash": "fb241928ec5fb2a75a92f517d75929b8"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/ORIGINAL_REQUEST.md": {
-    "mtime": 1787727123.53,
-    "hash": "c04088a592b3eede87ad96617c4053eb"
+    "mtime": 1789832512.82,
+    "hash": "c3f638a0697b2e10db60973fb399026c"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/PROJECT.md": {
-    "mtime": 1787742065.54,
-    "hash": "63512c34af93f8acf86153f79818d707"
+    "mtime": 1789836026.26,
+    "hash": "e5e52f41c30950aa7671e1a55f7841f9"
   },
   "/Volumes/Acasis2TB/playground/ghar-bhandaa/public/robots.txt": {
     "mtime": 1787725702.28,

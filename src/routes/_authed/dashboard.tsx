@@ -47,11 +47,13 @@ import { Alert, AlertDescription } from '#/components/ui/alert'
 import { DatePicker } from '#/components/ui/date-picker'
 import {
   Empty,
+  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
 } from '#/components/ui/empty'
+import { AnimatedNumber } from '#/components/ui/animated-number'
 import { toastManager } from '#/components/ui/toast'
 import {
   FileText,
@@ -218,7 +220,7 @@ function DashboardPage() {
               Total Collected
             </CardDescription>
             <CardTitle className="text-2xl font-bold text-[var(--palm)] mt-1">
-              {formatNpr(stats.totalCollected)}
+              <AnimatedNumber value={formatNpr(stats.totalCollected)} />
             </CardTitle>
           </CardHeader>
         </Card>
@@ -229,7 +231,7 @@ function DashboardPage() {
               Total Outstanding
             </CardDescription>
             <CardTitle className="text-2xl font-bold text-[var(--sea-ink)] mt-1">
-              {formatNpr(stats.totalOutstanding)}
+              <AnimatedNumber value={formatNpr(stats.totalOutstanding)} />
             </CardTitle>
           </CardHeader>
         </Card>
@@ -240,7 +242,7 @@ function DashboardPage() {
               Active Leases
             </CardDescription>
             <CardTitle className="text-2xl font-bold text-[var(--lagoon-deep)] mt-1">
-              {stats.activeLeasesCount}
+              <AnimatedNumber value={stats.activeLeasesCount} />
             </CardTitle>
           </CardHeader>
         </Card>
@@ -251,7 +253,7 @@ function DashboardPage() {
               Overdue Invoices
             </CardDescription>
             <CardTitle className="text-2xl font-bold text-destructive mt-1">
-              {stats.overdueInvoicesCount}
+              <AnimatedNumber value={stats.overdueInvoicesCount} />
             </CardTitle>
           </CardHeader>
         </Card>
@@ -284,36 +286,86 @@ function DashboardPage() {
           </Tabs>
         </div>
 
-        {/* Invoice Table */}
+        {/* Invoice Table on Desktop & Card List on Mobile */}
         {filteredInvoices.length > 0 ? (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Period</TableHead>
-                <TableHead>Tenant</TableHead>
-                <TableHead>Room & Property</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
-                <TableHead>Due Date</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
+          <>
+            {/* Desktop View */}
+            <div className="hidden md:block">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Period</TableHead>
+                    <TableHead>Tenant</TableHead>
+                    <TableHead>Room & Property</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
+                    <TableHead>Due Date</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredInvoices.map((inv) => (
+                    <TableRow key={inv.id}>
+                      <TableCell className="font-semibold">{inv.period}</TableCell>
+                      <TableCell>{inv.tenantName}</TableCell>
+                      <TableCell>
+                        <div className="font-medium">{inv.roomName}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {inv.propertyName}
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-right font-bold">
+                        {formatNpr(inv.amount)}
+                      </TableCell>
+                      <TableCell>{inv.dueDate}</TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={
+                            inv.status === 'paid'
+                              ? 'success'
+                              : inv.status === 'partial'
+                                ? 'warning'
+                                : inv.status === 'overdue'
+                                  ? 'error'
+                                  : 'secondary'
+                          }
+                          className="capitalize font-bold"
+                        >
+                          {inv.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          render={
+                            <Link
+                              to="/invoices/$invoiceId"
+                              params={{ invoiceId: inv.id }}
+                            >
+                              Details{' '}
+                              <ArrowRight className="size-3.5" aria-hidden="true" />
+                            </Link>
+                          }
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* Mobile View: Compact Card List */}
+            <div className="flex flex-col gap-3 md:hidden">
               {filteredInvoices.map((inv) => (
-                <TableRow key={inv.id}>
-                  <TableCell className="font-semibold">{inv.period}</TableCell>
-                  <TableCell>{inv.tenantName}</TableCell>
-                  <TableCell>
-                    <div className="font-medium">{inv.roomName}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {inv.propertyName}
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right font-bold">
-                    {formatNpr(inv.amount)}
-                  </TableCell>
-                  <TableCell>{inv.dueDate}</TableCell>
-                  <TableCell>
+                <div
+                  key={inv.id}
+                  className="p-4 rounded-2xl border border-[var(--line)] bg-muted/10 flex flex-col gap-3"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-semibold text-sm text-[var(--sea-ink)]">
+                      {inv.period}
+                    </span>
                     <Badge
                       variant={
                         inv.status === 'paid'
@@ -324,15 +376,30 @@ function DashboardPage() {
                               ? 'error'
                               : 'secondary'
                       }
-                      className="capitalize font-bold"
+                      className="capitalize font-bold text-xs"
                     >
                       {inv.status}
                     </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
+                  </div>
+                  <div className="text-xs space-y-1 text-muted-foreground">
+                    <div className="font-medium text-foreground text-sm">
+                      {inv.tenantName}
+                    </div>
+                    <div>
+                      {inv.roomName} • {inv.propertyName}
+                    </div>
+                    <div className="flex justify-between items-center pt-1">
+                      <span className="text-foreground font-bold text-base">
+                        {formatNpr(inv.amount)}
+                      </span>
+                      <span className="text-[11px]">Due: {inv.dueDate}</span>
+                    </div>
+                  </div>
+                  <div className="pt-2 border-t border-[var(--line)] flex justify-end">
                     <Button
-                      variant="ghost"
+                      variant="outline"
                       size="sm"
+                      className="rounded-full text-xs"
                       render={
                         <Link
                           to="/invoices/$invoiceId"
@@ -343,11 +410,11 @@ function DashboardPage() {
                         </Link>
                       }
                     />
-                  </TableCell>
-                </TableRow>
+                  </div>
+                </div>
               ))}
-            </TableBody>
-          </Table>
+            </div>
+          </>
         ) : (
           <Empty>
             <EmptyMedia variant="icon">
@@ -361,6 +428,16 @@ function DashboardPage() {
                   : `No invoices currently match the "${statusFilter}" filter.`}
               </EmptyDescription>
             </EmptyHeader>
+            <EmptyContent>
+              <Button
+                onClick={() => setShowCreateModal(true)}
+                size="sm"
+                className="rounded-full"
+              >
+                <Plus className="size-4" aria-hidden="true" />
+                Raise Manual Invoice
+              </Button>
+            </EmptyContent>
           </Empty>
         )}
       </Card>
@@ -452,9 +529,12 @@ function DashboardPage() {
                   </Button>
                 </div>
 
-                <div className="flex flex-col gap-2.5">
+                <div className="flex flex-col gap-3">
                   {lineItems.map((item, index) => (
-                    <div key={index} className="flex gap-2 items-center">
+                    <div
+                      key={index}
+                      className="flex flex-col sm:flex-row gap-2.5 sm:items-center p-3 sm:p-0 rounded-2xl sm:rounded-none border sm:border-0 border-border/60 bg-muted/20 sm:bg-transparent"
+                    >
                       <Input
                         type="text"
                         required
@@ -463,59 +543,61 @@ function DashboardPage() {
                         onChange={(e) =>
                           updateLineItem(index, 'description', e.target.value)
                         }
-                        className="flex-1"
+                        className="flex-1 w-full"
                       />
-                      <Input
-                        type="number"
-                        required
-                        min="1"
-                        placeholder="NPR"
-                        value={item.amountNpr || ''}
-                        onChange={(e) =>
-                          updateLineItem(
-                            index,
-                            'amountNpr',
-                            parseFloat(e.target.value) || 0,
-                          )
-                        }
-                        className="w-28"
-                      />
-                      <Select
-                        items={[
-                          { label: 'Rent', value: 'rent' },
-                          { label: 'Utility', value: 'utility' },
-                          { label: 'Adjustment', value: 'adjustment' },
-                        ]}
-                        value={item.kind}
-                        onValueChange={(val) =>
-                          updateLineItem(
-                            index,
-                            'kind',
-                            val ? String(val) : 'rent',
-                          )
-                        }
-                      >
-                        <SelectTrigger className="w-32">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectPopup>
-                          <SelectItem value="rent">Rent</SelectItem>
-                          <SelectItem value="utility">Utility</SelectItem>
-                          <SelectItem value="adjustment">Adjustment</SelectItem>
-                        </SelectPopup>
-                      </Select>
-                      {lineItems.length > 1 && (
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon-sm"
-                          aria-label="Remove item"
-                          onClick={() => removeLineItem(index)}
-                          className="text-destructive hover:text-destructive"
+                      <div className="flex items-center gap-2 w-full sm:w-auto">
+                        <Input
+                          type="number"
+                          required
+                          min="1"
+                          placeholder="NPR"
+                          value={item.amountNpr || ''}
+                          onChange={(e) =>
+                            updateLineItem(
+                              index,
+                              'amountNpr',
+                              parseFloat(e.target.value) || 0,
+                            )
+                          }
+                          className="w-32 sm:w-28"
+                        />
+                        <Select
+                          items={[
+                            { label: 'Rent', value: 'rent' },
+                            { label: 'Utility', value: 'utility' },
+                            { label: 'Adjustment', value: 'adjustment' },
+                          ]}
+                          value={item.kind}
+                          onValueChange={(val) =>
+                            updateLineItem(
+                              index,
+                              'kind',
+                              val ? String(val) : 'rent',
+                            )
+                          }
                         >
-                          <Trash2 className="size-4" aria-hidden="true" />
-                        </Button>
-                      )}
+                          <SelectTrigger className="flex-1 sm:w-32">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectPopup>
+                            <SelectItem value="rent">Rent</SelectItem>
+                            <SelectItem value="utility">Utility</SelectItem>
+                            <SelectItem value="adjustment">Adjustment</SelectItem>
+                          </SelectPopup>
+                        </Select>
+                        {lineItems.length > 1 && (
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon-sm"
+                            aria-label="Remove item"
+                            onClick={() => removeLineItem(index)}
+                            className="text-destructive hover:text-destructive shrink-0"
+                          >
+                            <Trash2 className="size-4" aria-hidden="true" />
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
