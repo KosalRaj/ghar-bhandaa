@@ -4,7 +4,7 @@ import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest'
 import ThemeToggle from '../ThemeToggle'
 import Header from '../Header'
 import Footer from '../Footer'
-import { LandingPage } from '#/routes/index'
+import { LandingPage } from '#/components/views/LandingPage'
 import { authClient } from '#/lib/auth-client'
 
 // Mock TanStack Router Link and hooks

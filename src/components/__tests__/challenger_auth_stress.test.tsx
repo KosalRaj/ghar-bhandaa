@@ -4,8 +4,8 @@ import { resolve as pathResolve } from 'node:path'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { z } from 'zod'
-import { LoginPage } from '#/routes/login'
-import { SignupPage } from '#/routes/signup'
+import { LoginPage } from '#/components/views/LoginPage'
+import { SignupPage } from '#/components/views/SignupPage'
 
 // Shared mocks
 const mockNavigate = vi.fn()

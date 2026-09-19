@@ -4,9 +4,9 @@ import { describe, expect, it, beforeEach, vi } from 'vitest'
 import ThemeToggle from '../ThemeToggle'
 import Header from '../Header'
 import Footer from '../Footer'
-import { LandingPage } from '#/routes/index'
-import { LoginPage } from '#/routes/login'
-import { SignupPage } from '#/routes/signup'
+import { LandingPage } from '#/components/views/LandingPage'
+import { LoginPage } from '#/components/views/LoginPage'
+import { SignupPage } from '#/components/views/SignupPage'
 
 // Mock TanStack Router Link and hooks
 vi.mock('@tanstack/react-router', () => ({
