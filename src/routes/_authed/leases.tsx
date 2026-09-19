@@ -5,11 +5,7 @@ import { getRooms } from '#/server/rooms.functions'
 import { getTenants } from '#/server/tenants.functions'
 import { formatNpr } from '#/lib/money'
 import { getTodayInKathmandu } from '#/lib/dates'
-import {
-  Card,
-  CardDescription,
-  CardTitle,
-} from '#/components/ui/card'
+import { Card, CardDescription, CardTitle } from '#/components/ui/card'
 import {
   Table,
   TableBody,
@@ -40,6 +36,7 @@ import {
   SelectValue,
 } from '#/components/ui/select'
 import { Alert, AlertDescription } from '#/components/ui/alert'
+import { DatePicker } from '#/components/ui/date-picker'
 import {
   Empty,
   EmptyDescription,
@@ -254,7 +251,9 @@ function LeasesPage() {
                   </TableCell>
                   <TableCell>
                     <Badge
-                      variant={lease.status === 'active' ? 'success' : 'secondary'}
+                      variant={
+                        lease.status === 'active' ? 'success' : 'secondary'
+                      }
                       className="capitalize font-bold"
                     >
                       {lease.status}
@@ -284,7 +283,8 @@ function LeasesPage() {
             <EmptyHeader>
               <EmptyTitle>No Leases Registered</EmptyTitle>
               <EmptyDescription>
-                No active or historic leases found. Click "Create Lease" to link a tenant to a room.
+                No active or historic leases found. Click "Create Lease" to link
+                a tenant to a room.
               </EmptyDescription>
             </EmptyHeader>
           </Empty>
@@ -298,7 +298,8 @@ function LeasesPage() {
             <span className="island-kicker block mb-1">Setup</span>
             <DialogTitle>Create Lease Agreement</DialogTitle>
             <DialogDescription>
-              Assign an available room to a tenant with custom rent, deposit, and billing day.
+              Assign an available room to a tenant with custom rent, deposit,
+              and billing day.
             </DialogDescription>
           </DialogHeader>
 
@@ -315,8 +316,12 @@ function LeasesPage() {
               <Field>
                 <FieldLabel>Select Room</FieldLabel>
                 <Select
+                  items={rooms.map((r) => ({
+                    label: `${r.name} (${r.propertyName})`,
+                    value: r.id,
+                  }))}
                   value={roomId}
-                  onValueChange={(val) => setRoomId(val as string)}
+                  onValueChange={(val) => setRoomId(val ? String(val) : '')}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="-- Choose Room --" />
@@ -335,8 +340,12 @@ function LeasesPage() {
               <Field>
                 <FieldLabel>Select Tenant</FieldLabel>
                 <Select
+                  items={tenants.map((t) => ({
+                    label: `${t.name} (${t.email})`,
+                    value: t.id,
+                  }))}
                   value={tenantId}
-                  onValueChange={(val) => setTenantId(val as string)}
+                  onValueChange={(val) => setTenantId(val ? String(val) : '')}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="-- Choose Tenant --" />
@@ -402,11 +411,10 @@ function LeasesPage() {
                 {/* Start Date */}
                 <Field>
                   <FieldLabel>Start Date</FieldLabel>
-                  <Input
-                    type="date"
-                    required
+                  <DatePicker
                     value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
+                    onChange={setStartDate}
+                    placeholder="Select start date"
                   />
                 </Field>
               </div>
@@ -414,10 +422,10 @@ function LeasesPage() {
               {/* End Date */}
               <Field>
                 <FieldLabel>End Date (Optional)</FieldLabel>
-                <Input
-                  type="date"
+                <DatePicker
                   value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
+                  onChange={setEndDate}
+                  placeholder="Select end date (optional)"
                 />
               </Field>
             </DialogPanel>
@@ -465,11 +473,10 @@ function LeasesPage() {
 
               <Field>
                 <FieldLabel>Termination Date</FieldLabel>
-                <Input
-                  type="date"
-                  required
+                <DatePicker
                   value={closeDate}
-                  onChange={(e) => setCloseDate(e.target.value)}
+                  onChange={setCloseDate}
+                  placeholder="Select termination date"
                 />
               </Field>
             </DialogPanel>

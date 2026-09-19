@@ -1,7 +1,8 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { Select as SelectPrimitive } from '@base-ui/react/select'
 import { useRender } from '@base-ui/react/use-render'
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
+import type { VariantProps } from 'class-variance-authority'
 import {
   ChevronDownIcon,
   ChevronsUpDownIcon,

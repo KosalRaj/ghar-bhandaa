@@ -44,6 +44,7 @@ import {
   SelectValue,
 } from '#/components/ui/select'
 import { Alert, AlertDescription } from '#/components/ui/alert'
+import { DatePicker } from '#/components/ui/date-picker'
 import {
   Empty,
   EmptyDescription,
@@ -271,7 +272,7 @@ function DashboardPage() {
           {/* Filters using COSS Tabs */}
           <Tabs
             value={statusFilter}
-            onValueChange={(val) => setStatusFilter(val as any)}
+            onValueChange={(val) => setStatusFilter(val)}
           >
             <TabsList size="sm">
               <TabsTab value="all">All</TabsTab>
@@ -337,7 +338,8 @@ function DashboardPage() {
                           to="/invoices/$invoiceId"
                           params={{ invoiceId: inv.id }}
                         >
-                          Details <ArrowRight className="size-3.5" aria-hidden="true" />
+                          Details{' '}
+                          <ArrowRight className="size-3.5" aria-hidden="true" />
                         </Link>
                       }
                     />
@@ -387,8 +389,14 @@ function DashboardPage() {
               <Field>
                 <FieldLabel>Select Active Lease</FieldLabel>
                 <Select
+                  items={leases.map((l) => ({
+                    label: `${l.tenantName} — ${l.roomName} (${l.propertyName})`,
+                    value: l.id,
+                  }))}
                   value={selectedLeaseId}
-                  onValueChange={(val) => handleLeaseChange(val as string)}
+                  onValueChange={(val) =>
+                    handleLeaseChange(val ? String(val) : '')
+                  }
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="-- Choose Lease --" />
@@ -419,11 +427,10 @@ function DashboardPage() {
                 {/* Due Date */}
                 <Field>
                   <FieldLabel>Due Date</FieldLabel>
-                  <Input
-                    type="date"
-                    required
+                  <DatePicker
                     value={dueDate}
-                    onChange={(e) => setDueDate(e.target.value)}
+                    onChange={setDueDate}
+                    placeholder="Select due date"
                   />
                 </Field>
               </div>
@@ -474,9 +481,18 @@ function DashboardPage() {
                         className="w-28"
                       />
                       <Select
+                        items={[
+                          { label: 'Rent', value: 'rent' },
+                          { label: 'Utility', value: 'utility' },
+                          { label: 'Adjustment', value: 'adjustment' },
+                        ]}
                         value={item.kind}
                         onValueChange={(val) =>
-                          updateLineItem(index, 'kind', val as string)
+                          updateLineItem(
+                            index,
+                            'kind',
+                            val ? String(val) : 'rent',
+                          )
                         }
                       >
                         <SelectTrigger className="w-32">

@@ -1,4 +1,5 @@
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
+import type { VariantProps } from 'class-variance-authority'
 import type React from 'react'
 import { cn } from '#/lib/utils'
 
@@ -11,7 +12,7 @@ const emptyMediaVariants = cva(
     variants: {
       variant: {
         default: 'bg-transparent',
-        icon: 'relative flex size-12 shrink-0 items-center justify-center rounded-xl border bg-card not-dark:bg-clip-padding text-foreground shadow-sm/5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-md)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] dark:before:shadow-[0_-1px_--theme(--color-white/6%)] [&_svg:not([class*=\'size-\'])]:size-6',
+        icon: "relative flex size-12 shrink-0 items-center justify-center rounded-xl border bg-card not-dark:bg-clip-padding text-foreground shadow-sm/5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-md)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] dark:before:shadow-[0_-1px_--theme(--color-white/6%)] [&_svg:not([class*='size-'])]:size-6",
       },
     },
   },
@@ -76,7 +77,10 @@ export function EmptyTitle({
 }: React.ComponentProps<'div'>): React.ReactElement {
   return (
     <div
-      className={cn('font-heading font-semibold text-lg text-[var(--sea-ink)]', className)}
+      className={cn(
+        'font-heading font-semibold text-lg text-[var(--sea-ink)]',
+        className,
+      )}
       data-slot="empty-title"
       {...props}
     />

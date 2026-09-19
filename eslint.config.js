@@ -20,6 +20,7 @@ export default [
       'prettier.config.js',
       'vitest.config.ts',
       '.agents/**',
+      '.venv/**',
       'graphify-out/**',
       'drizzle/**',
       'dist/**',

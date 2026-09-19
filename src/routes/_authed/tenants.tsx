@@ -5,12 +5,7 @@ import {
   createTenant,
   updateTenant,
 } from '#/server/tenants.functions'
-import {
-  Card,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '#/components/ui/card'
+import { Card, CardFooter, CardHeader, CardTitle } from '#/components/ui/card'
 import { Avatar, AvatarFallback } from '#/components/ui/avatar'
 import { Button } from '#/components/ui/button'
 import {
@@ -211,7 +206,10 @@ function TenantsPage() {
                   <div className="space-y-1.5 text-xs text-[var(--sea-ink-soft)]">
                     {tenant.phone && (
                       <div className="flex items-center gap-1.5">
-                        <Phone className="size-3.5 text-muted-foreground" aria-hidden="true" />
+                        <Phone
+                          className="size-3.5 text-muted-foreground"
+                          aria-hidden="true"
+                        />
                         <span>{tenant.phone}</span>
                       </div>
                     )}
@@ -246,7 +244,8 @@ function TenantsPage() {
             <EmptyHeader>
               <EmptyTitle>No Tenants Registered</EmptyTitle>
               <EmptyDescription>
-                You haven't onboarded any tenants yet. Click "Add Tenant" to register a tenant.
+                You haven't onboarded any tenants yet. Click "Add Tenant" to
+                register a tenant.
               </EmptyDescription>
             </EmptyHeader>
           </Empty>

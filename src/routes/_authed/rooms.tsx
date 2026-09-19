@@ -32,6 +32,7 @@ import {
   SelectValue,
 } from '#/components/ui/select'
 import { Alert, AlertDescription } from '#/components/ui/alert'
+import { Switch } from '#/components/ui/switch'
 import {
   Empty,
   EmptyDescription,
@@ -249,7 +250,8 @@ function RoomsPage() {
             <EmptyHeader>
               <EmptyTitle>No Rooms Registered</EmptyTitle>
               <EmptyDescription>
-                No rental rooms or flats found. Click "Add Room" to configure your first unit.
+                No rental rooms or flats found. Click "Add Room" to configure
+                your first unit.
               </EmptyDescription>
             </EmptyHeader>
           </Empty>
@@ -268,9 +270,7 @@ function RoomsPage() {
             <span className="island-kicker block mb-1">
               {editingRoom ? 'Edit' : 'Create'}
             </span>
-            <DialogTitle>
-              {editingRoom ? 'Edit Room' : 'Add Room'}
-            </DialogTitle>
+            <DialogTitle>{editingRoom ? 'Edit Room' : 'Add Room'}</DialogTitle>
             <DialogDescription>
               {editingRoom
                 ? 'Update unit naming, floor, and availability status.'
@@ -295,8 +295,14 @@ function RoomsPage() {
                 <Field>
                   <FieldLabel>Property Selection</FieldLabel>
                   <Select
+                    items={properties.map((p) => ({
+                      label: `${p.name} (${p.address})`,
+                      value: p.id,
+                    }))}
                     value={propertyId}
-                    onValueChange={(val) => setPropertyId(val as string)}
+                    onValueChange={(val) =>
+                      setPropertyId(val ? String(val) : '')
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="-- Choose Property --" />
@@ -343,17 +349,15 @@ function RoomsPage() {
                 />
               </Field>
 
-              <div className="flex items-center gap-2 pt-1">
-                <input
-                  type="checkbox"
+              <div className="flex items-center gap-3 pt-1">
+                <Switch
                   id="isActive"
                   checked={isActive}
-                  onChange={(e) => setIsActive(e.target.checked)}
-                  className="rounded border-[var(--line)] text-[var(--lagoon-deep)] focus:ring-[var(--lagoon-deep)] cursor-pointer"
+                  onCheckedChange={setIsActive}
                 />
                 <label
                   htmlFor="isActive"
-                  className="text-sm font-semibold text-[var(--sea-ink)] cursor-pointer"
+                  className="text-sm font-semibold text-[var(--sea-ink)] cursor-pointer select-none"
                 >
                   Active (Available for leasing)
                 </label>

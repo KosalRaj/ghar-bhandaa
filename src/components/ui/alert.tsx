@@ -1,4 +1,5 @@
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
+import type { VariantProps } from 'class-variance-authority'
 import type * as React from 'react'
 import { cn } from '#/lib/utils'
 
@@ -15,8 +16,10 @@ const alertVariants = cva(
         error:
           'border-destructive/32 bg-destructive/4 [&>svg]:text-destructive text-destructive-foreground',
         info: 'border-info/32 bg-info/4 [&>svg]:text-info text-info-foreground',
-        success: 'border-success/32 bg-success/4 [&>svg]:text-success text-success-foreground',
-        warning: 'border-warning/32 bg-warning/4 [&>svg]:text-warning text-warning-foreground',
+        success:
+          'border-success/32 bg-success/4 [&>svg]:text-success text-success-foreground',
+        warning:
+          'border-warning/32 bg-warning/4 [&>svg]:text-warning text-warning-foreground',
       },
     },
   },

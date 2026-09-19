@@ -44,25 +44,31 @@ export const registerLandlord = createServerFn({ method: 'POST' })
     const auth = getAuth(env)
     const db = getDB(env.DB)
 
-    return await db.transaction(async (tx) => {
-      const signUpRes = await auth.api.signUpEmail({
-        body: {
-          email: data.email,
-          password: data.password,
-          name: data.name,
-        },
-      })
+    const signUpRes = await auth.api.signUpEmail({
+      body: {
+        email: data.email,
+        password: data.password,
+        name: data.name,
+      },
+    })
 
-      await tx.insert(landlords).values({
+    if (!signUpRes.user.id) {
+      throw new Error('Failed to create user account')
+    }
+
+    try {
+      await db.insert(landlords).values({
         id: signUpRes.user.id,
         email: signUpRes.user.email,
         name: signUpRes.user.name,
         phone: data.phone || null,
         createdAt: getCurrentDateTimeInKathmandu(),
       })
+    } catch (err: any) {
+      throw new Error(err?.message || 'Failed to initialize landlord profile')
+    }
 
-      return { success: true }
-    })
+    return { success: true }
   })
 
 /**

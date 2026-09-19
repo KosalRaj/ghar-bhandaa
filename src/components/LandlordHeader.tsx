@@ -13,7 +13,7 @@ export default function LandlordHeader() {
     await navigate({ to: '/login' })
   }
 
-  const initials = session?.user?.name
+  const initials = session?.user.name
     ? session.user.name
         .split(' ')
         .map((n) => n[0])

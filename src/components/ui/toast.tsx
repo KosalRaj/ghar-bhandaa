@@ -144,7 +144,10 @@ function Toasts({
                 </div>
                 {toast.actionProps && (
                   <Toast.Action
-                    className={buttonVariants({ size: 'xs', variant: 'outline' })}
+                    className={buttonVariants({
+                      size: 'xs',
+                      variant: 'outline',
+                    })}
                     data-slot="toast-action"
                   >
                     {toast.actionProps.children}

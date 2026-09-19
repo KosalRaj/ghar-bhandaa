@@ -10,6 +10,7 @@ import { getAuth } from '#/lib/auth'
 import { getDB } from '#/db/index'
 import { landlords } from '#/db/schema'
 import { eq } from 'drizzle-orm'
+import { env as cfEnv } from 'cloudflare:workers'
 
 /**
  * Server middleware that verifies the user's active session and confirms their registration
@@ -40,8 +41,7 @@ import { eq } from 'drizzle-orm'
 export const landlordAuthMiddleware = createMiddleware({
   type: 'function',
 }).server(async ({ next, context }) => {
-  const env =
-    (context as any).cloudflare?.env || (context as any).env || context
+  const env = (context as any).cloudflare?.env || (context as any).env || cfEnv
 
   if (!env || !env.DB) {
     throw new Error('Database binding DB is missing from environment context')

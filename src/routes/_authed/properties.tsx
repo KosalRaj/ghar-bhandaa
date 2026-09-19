@@ -175,7 +175,10 @@ function PropertiesPage() {
                   </CardTitle>
                 </div>
                 <CardDescription className="text-sm flex items-start gap-1 text-[var(--sea-ink-soft)]">
-                  <MapPin className="size-4 shrink-0 mt-0.5" aria-hidden="true" />
+                  <MapPin
+                    className="size-4 shrink-0 mt-0.5"
+                    aria-hidden="true"
+                  />
                   {prop.address}
                 </CardDescription>
               </CardHeader>
@@ -202,7 +205,8 @@ function PropertiesPage() {
             <EmptyHeader>
               <EmptyTitle>No Properties Registered</EmptyTitle>
               <EmptyDescription>
-                You haven't added any buildings or property assets yet. Click "Add Property" to create one.
+                You haven't added any buildings or property assets yet. Click
+                "Add Property" to create one.
               </EmptyDescription>
             </EmptyHeader>
           </Empty>

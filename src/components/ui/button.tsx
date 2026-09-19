@@ -1,6 +1,7 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
+import type { VariantProps } from 'class-variance-authority'
 import type * as React from 'react'
 import { cn } from '#/lib/utils'
 import { Spinner } from '#/components/ui/spinner'
@@ -62,7 +63,7 @@ export function Button({
   disabled: disabledProp,
   ...props
 }: ButtonProps): React.ReactElement {
-  const isDisabled: boolean = Boolean(loading || disabledProp)
+  const isDisabled = Boolean(loading || disabledProp)
   const typeValue: React.ButtonHTMLAttributes<HTMLButtonElement>['type'] =
     render ? undefined : 'button'
 

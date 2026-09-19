@@ -117,9 +117,10 @@ export async function createManualInvoice(
   landlordId: string,
   input: CreateManualInvoiceInput,
 ) {
-  return await db.transaction(async (tx) => {
+  const runner = async (client: any) => {
+    const q = client.query || db.query
     // Verify lease exists and belongs to this landlord
-    const lease = await tx.query.leases.findFirst({
+    const lease = await q.leases.findFirst({
       where: and(
         eq(leases.id, input.leaseId),
         eq(leases.landlordId, landlordId),
@@ -148,7 +149,7 @@ export async function createManualInvoice(
     })
 
     // Insert Invoice
-    await tx.insert(invoices).values({
+    await client.insert(invoices).values({
       id: invoiceId,
       landlordId,
       leaseId: lease.id,
@@ -163,12 +164,25 @@ export async function createManualInvoice(
 
     // Insert Line Items
     if (lineItemInserts.length > 0) {
-      await tx.insert(invoiceLineItems).values(lineItemInserts)
+      await client.insert(invoiceLineItems).values(lineItemInserts)
     }
 
-    // Call recalculate in tx context
-    await recalculateInvoiceStatus(tx, invoiceId)
+    // Call recalculate in client context
+    await recalculateInvoiceStatus(client, invoiceId)
 
     return invoiceId
-  })
+  }
+
+  if (typeof (db as any).transaction === 'function') {
+    try {
+      return await (db as any).transaction(runner)
+    } catch (err: any) {
+      if (err?.message?.includes('begin')) {
+        return await runner(db)
+      }
+      throw err
+    }
+  }
+
+  return await runner(db)
 }

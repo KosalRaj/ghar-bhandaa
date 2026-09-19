@@ -46,9 +46,10 @@ export async function recordCashPayment(
   landlordId: string,
   input: RecordCashPaymentInput,
 ) {
-  return await db.transaction(async (tx) => {
+  const runner = async (client: any) => {
+    const q = client.query || db.query
     // Verify invoice exists and belongs to this landlord
-    const invoice = await tx.query.invoices.findFirst({
+    const invoice = await q.invoices.findFirst({
       where: and(
         eq(invoices.id, input.invoiceId),
         eq(invoices.landlordId, landlordId),
@@ -60,13 +61,16 @@ export async function recordCashPayment(
     }
 
     // Calculate current confirmed payments and remaining balance
-    const existingPayments = await tx.query.payments.findMany({
+    const existingPayments = await q.payments.findMany({
       where: and(
         eq(payments.invoiceId, invoice.id),
         eq(payments.status, 'confirmed'),
       ),
     })
-    const currentPaid = existingPayments.reduce((acc, p) => acc + p.amount, 0)
+    const currentPaid = existingPayments.reduce(
+      (acc: number, p: { amount: number }) => acc + p.amount,
+      0,
+    )
     const remainingPaisa = Math.max(0, invoice.amount - currentPaid)
     const paymentAmountPaisa = nprToPaisa(input.amountNpr)
 
@@ -83,7 +87,7 @@ export async function recordCashPayment(
     const nowStr = getCurrentDateTimeInKathmandu()
 
     // Insert Cash Payment (Cash payments are confirmed immediately)
-    await tx.insert(payments).values({
+    await client.insert(payments).values({
       id: paymentId,
       landlordId,
       invoiceId: invoice.id,
@@ -96,8 +100,21 @@ export async function recordCashPayment(
     })
 
     // Recalculate Invoice Status
-    await recalculateInvoiceStatus(tx, invoice.id)
+    await recalculateInvoiceStatus(client, invoice.id)
 
     return paymentId
-  })
+  }
+
+  if (typeof (db as any).transaction === 'function') {
+    try {
+      return await (db as any).transaction(runner)
+    } catch (err: any) {
+      if (err?.message?.includes('begin')) {
+        return await runner(db)
+      }
+      throw err
+    }
+  }
+
+  return await runner(db)
 }

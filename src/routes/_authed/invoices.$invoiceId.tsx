@@ -4,12 +4,7 @@ import { getInvoiceDetails } from '#/server/invoices.functions'
 import { recordCashPaymentFn } from '#/server/payments.functions'
 import { formatNpr } from '#/lib/money'
 import { getTodayInKathmandu } from '#/lib/dates'
-import {
-  Card,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-} from '#/components/ui/card'
+import { Card, CardHeader, CardPanel, CardTitle } from '#/components/ui/card'
 import {
   Table,
   TableBody,
@@ -34,6 +29,7 @@ import {
 import { Field, FieldLabel } from '#/components/ui/field'
 import { Input } from '#/components/ui/input'
 import { Alert, AlertDescription } from '#/components/ui/alert'
+import { DatePicker } from '#/components/ui/date-picker'
 import { toastManager } from '#/components/ui/toast'
 import {
   ArrowLeft,
@@ -168,23 +164,33 @@ function InvoiceDetailsPage() {
 
             <div className="grid gap-4 sm:grid-cols-2 text-sm text-[var(--sea-ink-soft)] bg-white/40 dark:bg-black/20 p-4 rounded-2xl border border-[var(--line)]">
               <div>
-                <span className="text-xs font-semibold uppercase block text-muted-foreground">Due Date</span>
-                <span className="font-semibold text-foreground">{invoice.dueDate}</span>
+                <span className="text-xs font-semibold uppercase block text-muted-foreground">
+                  Due Date
+                </span>
+                <span className="font-semibold text-foreground">
+                  {invoice.dueDate}
+                </span>
               </div>
               <div>
-                <span className="text-xs font-semibold uppercase block text-muted-foreground">Total Amount</span>
+                <span className="text-xs font-semibold uppercase block text-muted-foreground">
+                  Total Amount
+                </span>
                 <span className="font-bold text-foreground text-base">
                   {formatNpr(invoice.amount)}
                 </span>
               </div>
               <div>
-                <span className="text-xs font-semibold uppercase block text-muted-foreground">Total Paid</span>
+                <span className="text-xs font-semibold uppercase block text-muted-foreground">
+                  Total Paid
+                </span>
                 <span className="font-bold text-[var(--palm)] text-base">
                   {formatNpr(totalPaidPaisa)}
                 </span>
               </div>
               <div>
-                <span className="text-xs font-semibold uppercase block text-muted-foreground">Remaining Balance</span>
+                <span className="text-xs font-semibold uppercase block text-muted-foreground">
+                  Remaining Balance
+                </span>
                 <span className="font-bold text-destructive text-base">
                   {formatNpr(remainingPaisa)}
                 </span>
@@ -255,17 +261,24 @@ function InvoiceDetailsPage() {
           <Card className="rounded-3xl border-[var(--line)] p-6">
             <span className="island-kicker">Tenant</span>
             <CardTitle className="text-lg mt-1 mb-3 flex items-center gap-2">
-              <User className="size-4 text-[var(--lagoon-deep)]" aria-hidden="true" />
+              <User
+                className="size-4 text-[var(--lagoon-deep)]"
+                aria-hidden="true"
+              />
               {tenant?.name}
             </CardTitle>
             <div className="text-sm text-[var(--sea-ink-soft)] space-y-2">
               <div>
-                <span className="text-xs uppercase text-muted-foreground block font-semibold">Email</span>
+                <span className="text-xs uppercase text-muted-foreground block font-semibold">
+                  Email
+                </span>
                 <span>{tenant?.email}</span>
               </div>
               {tenant?.phone && (
                 <div>
-                  <span className="text-xs uppercase text-muted-foreground block font-semibold">Phone</span>
+                  <span className="text-xs uppercase text-muted-foreground block font-semibold">
+                    Phone
+                  </span>
                   <span>{tenant.phone}</span>
                 </div>
               )}
@@ -274,13 +287,16 @@ function InvoiceDetailsPage() {
                   <Separator className="my-3" />
                   <div className="space-y-1.5 text-xs">
                     <div>
-                      <strong className="text-foreground">Room:</strong> {room.name}
+                      <strong className="text-foreground">Room:</strong>{' '}
+                      {room.name}
                     </div>
                     <div>
-                      <strong className="text-foreground">Property:</strong> {property?.name}
+                      <strong className="text-foreground">Property:</strong>{' '}
+                      {property?.name}
                     </div>
                     <div>
-                      <strong className="text-foreground">Billing Day:</strong> {lease?.billingDay}th of month
+                      <strong className="text-foreground">Billing Day:</strong>{' '}
+                      {lease?.billingDay}th of month
                     </div>
                   </div>
                 </>
@@ -292,7 +308,10 @@ function InvoiceDetailsPage() {
           <Card className="rounded-3xl border-[var(--line)] p-6">
             <span className="island-kicker">Ledger</span>
             <CardTitle className="text-lg mt-1 mb-4 flex items-center gap-2">
-              <Receipt className="size-4 text-[var(--lagoon-deep)]" aria-hidden="true" />
+              <Receipt
+                className="size-4 text-[var(--lagoon-deep)]"
+                aria-hidden="true"
+              />
               Payment history
             </CardTitle>
             <div className="flex flex-col gap-3">
@@ -304,7 +323,10 @@ function InvoiceDetailsPage() {
                   >
                     <div>
                       <div className="font-bold text-[var(--sea-ink)] capitalize flex items-center gap-1.5">
-                        <CheckCircle2 className="size-3.5 text-success" aria-hidden="true" />
+                        <CheckCircle2
+                          className="size-3.5 text-success"
+                          aria-hidden="true"
+                        />
                         {p.method} Payment
                       </div>
                       <div className="text-muted-foreground mt-1">
@@ -320,7 +342,11 @@ function InvoiceDetailsPage() {
                       <div className="font-bold text-[var(--palm)] text-sm">
                         {formatNpr(p.amount)}
                       </div>
-                      <Badge variant="success" size="sm" className="mt-1 uppercase">
+                      <Badge
+                        variant="success"
+                        size="sm"
+                        className="mt-1 uppercase"
+                      >
                         {p.status}
                       </Badge>
                     </div>
@@ -376,11 +402,10 @@ function InvoiceDetailsPage() {
 
               <Field>
                 <FieldLabel>Payment Date</FieldLabel>
-                <Input
-                  type="date"
-                  required
+                <DatePicker
                   value={paymentDate}
-                  onChange={(e) => setPaymentDate(e.target.value)}
+                  onChange={setPaymentDate}
+                  placeholder="Select payment date"
                 />
               </Field>
             </DialogPanel>
